@@ -1,0 +1,280 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PdbContent>
+  <UserEntryPoint>null</UserEntryPoint>
+  <SourceFile Index="0" DocumentType="Text" Language="C#" LanguageVendor="Microsoft">C:\Users\medso_000\Documents\code\KSPModding\TrackIRUnity\TrackIRClient.cs</SourceFile>
+  <SourceFile Index="1" DocumentType="Text" Language="C#" LanguageVendor="Microsoft">C:\Users\medso_000\Documents\code\KSPModding\TrackIRUnity\NPConstants.cs</SourceFile>
+  <Method Token="6000005">
+    <SequencePoints SourceFileIndex="0">
+      <SequencePoint IlOffset="IL_0000" SourceFileIndex="0" StartLine="46" StartColumn="7" EndLine="46" EndColumn="34" />
+      <SequencePoint IlOffset="IL_0008" SourceFileIndex="0" StartLine="47" StartColumn="7" EndLine="47" EndColumn="31" />
+      <SequencePoint IlOffset="IL_0010" SourceFileIndex="0" StartLine="48" StartColumn="7" EndLine="48" EndColumn="26" />
+      <SequencePoint IlOffset="IL_0016" SourceFileIndex="0" StartLine="49" StartColumn="7" EndLine="49" EndColumn="23" />
+      <SequencePoint IlOffset="IL_001c" SourceFileIndex="0" StartLine="50" StartColumn="7" EndLine="50" EndColumn="39" />
+      <SequencePoint IlOffset="IL_0024" SourceFileIndex="0" StartLine="51" StartColumn="7" EndLine="51" EndColumn="51" />
+      <SequencePoint IlOffset="IL_002c" SourceFileIndex="0" StartLine="53" StartColumn="7" EndLine="53" EndColumn="71" />
+      <SequencePoint IlOffset="IL_0034" SourceFileIndex="0" Hidden="true" />
+      <SequencePoint IlOffset="IL_0037" SourceFileIndex="0" StartLine="55" StartColumn="9" EndLine="55" EndColumn="71" />
+      <SequencePoint IlOffset="IL_0043" SourceFileIndex="0" Hidden="true" />
+      <SequencePoint IlOffset="IL_0045" SourceFileIndex="0" StartLine="96" StartColumn="9" EndLine="96" EndColumn="68" />
+      <SequencePoint IlOffset="IL_0051" SourceFileIndex="0" StartLine="97" StartColumn="9" EndLine="97" EndColumn="30" />
+      <SequencePoint IlOffset="IL_0053" SourceFileIndex="0" StartLine="56" StartColumn="9" EndLine="56" EndColumn="67" />
+      <SequencePoint IlOffset="IL_0059" SourceFileIndex="0" StartLine="57" StartColumn="9" EndLine="57" EndColumn="96" />
+      <SequencePoint IlOffset="IL_0071" SourceFileIndex="0" StartLine="58" StartColumn="9" EndLine="58" EndColumn="92" />
+      <SequencePoint IlOffset="IL_007e" SourceFileIndex="0" Hidden="true" />
+      <SequencePoint IlOffset="IL_0081" SourceFileIndex="0" StartLine="60" StartColumn="11" EndLine="60" EndColumn="87" />
+      <SequencePoint IlOffset="IL_008d" SourceFileIndex="0" Hidden="true" />
+      <SequencePoint IlOffset="IL_008f" SourceFileIndex="0" StartLine="90" StartColumn="11" EndLine="90" EndColumn="75" />
+      <SequencePoint IlOffset="IL_009b" SourceFileIndex="0" StartLine="91" StartColumn="11" EndLine="91" EndColumn="32" />
+      <SequencePoint IlOffset="IL_009d" SourceFileIndex="0" StartLine="61" StartColumn="11" EndLine="61" EndColumn="40" />
+      <SequencePoint IlOffset="IL_00a0" SourceFileIndex="0" StartLine="62" StartColumn="11" EndLine="62" EndColumn="83" />
+      <SequencePoint IlOffset="IL_00ae" SourceFileIndex="0" Hidden="true" />
+      <SequencePoint IlOffset="IL_00b4" SourceFileIndex="0" StartLine="64" StartColumn="13" EndLine="64" EndColumn="247" />
+      <SequencePoint IlOffset="IL_012a" SourceFileIndex="0" StartLine="65" StartColumn="13" EndLine="65" EndColumn="38" />
+      <SequencePoint IlOffset="IL_0133" SourceFileIndex="0" Hidden="true" />
+      <SequencePoint IlOffset="IL_0135" SourceFileIndex="0" StartLine="84" StartColumn="13" EndLine="84" EndColumn="90" />
+      <SequencePoint IlOffset="IL_0141" SourceFileIndex="0" StartLine="85" StartColumn="13" EndLine="85" EndColumn="34" />
+      <SequencePoint IlOffset="IL_0143" SourceFileIndex="0" StartLine="66" StartColumn="13" EndLine="66" EndColumn="104" />
+      <SequencePoint IlOffset="IL_017c" SourceFileIndex="0" StartLine="67" StartColumn="13" EndLine="67" EndColumn="78" />
+      <SequencePoint IlOffset="IL_018d" SourceFileIndex="0" StartLine="68" StartColumn="13" EndLine="68" EndColumn="70" />
+      <SequencePoint IlOffset="IL_0199" SourceFileIndex="0" Hidden="true" />
+      <SequencePoint IlOffset="IL_019c" SourceFileIndex="0" StartLine="70" StartColumn="15" EndLine="70" EndColumn="56" />
+      <SequencePoint IlOffset="IL_01a8" SourceFileIndex="0" Hidden="true" />
+      <SequencePoint IlOffset="IL_01aa" SourceFileIndex="0" StartLine="78" StartColumn="15" EndLine="78" EndColumn="67" />
+      <SequencePoint IlOffset="IL_01b6" SourceFileIndex="0" StartLine="79" StartColumn="15" EndLine="79" EndColumn="36" />
+      <SequencePoint IlOffset="IL_01b8" SourceFileIndex="0" StartLine="71" StartColumn="15" EndLine="71" EndColumn="83" />
+      <SequencePoint IlOffset="IL_01c4" SourceFileIndex="0" Hidden="true" />
+      <SequencePoint IlOffset="IL_01c7" SourceFileIndex="0" StartLine="72" StartColumn="17" EndLine="72" EndColumn="63" />
+      <SequencePoint IlOffset="IL_01d3" SourceFileIndex="0" Hidden="true" />
+      <SequencePoint IlOffset="IL_01d5" SourceFileIndex="0" StartLine="73" StartColumn="15" EndLine="73" EndColumn="78" />
+      <SequencePoint IlOffset="IL_01e1" SourceFileIndex="0" StartLine="74" StartColumn="15" EndLine="74" EndColumn="36" />
+      <SequencePoint IlOffset="IL_01e3" SourceFileIndex="0" Hidden="true" />
+    </SequencePoints>
+    <Scope OffsetRange="IL_0000-IL_01e5" IsRoot="True" Method="6000005">
+      <Scope OffsetRange="IL_0000-IL_01e5" IsRoot="False" Method="6000005">
+        <UsedNamespace>Microsoft.Win32</UsedNamespace>
+        <UsedNamespace>System</UsedNamespace>
+        <UsedNamespace>System.IO</UsedNamespace>
+        <UsedNamespace>System.Runtime.InteropServices</UsedNamespace>
+        <Scope OffsetRange="IL_0015-IL_002e" IsRoot="False" Method="6000005">
+          <LocalVariable LocalVariablesSignatureToken="11000001" IlIndex="1" Attributes="PrivateScope" Signature="">dllPath</LocalVariable>
+          <Scope OffsetRange="IL_001b-IL_002e" IsRoot="False" Method="6000005">
+            <LocalVariable LocalVariablesSignatureToken="11000001" IlIndex="2" Attributes="PrivateScope" Signature="">str1</LocalVariable>
+          </Scope>
+        </Scope>
+        <Scope OffsetRange="IL_002e-IL_0046" IsRoot="False" Method="6000005">
+          <LocalVariable LocalVariablesSignatureToken="11000001" IlIndex="2" Attributes="PrivateScope" Signature="">str1</LocalVariable>
+          <Scope OffsetRange="IL_0042-IL_0046" IsRoot="False" Method="6000005" />
+        </Scope>
+        <Scope OffsetRange="IL_0046-IL_005a" IsRoot="False" Method="6000005">
+          <LocalVariable LocalVariablesSignatureToken="11000001" IlIndex="2" Attributes="PrivateScope" Signature="">str3</LocalVariable>
+          <Scope OffsetRange="IL_0050-IL_005a" IsRoot="False" Method="6000005">
+            <Scope OffsetRange="IL_0058-IL_005a" IsRoot="False" Method="6000005">
+              <LocalVariable LocalVariablesSignatureToken="11000001" IlIndex="3" Attributes="PrivateScope" Signature="">foregroundWindow</LocalVariable>
+            </Scope>
+          </Scope>
+        </Scope>
+        <Scope OffsetRange="IL_005a-IL_01e1" IsRoot="False" Method="6000005">
+          <LocalVariable LocalVariablesSignatureToken="11000001" IlIndex="2" Attributes="PrivateScope" Signature="">str2</LocalVariable>
+          <Scope OffsetRange="IL_005a-IL_0078" IsRoot="False" Method="6000005">
+            <LocalVariable LocalVariablesSignatureToken="11000001" IlIndex="3" Attributes="PrivateScope" Signature="">foregroundWindow</LocalVariable>
+            <Scope OffsetRange="IL_0070-IL_0078" IsRoot="False" Method="6000005" />
+          </Scope>
+          <Scope OffsetRange="IL_0078-IL_0090" IsRoot="False" Method="6000005">
+            <Scope OffsetRange="IL_008c-IL_0090" IsRoot="False" Method="6000005" />
+          </Scope>
+          <Scope OffsetRange="IL_0090-IL_0136" IsRoot="False" Method="6000005">
+            <Scope OffsetRange="IL_009e-IL_00d0" IsRoot="False" Method="6000005">
+              <LocalVariable LocalVariablesSignatureToken="11000001" IlIndex="4" Attributes="PrivateScope" Signature="">pwVersion</LocalVariable>
+            </Scope>
+            <Scope OffsetRange="IL_0128-IL_012d" IsRoot="False" Method="6000005">
+              <LocalVariable LocalVariablesSignatureToken="11000001" IlIndex="7" Attributes="PrivateScope" Signature="">str6</LocalVariable>
+            </Scope>
+            <Scope OffsetRange="IL_0132-IL_0136" IsRoot="False" Method="6000005" />
+          </Scope>
+          <Scope OffsetRange="IL_0136-IL_01ab" IsRoot="False" Method="6000005">
+            <Scope OffsetRange="IL_01a7-IL_01ab" IsRoot="False" Method="6000005" />
+          </Scope>
+          <Scope OffsetRange="IL_01ab-IL_01d6" IsRoot="False" Method="6000005" />
+        </Scope>
+      </Scope>
+    </Scope>
+  </Method>
+  <Method Token="6000006">
+    <SequencePoints SourceFileIndex="0">
+      <SequencePoint IlOffset="IL_0000" SourceFileIndex="0" StartLine="103" StartColumn="7" EndLine="103" EndColumn="75" />
+      <SequencePoint IlOffset="IL_0008" SourceFileIndex="0" StartLine="104" StartColumn="7" EndLine="104" EndColumn="98" />
+      <SequencePoint IlOffset="IL_0016" SourceFileIndex="0" Hidden="true" />
+      <SequencePoint IlOffset="IL_0022" SourceFileIndex="0" StartLine="106" StartColumn="7" EndLine="106" EndColumn="72" />
+      <SequencePoint IlOffset="IL_0032" SourceFileIndex="0" StartLine="108" StartColumn="9" EndLine="108" EndColumn="62" />
+      <SequencePoint IlOffset="IL_0040" SourceFileIndex="0" StartLine="109" StartColumn="9" EndLine="109" EndColumn="33" />
+      <SequencePoint IlOffset="IL_0048" SourceFileIndex="0" StartLine="110" StartColumn="9" EndLine="110" EndColumn="21" />
+      <SequencePoint IlOffset="IL_004a" SourceFileIndex="0" StartLine="114" StartColumn="9" EndLine="114" EndColumn="39" />
+      <SequencePoint IlOffset="IL_0055" SourceFileIndex="0" StartLine="115" StartColumn="11" EndLine="115" EndColumn="23" />
+      <SequencePoint IlOffset="IL_0057" SourceFileIndex="0" StartLine="116" StartColumn="9" EndLine="116" EndColumn="29" />
+      <SequencePoint IlOffset="IL_0066" SourceFileIndex="0" StartLine="117" StartColumn="9" EndLine="117" EndColumn="21" />
+      <SequencePoint IlOffset="IL_0068" SourceFileIndex="0" StartLine="105" StartColumn="9" EndLine="105" EndColumn="21" />
+      <SequencePoint IlOffset="IL_006a" SourceFileIndex="0" Hidden="true" />
+    </SequencePoints>
+    <Scope OffsetRange="IL_0000-IL_006c" IsRoot="True" Method="6000006">
+      <Scope OffsetRange="IL_0000-IL_006c" IsRoot="False" Method="6000006">
+        <UsedNamespace>Microsoft.Win32</UsedNamespace>
+        <UsedNamespace>System</UsedNamespace>
+        <UsedNamespace>System.IO</UsedNamespace>
+        <UsedNamespace>System.Runtime.InteropServices</UsedNamespace>
+        <Scope OffsetRange="IL_0000-IL_006b" IsRoot="False" Method="6000006">
+          <LocalVariable LocalVariablesSignatureToken="11000002" IlIndex="0" Attributes="PrivateScope" Signature="">pTID</LocalVariable>
+        </Scope>
+      </Scope>
+    </Scope>
+  </Method>
+  <Method Token="6000007">
+    <SequencePoints SourceFileIndex="0">
+      <SequencePoint IlOffset="IL_0000" SourceFileIndex="0" StartLine="123" StartColumn="7" EndLine="123" EndColumn="75" />
+      <SequencePoint IlOffset="IL_0008" SourceFileIndex="0" StartLine="124" StartColumn="7" EndLine="124" EndColumn="22" />
+      <SequencePoint IlOffset="IL_000e" SourceFileIndex="0" StartLine="125" StartColumn="7" EndLine="125" EndColumn="69" />
+      <SequencePoint IlOffset="IL_001c" SourceFileIndex="0" Hidden="true" />
+      <SequencePoint IlOffset="IL_0022" SourceFileIndex="0" StartLine="127" StartColumn="9" EndLine="127" EndColumn="39" />
+      <SequencePoint IlOffset="IL_002e" SourceFileIndex="0" StartLine="129" StartColumn="11" EndLine="129" EndColumn="76" />
+      <SequencePoint IlOffset="IL_0041" SourceFileIndex="0" StartLine="131" StartColumn="13" EndLine="179" EndColumn="15" />
+      <SequencePoint IlOffset="IL_0217" SourceFileIndex="0" StartLine="180" StartColumn="13" EndLine="180" EndColumn="66" />
+      <SequencePoint IlOffset="IL_0225" SourceFileIndex="0" StartLine="181" StartColumn="13" EndLine="181" EndColumn="37" />
+      <SequencePoint IlOffset="IL_022d" SourceFileIndex="0" Hidden="true" />
+      <SequencePoint IlOffset="IL_0232" SourceFileIndex="0" StartLine="183" StartColumn="16" EndLine="183" EndColumn="46" />
+      <SequencePoint IlOffset="IL_023d" SourceFileIndex="0" StartLine="185" StartColumn="13" EndLine="191" EndColumn="15" />
+      <SequencePoint IlOffset="IL_0249" SourceFileIndex="0" Hidden="true" />
+      <SequencePoint IlOffset="IL_0289" SourceFileIndex="0" StartLine="195" StartColumn="13" EndLine="195" EndColumn="33" />
+      <SequencePoint IlOffset="IL_0298" SourceFileIndex="0" StartLine="196" StartColumn="13" EndLine="208" EndColumn="15" />
+      <SequencePoint IlOffset="IL_029b" SourceFileIndex="0" Hidden="true" />
+      <SequencePoint IlOffset="IL_030f" SourceFileIndex="0" StartLine="213" StartColumn="9" EndLine="213" EndColumn="36" />
+      <SequencePoint IlOffset="IL_031b" SourceFileIndex="0" StartLine="214" StartColumn="7" EndLine="214" EndColumn="18" />
+    </SequencePoints>
+    <Scope OffsetRange="IL_0000-IL_031d" IsRoot="True" Method="6000007">
+      <Scope OffsetRange="IL_0000-IL_031d" IsRoot="False" Method="6000007">
+        <UsedNamespace>Microsoft.Win32</UsedNamespace>
+        <UsedNamespace>System</UsedNamespace>
+        <UsedNamespace>System.IO</UsedNamespace>
+        <UsedNamespace>System.Runtime.InteropServices</UsedNamespace>
+        <Scope OffsetRange="IL_0000-IL_02f1" IsRoot="False" Method="6000007">
+          <LocalVariable LocalVariablesSignatureToken="11000003" IlIndex="0" Attributes="PrivateScope" Signature="">pTID</LocalVariable>
+          <Scope OffsetRange="IL_000d-IL_02f1" IsRoot="False" Method="6000007">
+            <LocalVariable LocalVariablesSignatureToken="11000003" IlIndex="1" Attributes="PrivateScope" Signature="">str</LocalVariable>
+          </Scope>
+        </Scope>
+        <Scope OffsetRange="IL_02f1-IL_031c" IsRoot="False" Method="6000007">
+          <LocalVariable LocalVariablesSignatureToken="11000003" IlIndex="1" Attributes="PrivateScope" Signature="">str</LocalVariable>
+        </Scope>
+      </Scope>
+    </Scope>
+  </Method>
+  <Method Token="6000008">
+    <SequencePoints SourceFileIndex="0">
+      <SequencePoint IlOffset="IL_0000" SourceFileIndex="0" StartLine="219" StartColumn="7" EndLine="219" EndColumn="23" />
+      <SequencePoint IlOffset="IL_0006" SourceFileIndex="0" StartLine="220" StartColumn="7" EndLine="220" EndColumn="170" />
+      <SequencePoint IlOffset="IL_0012" SourceFileIndex="0" Hidden="true" />
+      <SequencePoint IlOffset="IL_002f" SourceFileIndex="0" StartLine="221" StartColumn="7" EndLine="221" EndColumn="143" />
+      <SequencePoint IlOffset="IL_003b" SourceFileIndex="0" Hidden="true" />
+      <SequencePoint IlOffset="IL_0058" SourceFileIndex="0" StartLine="222" StartColumn="7" EndLine="222" EndColumn="170" />
+      <SequencePoint IlOffset="IL_0064" SourceFileIndex="0" Hidden="true" />
+    </SequencePoints>
+    <Scope OffsetRange="IL_0000-IL_0083" IsRoot="True" Method="6000008">
+      <Scope OffsetRange="IL_0000-IL_0083" IsRoot="False" Method="6000008">
+        <UsedNamespace>Microsoft.Win32</UsedNamespace>
+        <UsedNamespace>System</UsedNamespace>
+        <UsedNamespace>System.IO</UsedNamespace>
+        <UsedNamespace>System.Runtime.InteropServices</UsedNamespace>
+        <Scope OffsetRange="IL_0005-IL_0024" IsRoot="False" Method="6000008">
+          <LocalVariable LocalVariablesSignatureToken="11000004" IlIndex="0" Attributes="PrivateScope" Signature="">str1</LocalVariable>
+          <Scope OffsetRange="IL_0020-IL_0024" IsRoot="False" Method="6000008" />
+        </Scope>
+        <Scope OffsetRange="IL_0024-IL_004d" IsRoot="False" Method="6000008">
+          <LocalVariable LocalVariablesSignatureToken="11000004" IlIndex="0" Attributes="PrivateScope" Signature="">str2</LocalVariable>
+          <Scope OffsetRange="IL_0049-IL_004d" IsRoot="False" Method="6000008" />
+        </Scope>
+        <Scope OffsetRange="IL_004d-IL_0076" IsRoot="False" Method="6000008">
+          <LocalVariable LocalVariablesSignatureToken="11000004" IlIndex="0" Attributes="PrivateScope" Signature="">str3</LocalVariable>
+        </Scope>
+      </Scope>
+    </Scope>
+  </Method>
+  <Method Token="6000009">
+    <SequencePoints SourceFileIndex="0">
+      <SequencePoint IlOffset="IL_0000" SourceFileIndex="0" Hidden="true" />
+      <SequencePoint IlOffset="IL_0002" SourceFileIndex="0" StartLine="227" StartColumn="7" EndLine="227" EndColumn="41" />
+      <SequencePoint IlOffset="IL_000f" SourceFileIndex="0" StartLine="228" StartColumn="7" EndLine="228" EndColumn="33" />
+      <SequencePoint IlOffset="IL_0017" SourceFileIndex="0" StartLine="229" StartColumn="9" EndLine="229" EndColumn="60" />
+      <SequencePoint IlOffset="IL_001b" SourceFileIndex="0" StartLine="230" StartColumn="7" EndLine="230" EndColumn="55" />
+      <SequencePoint IlOffset="IL_0022" SourceFileIndex="0" StartLine="231" StartColumn="7" EndLine="231" EndColumn="24" />
+      <SequencePoint IlOffset="IL_0025" SourceFileIndex="0" StartLine="232" StartColumn="9" EndLine="232" EndColumn="60" />
+      <SequencePoint IlOffset="IL_0029" SourceFileIndex="0" StartLine="233" StartColumn="7" EndLine="233" EndColumn="223" />
+      <SequencePoint IlOffset="IL_0050" SourceFileIndex="0" StartLine="234" StartColumn="7" EndLine="234" EndColumn="98" />
+      <SequencePoint IlOffset="IL_0058" SourceFileIndex="0" StartLine="235" StartColumn="7" EndLine="235" EndColumn="111" />
+      <SequencePoint IlOffset="IL_0060" SourceFileIndex="0" StartLine="236" StartColumn="7" EndLine="236" EndColumn="157" />
+      <SequencePoint IlOffset="IL_006c" SourceFileIndex="0" StartLine="237" StartColumn="7" EndLine="237" EndColumn="149" />
+      <SequencePoint IlOffset="IL_0078" SourceFileIndex="0" StartLine="239" StartColumn="7" EndLine="239" EndColumn="87" />
+      <SequencePoint IlOffset="IL_0087" SourceFileIndex="0" Hidden="true" />
+      <SequencePoint IlOffset="IL_008e" SourceFileIndex="0" StartLine="241" StartColumn="9" EndLine="241" EndColumn="178" />
+      <SequencePoint IlOffset="IL_00a6" SourceFileIndex="0" Hidden="true" />
+      <SequencePoint IlOffset="IL_00be" SourceFileIndex="0" StartLine="243" StartColumn="11" EndLine="243" EndColumn="50" />
+      <SequencePoint IlOffset="IL_00c0" SourceFileIndex="0" StartLine="244" StartColumn="11" EndLine="244" EndColumn="235" />
+      <SequencePoint IlOffset="IL_00e5" SourceFileIndex="0" StartLine="245" StartColumn="11" EndLine="245" EndColumn="243" />
+      <SequencePoint IlOffset="IL_010a" SourceFileIndex="0" StartLine="246" StartColumn="11" EndLine="246" EndColumn="251" />
+      <SequencePoint IlOffset="IL_012f" SourceFileIndex="0" StartLine="247" StartColumn="11" EndLine="247" EndColumn="203" />
+      <SequencePoint IlOffset="IL_0154" SourceFileIndex="0" StartLine="248" StartColumn="11" EndLine="248" EndColumn="199" />
+      <SequencePoint IlOffset="IL_0179" SourceFileIndex="0" StartLine="249" StartColumn="11" EndLine="249" EndColumn="183" />
+      <SequencePoint IlOffset="IL_019e" SourceFileIndex="0" StartLine="250" StartColumn="11" EndLine="250" EndColumn="199" />
+      <SequencePoint IlOffset="IL_01c3" SourceFileIndex="0" StartLine="251" StartColumn="11" EndLine="251" EndColumn="195" />
+      <SequencePoint IlOffset="IL_01e8" SourceFileIndex="0" StartLine="252" StartColumn="11" EndLine="252" EndColumn="187" />
+      <SequencePoint IlOffset="IL_020d" SourceFileIndex="0" StartLine="253" StartColumn="11" EndLine="253" EndColumn="239" />
+      <SequencePoint IlOffset="IL_0232" SourceFileIndex="0" StartLine="254" StartColumn="11" EndLine="254" EndColumn="235" />
+      <SequencePoint IlOffset="IL_0257" SourceFileIndex="0" Hidden="true" />
+      <SequencePoint IlOffset="IL_0259" SourceFileIndex="0" StartLine="257" StartColumn="11" EndLine="257" EndColumn="65" />
+      <SequencePoint IlOffset="IL_025b" SourceFileIndex="0" Hidden="true" />
+      <SequencePoint IlOffset="IL_025d" SourceFileIndex="0" StartLine="260" StartColumn="9" EndLine="260" EndColumn="63" />
+      <SequencePoint IlOffset="IL_025f" SourceFileIndex="0" StartLine="261" StartColumn="7" EndLine="261" EndColumn="23" />
+    </SequencePoints>
+    <Scope OffsetRange="IL_0000-IL_0261" IsRoot="True" Method="6000009">
+      <Scope OffsetRange="IL_0000-IL_0261" IsRoot="False" Method="6000009">
+        <UsedNamespace>Microsoft.Win32</UsedNamespace>
+        <UsedNamespace>System</UsedNamespace>
+        <UsedNamespace>System.IO</UsedNamespace>
+        <UsedNamespace>System.Runtime.InteropServices</UsedNamespace>
+        <Scope OffsetRange="IL_0021-IL_0234" IsRoot="False" Method="6000009">
+          <LocalVariable LocalVariablesSignatureToken="11000005" IlIndex="1" Attributes="PrivateScope" Signature="">hModule</LocalVariable>
+          <Scope OffsetRange="IL_0050-IL_00af" IsRoot="False" Method="6000009">
+            <LocalVariable LocalVariablesSignatureToken="11000005" IlIndex="3" Attributes="PrivateScope" Signature="">signature</LocalVariable>
+            <Scope OffsetRange="IL_0058-IL_00a8" IsRoot="False" Method="6000009">
+              <LocalVariable LocalVariablesSignatureToken="11000005" IlIndex="4" Attributes="PrivateScope" Signature="">lptrackirsignaturedata</LocalVariable>
+            </Scope>
+          </Scope>
+          <Scope OffsetRange="IL_00bf-IL_0234" IsRoot="False" Method="6000009">
+            <LocalVariable LocalVariablesSignatureToken="11000005" IlIndex="0" Attributes="PrivateScope" Signature="">npresult</LocalVariable>
+          </Scope>
+        </Scope>
+        <Scope OffsetRange="IL_0234-IL_0260" IsRoot="False" Method="6000009">
+          <LocalVariable LocalVariablesSignatureToken="11000005" IlIndex="0" Attributes="PrivateScope" Signature="">npresult</LocalVariable>
+        </Scope>
+      </Scope>
+    </Scope>
+  </Method>
+  <Method Token="600000A">
+    <SequencePoints SourceFileIndex="0">
+      <SequencePoint IlOffset="IL_0000" SourceFileIndex="0" StartLine="266" StartColumn="7" EndLine="266" EndColumn="130" />
+      <SequencePoint IlOffset="IL_0011" SourceFileIndex="0" StartLine="267" StartColumn="7" EndLine="267" EndColumn="56" />
+      <SequencePoint IlOffset="IL_0023" SourceFileIndex="0" StartLine="268" StartColumn="7" EndLine="268" EndColumn="26" />
+    </SequencePoints>
+    <Scope OffsetRange="IL_0000-IL_002a" IsRoot="True" Method="600000A">
+      <Scope OffsetRange="IL_0000-IL_002a" IsRoot="False" Method="600000A">
+        <UsedNamespace>Microsoft.Win32</UsedNamespace>
+        <UsedNamespace>System</UsedNamespace>
+        <UsedNamespace>System.IO</UsedNamespace>
+        <UsedNamespace>System.Runtime.InteropServices</UsedNamespace>
+        <Scope OffsetRange="IL_0010-IL_0024" IsRoot="False" Method="600000A">
+          <LocalVariable LocalVariablesSignatureToken="11000006" IlIndex="0" Attributes="PrivateScope" Signature="">registryKey</LocalVariable>
+        </Scope>
+      </Scope>
+    </Scope>
+  </Method>
+  <Method Token="600000B">
+    <Scope OffsetRange="IL_0000-IL_0007" IsRoot="True" Method="600000B" />
+  </Method>
+</PdbContent>
