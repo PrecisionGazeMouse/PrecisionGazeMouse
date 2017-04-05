@@ -42,7 +42,7 @@ namespace GazePlusMouse
                     
                     aTimer = new System.Timers.Timer(33);
                     aTimer.Elapsed += Update;
-                    aTimer.AutoReset = true;
+                    aTimer.AutoReset = false;
                     aTimer.Enabled = true;
                 }
             }
@@ -70,6 +70,7 @@ namespace GazePlusMouse
                 //data = trackIRclient.client_TestTrackIRData();          // Data for debugging output, can be removed if not debugging/testing
                 tid = trackIRclient.client_HandleTrackIRData(); // Data for head tracking
             }
+            aTimer.Start();
         }
         
         public HeadRotation GetRotation()

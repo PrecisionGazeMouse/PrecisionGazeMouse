@@ -59,6 +59,11 @@ namespace GazePlusMouse
 
             delta = Point.Subtract(currentPoint, new Size(smoothedPoint));*/
 
+            return calculateMean();
+        }
+
+        private Point calculateMean()
+        {
             Point p = new Point(0, 0);
             for (int i = 0; i < samples.Length; i++)
             {
@@ -69,6 +74,19 @@ namespace GazePlusMouse
             p.Y /= samples.Length;
 
             return p;
+        }
+
+        private double calculateStdDev()
+        {
+            Point u = calculateMean();
+
+            double o = 0;
+            for (int i = 0; i < samples.Length; i++)
+            {
+                Point delta = Point.Subtract(samples[i], new Size(u));
+                o += Math.Pow(delta.X, 2) + Math.Pow(delta.Y, 2);
+            }
+            return Math.Sqrt(o/samples.Length);
         }
 
         public String PrintRawValue()
@@ -88,6 +106,15 @@ namespace GazePlusMouse
 
         public int GetWarpTreshold()
         {
+            /*if (sampleCount < 10)
+                return 150;
+            double o = calculateStdDev() * 5;
+            if (o < 50)
+                return 50;
+            if (o > 300)
+                return 300;
+            return (int)o;*/
+
             return warpTreshold;
         }
 
@@ -99,15 +126,16 @@ namespace GazePlusMouse
         public Point GetPoint(Point currentPoint)
         {
             Point smoothedPoint = calculateSmoothedPoint();
-            Point delta = Point.Subtract(currentPoint, new Size(smoothedPoint)); // whenever there is a big change from the past
+            //Point delta = Point.Subtract(currentPoint, new Size(smoothedPoint)); // whenever there is a big change from the past
+            Point delta = Point.Subtract(smoothedPoint, new Size(warpPoint)); // whenever there is a big change from the past
             double distance = Math.Sqrt(Math.Pow(delta.X, 2) + Math.Pow(delta.Y, 2));
-            if (!setNewWarp && distance > warpTreshold)
+            if (!setNewWarp && distance > GetWarpTreshold())
             {
                 sampleCount = 0;
                 setNewWarp = true;
             }
 
-            if (setNewWarp && sampleCount >= 10)
+            if (setNewWarp && IsWarpReady())
             {
                 warpPoint = smoothedPoint;
                 setNewWarp = false;

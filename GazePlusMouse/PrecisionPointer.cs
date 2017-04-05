@@ -59,10 +59,10 @@ namespace GazePlusMouse
                     if (rot != null)
                     {
                         double basePitch = (p.Y - screenSize.Height / 2.0) / (screenSize.Height / 2.0) * 200.0;
-                        int yOffset = (int)((rot.pitch - basePitch) / 5);
+                        int yOffset = (int)((rot.pitch - basePitch) / 4);
 
                         double baseYaw = (p.X - screenSize.Width / 2.0) / (screenSize.Width / 2.0) * 600.0;
-                        int xOffset = (int)((-1 * rot.yaw - baseYaw) / 5);
+                        int xOffset = (int)((-1 * rot.yaw - baseYaw) / 4);
 
                         p.Offset(xOffset, yOffset);
 
@@ -73,7 +73,7 @@ namespace GazePlusMouse
                     trans = tir.GetTranslation();
                     if (trans != null)
                     {
-                        p.Offset(trans.x / 5, trans.y / 5);
+                        p.Offset(trans.x / 4, trans.y / 4);
                         return p;
                     }
                     break;
