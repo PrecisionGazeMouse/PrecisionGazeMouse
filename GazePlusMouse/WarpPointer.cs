@@ -23,7 +23,7 @@ namespace GazePlusMouse
         public WarpPointer()
         {
             samples = new Point[10];
-            warpTreshold = 150;
+            warpTreshold = 200;
 
             stream = Program.EyeXHost.CreateGazePointDataStream(GazePointDataMode.LightlyFiltered);
             //stream = Program.EyeXHost.CreateFixationDataStream(FixationDataMode.Sensitive);
@@ -49,7 +49,7 @@ namespace GazePlusMouse
             samples[sampleIndex] = new Point((int)e.X, (int)e.Y);
         }
 
-        private Point calculateSmoothedPoint()
+        public Point calculateSmoothedPoint()
         {
             /*
             Point delta = Point.Subtract(currentPoint, new Size(smoothedPoint));

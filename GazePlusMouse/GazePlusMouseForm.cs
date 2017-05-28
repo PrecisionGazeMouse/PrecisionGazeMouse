@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using System;
 using System.Drawing;
 using System.Reflection;
+using System.Collections.Generic;
 
 namespace GazePlusMouse
 {
@@ -77,6 +78,16 @@ namespace GazePlusMouse
             canvas = PointToClient(controller.GetFinalPoint());
             rec = new Rectangle(canvas.X - 5, canvas.Y - 5, 10, 10);
             e.Graphics.FillRectangle(Brushes.Red, rec);
+
+            List<Event> events = controller.GazeCalibrator.GetEvents();
+            foreach(Event evt in events)
+            {
+                canvas = PointToClient(evt.location);
+                rec = new Rectangle(canvas.X - 5, canvas.Y - 5, 10, 10);
+                e.Graphics.FillRectangle(Brushes.Blue, rec);
+                e.Graphics.DrawLine(Pens.Blue, canvas, Point.Add(canvas, new Size(evt.delta)));
+            }
+
         }
 
         private void QuitButton_Click(object sender, EventArgs e)

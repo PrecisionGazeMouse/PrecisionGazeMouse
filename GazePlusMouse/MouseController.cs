@@ -22,6 +22,7 @@ namespace GazePlusMouse
             ERROR
         };
         TrackingState state;
+        GazeCalibrator calibrator;
 
         public MouseController()
         {
@@ -33,6 +34,8 @@ namespace GazePlusMouse
 
             if (!prec.IsStarted())
                 state = TrackingState.ERROR;
+
+            calibrator = new GazeCalibrator(this, warp);
         }
 
         public WarpPointer WarpPointer
@@ -48,6 +51,11 @@ namespace GazePlusMouse
         public Point GetFinalPoint()
         {
             return finalPoint;
+        }
+
+        public GazeCalibrator GazeCalibrator
+        {
+            get { return calibrator; }
         }
 
         public String GetTrackingState()
