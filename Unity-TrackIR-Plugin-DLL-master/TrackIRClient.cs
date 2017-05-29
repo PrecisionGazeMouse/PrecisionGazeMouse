@@ -60,7 +60,7 @@ namespace TrackIRUnity
             int num2 = (int) this.NP_RequestData((ushort) ((uint) (0 | 2) | 4U | 1U | 16U | 32U | 64U));
             
             // Set this ID to your own developer ID
-            int num3 = (int) this.NP_RegisterProgramProfileID((ushort) 20990);
+            int num3 = (int) this.NP_RegisterProgramProfileID((ushort) 20991);
 
             if (this.NP_StopCursor() == TrackIRClient.NPRESULT.NP_OK)
             {
