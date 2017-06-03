@@ -9,7 +9,7 @@ using System.Drawing;
 
 namespace GazePlusMouse
 {
-    class WarpPointer
+    class EyeXWarpPointer : WarpPointer
     {
         GazePointDataStream stream;
         //FixationDataStream stream;
@@ -20,7 +20,7 @@ namespace GazePlusMouse
         bool setNewWarp;
         int warpTreshold;
 
-        public WarpPointer()
+        public EyeXWarpPointer()
         {
             samples = new Point[10];
             warpTreshold = 200;
@@ -86,10 +86,10 @@ namespace GazePlusMouse
                 Point delta = Point.Subtract(samples[i], new Size(u));
                 o += Math.Pow(delta.X, 2) + Math.Pow(delta.Y, 2);
             }
-            return Math.Sqrt(o/samples.Length);
+            return Math.Sqrt(o / samples.Length);
         }
 
-        public String PrintRawValue()
+        public override String ToString()
         {
             return String.Format("({0:0}, {1:0})", samples[sampleIndex].X, samples[sampleIndex].Y);
         }
@@ -123,7 +123,7 @@ namespace GazePlusMouse
             return warpPoint;
         }
 
-        public Point GetPoint(Point currentPoint)
+        public Point GetNextPoint(Point currentPoint)
         {
             Point smoothedPoint = calculateSmoothedPoint();
             //Point delta = Point.Subtract(currentPoint, new Size(smoothedPoint)); // whenever there is a big change from the past

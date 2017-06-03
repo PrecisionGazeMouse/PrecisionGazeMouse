@@ -4,6 +4,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
 using System.Drawing;
+using GazePlusMouse.PrecisionPointers;
 
 namespace GazePlusMouse
 {
@@ -26,8 +27,8 @@ namespace GazePlusMouse
 
         public MouseController()
         {
-            warp = new WarpPointer();
-            prec = new PrecisionPointer();
+            warp = new EyeXWarpPointer();
+            prec = new TrackIRPrecisionPointer();
 
             if (!warp.IsStarted())
                 state = TrackingState.ERROR;
@@ -96,8 +97,8 @@ namespace GazePlusMouse
                         pauseTime = System.DateTime.Now;
                         return currentPoint;
                     }
-                    Point warpPoint = warp.GetPoint(currentPoint);
-                    finalPoint = prec.GetPoint(warpPoint);
+                    Point warpPoint = warp.GetNextPoint(currentPoint);
+                    finalPoint = prec.GetNextPoint(warpPoint);
                     finalPoint = limitToScreenBounds(finalPoint);
                     return finalPoint;
                 case TrackingState.PAUSED:

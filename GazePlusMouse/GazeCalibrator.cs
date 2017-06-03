@@ -22,7 +22,7 @@ namespace GazePlusMouse
         WarpPointer warp;
         MouseController controller;
         List<Event> events;
-        bool saveToFile = true;
+        bool saveCalibration = false;
 
         public GazeCalibrator(MouseController controller, WarpPointer warp)
         {
@@ -30,8 +30,11 @@ namespace GazePlusMouse
             this.warp = warp;
             events = new List<Event>();
 
-            mouseGlobalHook = Hook.GlobalEvents();
-            mouseGlobalHook.MouseDownExt += GlobalHookMouseDownExt;
+            if (saveCalibration)
+            {
+                mouseGlobalHook = Hook.GlobalEvents();
+                mouseGlobalHook.MouseDownExt += GlobalHookMouseDownExt;
+            }
         }
 
         public List<Event> GetEvents()
@@ -49,14 +52,11 @@ namespace GazePlusMouse
 
                 Event evt = new Event() { time = System.DateTime.Now, location = curr, delta = d };
                 events.Add(evt);
-
-                if (saveToFile)
-                {
-                    var csv = new StringBuilder();
-                    var newLine = string.Format("{0},{1},{2},{3},{4}", System.DateTime.Now, curr.X, curr.Y, d.X, d.Y);
-                    csv.AppendLine(newLine);
-                    File.AppendAllText("CalibrationData.csv", csv.ToString());
-                }
+                
+                var csv = new StringBuilder();
+                var newLine = string.Format("{0},{1},{2},{3},{4}", System.DateTime.Now, curr.X, curr.Y, d.X, d.Y);
+                csv.AppendLine(newLine);
+                File.AppendAllText("CalibrationData.csv", csv.ToString());
             }
         }
     }

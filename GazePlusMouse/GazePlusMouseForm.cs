@@ -45,8 +45,8 @@ namespace GazePlusMouse
         protected override void OnPaint(PaintEventArgs e)
         {
             // Labels
-            PositionLabel.Text = controller.WarpPointer.PrintRawValue();
-            HeadRotationLabel.Text = controller.PrecisionPointer.PrintRawValue();
+            PositionLabel.Text = controller.WarpPointer.ToString();
+            HeadRotationLabel.Text = controller.PrecisionPointer.ToString();
             StateLabel.Text = controller.GetTrackingState();
             SamplesLabel.Text = controller.WarpPointer.GetSampleCount().ToString();
 
