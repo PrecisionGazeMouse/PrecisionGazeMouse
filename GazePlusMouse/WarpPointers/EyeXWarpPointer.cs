@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Tobii.EyeX.Framework;
-using EyeXFramework;
 using System.Drawing;
+using Tobii.Interaction;
 
 namespace GazePlusMouse
 {
@@ -24,15 +19,19 @@ namespace GazePlusMouse
         {
             samples = new Point[10];
             warpTreshold = 200;
-
-            stream = Program.EyeXHost.CreateGazePointDataStream(GazePointDataMode.LightlyFiltered);
-            //stream = Program.EyeXHost.CreateFixationDataStream(FixationDataMode.Sensitive);
-            stream.Next += UpdateGazePosition;
+            
+            stream = Program.EyeXHost.Streams.CreateGazePointDataStream();
+            if (stream != null)
+            {
+                stream.IsEnabled = true;
+                stream.Next += UpdateGazePosition;
+            }
         }
 
         public bool IsStarted()
         {
-            return Program.EyeXHost.EyeTrackingDeviceStatus.Value == EyeTrackingDeviceStatus.Tracking;
+            EngineStateValue<Tobii.Interaction.Framework.GazeTracking> status = Program.EyeXHost.States.GetGazeTrackingAsync().Result;
+            return status.Value == Tobii.Interaction.Framework.GazeTracking.GazeTracked;
         }
 
         public bool IsWarpReady()
@@ -40,13 +39,13 @@ namespace GazePlusMouse
             return sampleCount > 10;
         }
 
-        protected void UpdateGazePosition(object s, GazePointEventArgs e)
+        protected void UpdateGazePosition(object s, StreamData<GazePointData> streamData)
         {
             sampleCount++;
             sampleIndex++;
             if (sampleIndex >= samples.Length)
                 sampleIndex = 0;
-            samples[sampleIndex] = new Point((int)e.X, (int)e.Y);
+            samples[sampleIndex] = new Point((int)streamData.Data.X, (int)streamData.Data.Y);
         }
 
         public Point calculateSmoothedPoint()
@@ -83,7 +82,7 @@ namespace GazePlusMouse
             double o = 0;
             for (int i = 0; i < samples.Length; i++)
             {
-                Point delta = Point.Subtract(samples[i], new Size(u));
+                Point delta = Point.Subtract(samples[i], new System.Drawing.Size(u));
                 o += Math.Pow(delta.X, 2) + Math.Pow(delta.Y, 2);
             }
             return Math.Sqrt(o / samples.Length);
@@ -127,7 +126,7 @@ namespace GazePlusMouse
         {
             Point smoothedPoint = calculateSmoothedPoint();
             //Point delta = Point.Subtract(currentPoint, new Size(smoothedPoint)); // whenever there is a big change from the past
-            Point delta = Point.Subtract(smoothedPoint, new Size(warpPoint)); // whenever there is a big change from the past
+            Point delta = Point.Subtract(smoothedPoint, new System.Drawing.Size(warpPoint)); // whenever there is a big change from the past
             double distance = Math.Sqrt(Math.Pow(delta.X, 2) + Math.Pow(delta.Y, 2));
             if (!setNewWarp && distance > GetWarpTreshold())
             {

@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Tobii.Interaction;
-using Tobii.Interaction.Framework;
 
 namespace GazePlusMouse.PrecisionPointers
 {
@@ -14,7 +9,6 @@ namespace GazePlusMouse.PrecisionPointers
         PrecisionPointerMode mode;
         bool started;
         HeadPoseStream headPoseStream;
-        Host host;
         bool hasCalibrated;
         Vector3 calibrationPoint;
         Vector3[] samples;
@@ -25,21 +19,14 @@ namespace GazePlusMouse.PrecisionPointers
         public EyeXPrecisionPointer()
         {
             mode = PrecisionPointerMode.ROTATION;
-            samples = new Vector3[10];
-
-            host = new Host();
-            headPoseStream = host.Streams.CreateHeadPoseStream();
+            samples = new Vector3[5];
+            headPoseStream = Program.EyeXHost.Streams.CreateHeadPoseStream();
             if (headPoseStream != null)
             {
                 headPoseStream.IsEnabled = true;
                 headPoseStream.Next += OnNextHeadPose;
                 started = true;
             }
-        }
-
-        ~EyeXPrecisionPointer()
-        {
-            host.DisableConnection();
         }
 
         public PrecisionPointerMode Mode
@@ -53,7 +40,7 @@ namespace GazePlusMouse.PrecisionPointers
             switch (mode)
             {
                 case (PrecisionPointerMode.ROTATION):
-                    if (sampleCount < 10)
+                    if (sampleCount < 5)
                         return "No rotation";
                     else
                         return String.Format("({0:f}, {1:f})", currentPoint.X, currentPoint.Y);
@@ -75,7 +62,7 @@ namespace GazePlusMouse.PrecisionPointers
             {
                 case (PrecisionPointerMode.ROTATION):
                     System.Drawing.Rectangle screenSize = GazePlusMouseForm.GetScreenSize();
-                    if (sampleCount >= 10)
+                    if (sampleCount >= 5)
                     {
                         currentPoint = calculateSmoothedCalibratedPoint();
 

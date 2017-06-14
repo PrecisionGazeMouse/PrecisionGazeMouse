@@ -4,18 +4,18 @@
 
 namespace GazePlusMouse
 {
-    using EyeXFramework.Forms;
     using System;
     using System.Windows.Forms;
+    using Tobii.Interaction;
 
     static class Program
     {
-        private static FormsEyeXHost _eyeXHost = new FormsEyeXHost();
+        private static Host _eyeXHost = new Host();
 
         /// <summary>
         /// Gets the singleton EyeX host instance.
         /// </summary>
-        public static FormsEyeXHost EyeXHost
+        public static Host EyeXHost
         {
             get { return _eyeXHost; }
         }
@@ -26,7 +26,7 @@ namespace GazePlusMouse
         [STAThread]
         static void Main()
         {
-            _eyeXHost.Start();
+            _eyeXHost.InitializeWpfAgent();
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
