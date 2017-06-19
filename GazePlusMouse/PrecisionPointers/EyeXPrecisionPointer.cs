@@ -127,5 +127,10 @@ namespace GazePlusMouse.PrecisionPointers
 
             return p;
         }
+
+        public void Dispose()
+        {
+            headPoseStream.IsEnabled = false;
+        }
     }
 }

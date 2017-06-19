@@ -23,7 +23,10 @@ namespace GazePlusMouse
             BindingFlags.SetProperty | BindingFlags.Instance | BindingFlags.NonPublic,
             null, this, new object[] { true });
 
+            // Set the default mode
+            ModeBox.SelectedIndex = 0;
             controller = new MouseController();
+            controller.setMode((MouseController.Mode)ModeBox.SelectedIndex);
 
             Timer myTimer = new System.Windows.Forms.Timer();
             myTimer.Tick += new EventHandler(RefreshScreen);
@@ -128,6 +131,28 @@ namespace GazePlusMouse
         private void StateLabel_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void ModeBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (controller == null)
+                return;
+
+            System.Windows.Forms.ComboBox box = (System.Windows.Forms.ComboBox)sender;
+            switch ((String)box.SelectedItem)
+            {
+                case "EyeX and TrackIR":
+                    controller.setMode(MouseController.Mode.TRACKIR_AND_EYEX);
+                    break;
+                case "EyeX Only":
+                    controller.setMode(MouseController.Mode.EYEX_ONLY);
+                    break;
+                case "TrackIR Only":
+                    controller.setMode(MouseController.Mode.TRACKIR_ONLY);
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }

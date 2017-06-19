@@ -1,8 +1,8 @@
 ﻿using System.Drawing;
 
-namespace GazePlusMouse
+namespace GazePlusMouse.WarpPointers
 {
-    interface WarpPointer
+    interface WarpPointer : System.IDisposable
     {
         // Whether it's started tracking gaze
         bool IsStarted();

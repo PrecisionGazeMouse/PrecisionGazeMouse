@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using GazePlusMouse.PrecisionPointers;
+using GazePlusMouse.WarpPointers;
 
 namespace GazePlusMouse
 {
@@ -11,6 +12,15 @@ namespace GazePlusMouse
         Point finalPoint;
         DateTime pauseTime;
         Point lastCursorPosition;
+        GazeCalibrator calibrator;
+
+        public enum Mode
+        {
+            TRACKIR_AND_EYEX,
+            EYEX_ONLY,
+            TRACKIR_ONLY
+        };
+
         enum TrackingState
         {
             STARTING,
@@ -19,20 +29,41 @@ namespace GazePlusMouse
             ERROR
         };
         TrackingState state;
-        GazeCalibrator calibrator;
-
+        
         public MouseController()
         {
-            warp = new EyeXWarpPointer();
-            prec = new TrackIRPrecisionPointer();
+        }
+
+        public void setMode(Mode mode)
+        {
+            if (warp != null)
+                warp.Dispose();
+            if (prec != null)
+                prec.Dispose();
+
+            switch(mode)
+            {
+                case Mode.TRACKIR_AND_EYEX:
+                    warp = new EyeXWarpPointer();
+                    prec = new TrackIRPrecisionPointer(.25);
+                    break;
+                case Mode.TRACKIR_ONLY:
+                    warp = new NoWarpPointer(getScreenCenter());
+                    prec = new TrackIRPrecisionPointer(.7);
+                    break;
+                case Mode.EYEX_ONLY:
+                    warp = new EyeXWarpPointer();
+                    prec = new EyeXPrecisionPointer();
+                    break;
+            }
+
+            calibrator = new GazeCalibrator(this, warp);
 
             if (!warp.IsStarted())
                 state = TrackingState.ERROR;
 
             if (!prec.IsStarted())
                 state = TrackingState.ERROR;
-
-            calibrator = new GazeCalibrator(this, warp);
         }
 
         public WarpPointer WarpPointer
@@ -114,6 +145,12 @@ namespace GazePlusMouse
             }
 
             return currentPoint;
+        }
+
+        private Point getScreenCenter()
+        {
+            Rectangle screenSize = GazePlusMouseForm.GetScreenSize();
+            return new Point(screenSize.Width / 2, screenSize.Height / 2);
         }
 
         private Point limitToScreenBounds(Point p)

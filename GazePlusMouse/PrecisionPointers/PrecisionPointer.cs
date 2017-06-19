@@ -5,10 +5,11 @@ namespace GazePlusMouse.PrecisionPointers
     enum PrecisionPointerMode
     {
         ROTATION,
-        TRANSLATION
+        TRANSLATION,
+        BOTH
     }
 
-    interface PrecisionPointer
+    interface PrecisionPointer : System.IDisposable
     {
         // Whether it's started tracking
         bool IsStarted();

@@ -29,10 +29,12 @@ namespace GazePlusMouse.PrecisionPointers
         PrecisionPointerMode mode;
         HeadRotation rot;
         HeadTranslation trans;
+        double sensitivity;
 
-        public TrackIRPrecisionPointer()
+        public TrackIRPrecisionPointer(double sensitivity)
         {
-            mode = PrecisionPointerMode.ROTATION;
+            mode = PrecisionPointerMode.BOTH;
+            this.sensitivity = sensitivity;
             trackIRclient = new TrackIRUnity.TrackIRClient();  // Create an instance of the TrackerIR Client to get data from.
             if (trackIRclient != null)
             {
@@ -74,6 +76,11 @@ namespace GazePlusMouse.PrecisionPointers
                         return "";
                     else
                         return String.Format("({0:0}, {1:0})", trans.x, trans.y);
+                case (PrecisionPointerMode.BOTH):
+                    if (rot == null && trans == null)
+                        return "";
+                    else
+                        return String.Format("({0:0}, {1:0})", trans.x + rot.yaw, trans.y + rot.pitch);
             }
 
             return "";
@@ -81,18 +88,18 @@ namespace GazePlusMouse.PrecisionPointers
 
         public Point GetNextPoint(Point warpPoint)
         {
+            Rectangle screenSize = GazePlusMouseForm.GetScreenSize();
             switch (mode)
             {
                 case (PrecisionPointerMode.ROTATION):
-                    Rectangle screenSize = GazePlusMouseForm.GetScreenSize();
                     rot = this.getRotation();
                     if (rot != null)
                     {
                         double basePitch = (warpPoint.Y - screenSize.Height / 2.0) / (screenSize.Height / 2.0) * 200.0;
-                        int yOffset = (int)((rot.pitch - basePitch) / 4);
+                        int yOffset = (int)((rot.pitch - basePitch) * sensitivity);
 
                         double baseYaw = (warpPoint.X - screenSize.Width / 2.0) / (screenSize.Width / 2.0) * 600.0;
-                        int xOffset = (int)((-1 * rot.yaw - baseYaw) / 4);
+                        int xOffset = (int)((-1 * rot.yaw - baseYaw) * sensitivity);
 
                         warpPoint.Offset(xOffset, yOffset);
 
@@ -107,16 +114,35 @@ namespace GazePlusMouse.PrecisionPointers
                         return warpPoint;
                     }
                     break;
+                case (PrecisionPointerMode.BOTH):
+                    trans = this.getTranslation();
+                    if (trans != null)
+                    {
+                        warpPoint.Offset(trans.x / 4, trans.y / 4);
+                    }
+                    rot = this.getRotation();
+                    if (rot != null)
+                    {
+                        double basePitch = (warpPoint.Y - screenSize.Height / 2.0) / (screenSize.Height / 2.0) * 200.0;
+                        int yOffset = (int)((rot.pitch - basePitch) * sensitivity);
+
+                        double baseYaw = (warpPoint.X - screenSize.Width / 2.0) / (screenSize.Width / 2.0) * 600.0;
+                        int xOffset = (int)((-1 * rot.yaw - baseYaw) * sensitivity);
+
+                        warpPoint.Offset(xOffset, yOffset);
+                    }
+                    return warpPoint;
             }
 
             return warpPoint;
         }
 
-        ~TrackIRPrecisionPointer()
+        public void Dispose()
         {
             if (trackIRclient != null && started)
             {                         // Stop tracking
                 string status = trackIRclient.TrackIR_Shutdown();
+                trackIRclient = null;
                 started = false;
             }
         }

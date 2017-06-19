@@ -2,7 +2,7 @@
 using System.Drawing;
 using Tobii.Interaction;
 
-namespace GazePlusMouse
+namespace GazePlusMouse.WarpPointers
 {
     class EyeXWarpPointer : WarpPointer
     {
@@ -13,12 +13,12 @@ namespace GazePlusMouse
         int sampleIndex;
         int sampleCount;
         bool setNewWarp;
-        int warpTreshold;
+        int warpThreshold;
 
         public EyeXWarpPointer()
         {
             samples = new Point[10];
-            warpTreshold = 200;
+            warpThreshold = 200;
             
             stream = Program.EyeXHost.Streams.CreateGazePointDataStream();
             if (stream != null)
@@ -114,7 +114,7 @@ namespace GazePlusMouse
                 return 300;
             return (int)o;*/
 
-            return warpTreshold;
+            return warpThreshold;
         }
 
         public Point GetWarpPoint()
@@ -142,6 +142,11 @@ namespace GazePlusMouse
             }
 
             return warpPoint;
+        }
+
+        public void Dispose()
+        {
+            stream.IsEnabled = false;
         }
     }
 }

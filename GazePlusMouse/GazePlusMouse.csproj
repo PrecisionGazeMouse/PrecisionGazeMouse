@@ -14,6 +14,23 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <AutorunEnabled>true</AutorunEnabled>
+    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -54,6 +71,18 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>2D58275878655DAB70325CF643DC264A968653B8</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>GazePlusMouse_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Gma.System.MouseKeyHook, Version=5.4.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MouseKeyHook.5.4.0\lib\net40\Gma.System.MouseKeyHook.dll</HintPath>
@@ -80,7 +109,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enums.cs" />
     <Compile Include="PrecisionPointers\EyeXPrecisionPointer.cs" />
+    <Compile Include="Settings.cs" />
     <Compile Include="WarpPointers\EyeXWarpPointer.cs" />
     <Compile Include="GazeCalibrator.cs" />
     <Compile Include="GazePlusMouseForm.cs">
@@ -94,6 +125,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PrecisionPointers\TrackIRPrecisionPointer.cs" />
+    <Compile Include="WarpPointers\NoWarpPointer.cs" />
     <Compile Include="WarpPointers\WarpPointer.cs" />
     <EmbeddedResource Include="GazePlusMouseForm.resx">
       <DependentUpon>GazePlusMouseForm.cs</DependentUpon>
@@ -107,6 +139,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="GazePlusMouse_TemporaryKey.pfx" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -126,6 +159,18 @@
       <Project>{59f0f87c-0e15-40f8-81b9-2719c887dc79}</Project>
       <Name>TrackIRUnity</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5.2 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Tobii.Interaction.0.7.1\build\Tobii.Interaction.targets" Condition="Exists('..\packages\Tobii.Interaction.0.7.1\build\Tobii.Interaction.targets')" />

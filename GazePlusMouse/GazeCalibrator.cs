@@ -3,6 +3,7 @@ using System.Text;
 using System.Drawing;
 using Gma.System.MouseKeyHook;
 using System.IO;
+using GazePlusMouse.WarpPointers;
 
 namespace GazePlusMouse
 {
