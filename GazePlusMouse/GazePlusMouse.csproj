@@ -109,9 +109,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Enums.cs" />
     <Compile Include="PrecisionPointers\EyeXPrecisionPointer.cs" />
-    <Compile Include="Settings.cs" />
     <Compile Include="WarpPointers\EyeXWarpPointer.cs" />
     <Compile Include="GazeCalibrator.cs" />
     <Compile Include="GazePlusMouseForm.cs">
