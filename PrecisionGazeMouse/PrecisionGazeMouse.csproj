@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -7,8 +7,8 @@
     <ProjectGuid>{E26B1AA0-F0D7-459A-8537-C73610DCEE95}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>GazePlusMouse</RootNamespace>
-    <AssemblyName>GazePlusMouse</AssemblyName>
+    <RootNamespace>PrecisionGazeMouse</RootNamespace>
+    <AssemblyName>PrecisionGazeMouse</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -75,7 +75,7 @@
     <ManifestCertificateThumbprint>2D58275878655DAB70325CF643DC264A968653B8</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>GazePlusMouse_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>PrecisionGazeMouse_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
@@ -112,11 +112,11 @@
     <Compile Include="PrecisionPointers\EyeXPrecisionPointer.cs" />
     <Compile Include="WarpPointers\EyeXWarpPointer.cs" />
     <Compile Include="GazeCalibrator.cs" />
-    <Compile Include="GazePlusMouseForm.cs">
+    <Compile Include="PrecisionGazeMouseForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GazePlusMouseForm.Designer.cs">
-      <DependentUpon>GazePlusMouseForm.cs</DependentUpon>
+    <Compile Include="PrecisionGazeMouseForm.Designer.cs">
+      <DependentUpon>PrecisionGazeMouseForm.cs</DependentUpon>
     </Compile>
     <Compile Include="MouseController.cs" />
     <Compile Include="PrecisionPointers\PrecisionPointer.cs" />
@@ -125,8 +125,8 @@
     <Compile Include="PrecisionPointers\TrackIRPrecisionPointer.cs" />
     <Compile Include="WarpPointers\NoWarpPointer.cs" />
     <Compile Include="WarpPointers\WarpPointer.cs" />
-    <EmbeddedResource Include="GazePlusMouseForm.resx">
-      <DependentUpon>GazePlusMouseForm.cs</DependentUpon>
+    <EmbeddedResource Include="PrecisionGazeMouseForm.resx">
+      <DependentUpon>PrecisionGazeMouseForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -137,7 +137,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <None Include="GazePlusMouse_TemporaryKey.pfx" />
+    <None Include="PrecisionGazeMouse_TemporaryKey.pfx" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

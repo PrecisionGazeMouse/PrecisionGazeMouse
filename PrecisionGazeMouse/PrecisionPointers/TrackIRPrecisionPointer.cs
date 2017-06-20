@@ -3,7 +3,7 @@ using System.Drawing;
 using System.Timers;
 using TrackIRUnity;
 
-namespace GazePlusMouse.PrecisionPointers
+namespace PrecisionGazeMouse.PrecisionPointers
 {
     public class HeadRotation
     {
@@ -88,7 +88,7 @@ namespace GazePlusMouse.PrecisionPointers
 
         public Point GetNextPoint(Point warpPoint)
         {
-            Rectangle screenSize = GazePlusMouseForm.GetScreenSize();
+            Rectangle screenSize = PrecisionGazeMouseForm.GetScreenSize();
             switch (mode)
             {
                 case (PrecisionPointerMode.ROTATION):

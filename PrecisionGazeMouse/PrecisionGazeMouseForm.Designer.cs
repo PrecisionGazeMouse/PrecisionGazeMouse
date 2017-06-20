@@ -1,6 +1,6 @@
-﻿namespace GazePlusMouse
+﻿namespace PrecisionGazeMouse
 {
-    partial class GazePlusMouseForm
+    partial class PrecisionGazeMouseForm
     {
         /// <summary>
         /// Required designer variable.
@@ -153,7 +153,7 @@
             this.ModeBox.TabIndex = 18;
             this.ModeBox.SelectedIndexChanged += new System.EventHandler(this.ModeBox_SelectedIndexChanged);
             // 
-            // GazePlusMouseForm
+            // PrecisionGazeMouseForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -170,8 +170,8 @@
             this.Controls.Add(this.QuitButton);
             this.Controls.Add(this.PositionLabel);
             this.Margin = new System.Windows.Forms.Padding(4);
-            this.Name = "GazePlusMouseForm";
-            this.Text = "GazePlusMouse";
+            this.Name = "PrecisionGazeMouseForm";
+            this.Text = "PrecisionGazeMouse";
             this.Load += new System.EventHandler(this.GazeAwareForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

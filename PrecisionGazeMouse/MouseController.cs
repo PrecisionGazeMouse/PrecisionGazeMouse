@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Drawing;
-using GazePlusMouse.PrecisionPointers;
-using GazePlusMouse.WarpPointers;
+using PrecisionGazeMouse.PrecisionPointers;
+using PrecisionGazeMouse.WarpPointers;
 
-namespace GazePlusMouse
+namespace PrecisionGazeMouse
 {
     class MouseController
     {
@@ -118,7 +118,7 @@ namespace GazePlusMouse
                     }
                     break;
                 case TrackingState.RUNNING:
-                    if (GazePlusMouseForm.MousePosition != finalPoint)
+                    if (PrecisionGazeMouseForm.MousePosition != finalPoint)
                     {
                         state = TrackingState.PAUSED;
                         pauseTime = System.DateTime.Now;
@@ -149,13 +149,13 @@ namespace GazePlusMouse
 
         private Point getScreenCenter()
         {
-            Rectangle screenSize = GazePlusMouseForm.GetScreenSize();
+            Rectangle screenSize = PrecisionGazeMouseForm.GetScreenSize();
             return new Point(screenSize.Width / 2, screenSize.Height / 2);
         }
 
         private Point limitToScreenBounds(Point p)
         {
-            Rectangle screenSize = GazePlusMouseForm.GetScreenSize();
+            Rectangle screenSize = PrecisionGazeMouseForm.GetScreenSize();
 
             if (p.X < 0)
                 p.X = 0;

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Drawing;
 
-namespace GazePlusMouse.WarpPointers
+namespace PrecisionGazeMouse.WarpPointers
 {
     class NoWarpPointer : WarpPointer
     {

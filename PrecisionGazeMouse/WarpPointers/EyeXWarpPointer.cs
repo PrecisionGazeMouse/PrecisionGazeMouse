@@ -2,7 +2,7 @@
 using System.Drawing;
 using Tobii.Interaction;
 
-namespace GazePlusMouse.WarpPointers
+namespace PrecisionGazeMouse.WarpPointers
 {
     class EyeXWarpPointer : WarpPointer
     {

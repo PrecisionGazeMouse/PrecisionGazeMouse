@@ -2,7 +2,7 @@
 using System.Drawing;
 using Tobii.Interaction;
 
-namespace GazePlusMouse.PrecisionPointers
+namespace PrecisionGazeMouse.PrecisionPointers
 {
     class EyeXPrecisionPointer : PrecisionPointer
     {
@@ -61,7 +61,7 @@ namespace GazePlusMouse.PrecisionPointers
             switch (mode)
             {
                 case (PrecisionPointerMode.ROTATION):
-                    System.Drawing.Rectangle screenSize = GazePlusMouseForm.GetScreenSize();
+                    System.Drawing.Rectangle screenSize = PrecisionGazeMouseForm.GetScreenSize();
                     if (sampleCount >= 5)
                     {
                         currentPoint = calculateSmoothedCalibratedPoint();

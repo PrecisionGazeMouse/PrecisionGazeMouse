@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace GazePlusMouse.Properties
+namespace PrecisionGazeMouse.Properties
 {
 
 

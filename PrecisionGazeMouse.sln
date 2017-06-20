@@ -1,15 +1,15 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GazePlusMouse", "GazePlusMouse\GazePlusMouse.csproj", "{E26B1AA0-F0D7-459A-8537-C73610DCEE95}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrecisionGazeMouse", "PrecisionGazeMouse\PrecisionGazeMouse.csproj", "{E26B1AA0-F0D7-459A-8537-C73610DCEE95}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrackIRUnity", "Unity-TrackIR-Plugin-DLL-master\TrackIRUnity.csproj", "{59F0F87C-0E15-40F8-81B9-2719C887DC79}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E702EBB4-A395-46D9-9755-1DA8D93BBEA2}"
 	ProjectSection(SolutionItems) = preProject
-		GazePlusMouse.png = GazePlusMouse.png
+		PrecisionGazeMouse.png = PrecisionGazeMouse.png
 		README.md = README.md
 	EndProjectSection
 EndProject

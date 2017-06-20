@@ -2,7 +2,7 @@
 // Copyright 2014 Tobii Technology AB. All rights reserved.
 //-----------------------------------------------------------------------
 
-namespace GazePlusMouse
+namespace PrecisionGazeMouse
 {
     using System;
     using System.Windows.Forms;
@@ -30,7 +30,7 @@ namespace GazePlusMouse
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new GazePlusMouseForm());
+            Application.Run(new PrecisionGazeMouseForm());
 
             _eyeXHost.Dispose();
         }

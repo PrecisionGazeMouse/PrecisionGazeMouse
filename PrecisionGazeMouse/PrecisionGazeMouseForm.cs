@@ -8,13 +8,13 @@ using System.Drawing;
 using System.Reflection;
 using System.Collections.Generic;
 
-namespace GazePlusMouse
+namespace PrecisionGazeMouse
 {
-    public partial class GazePlusMouseForm : Form
+    public partial class PrecisionGazeMouseForm : Form
     {
         MouseController controller;
 
-        public GazePlusMouseForm()
+        public PrecisionGazeMouseForm()
         {
             InitializeComponent();
             QuitButton.Select();

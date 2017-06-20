@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace GazePlusMouse.WarpPointers
+namespace PrecisionGazeMouse.WarpPointers
 {
     interface WarpPointer : System.IDisposable
     {

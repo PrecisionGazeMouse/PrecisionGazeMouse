@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace GazePlusMouse.PrecisionPointers
+namespace PrecisionGazeMouse.PrecisionPointers
 {
     enum PrecisionPointerMode
     {
