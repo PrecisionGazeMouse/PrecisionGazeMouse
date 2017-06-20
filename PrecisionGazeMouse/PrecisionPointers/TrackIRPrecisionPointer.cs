@@ -137,6 +137,11 @@ namespace PrecisionGazeMouse.PrecisionPointers
             return warpPoint;
         }
 
+        ~TrackIRPrecisionPointer()
+        {
+            Dispose();
+        }
+
         public void Dispose()
         {
             if (trackIRclient != null && started)
