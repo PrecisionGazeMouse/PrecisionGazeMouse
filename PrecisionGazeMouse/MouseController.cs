@@ -45,11 +45,11 @@ namespace PrecisionGazeMouse
             {
                 case Mode.TRACKIR_AND_EYEX:
                     warp = new EyeXWarpPointer();
-                    prec = new TrackIRPrecisionPointer(.25);
+                    prec = new TrackIRPrecisionPointer(PrecisionPointerMode.ROTATION, .25);
                     break;
                 case Mode.TRACKIR_ONLY:
                     warp = new NoWarpPointer(getScreenCenter());
-                    prec = new TrackIRPrecisionPointer(.7);
+                    prec = new TrackIRPrecisionPointer(PrecisionPointerMode.BOTH, .7);
                     break;
                 case Mode.EYEX_ONLY:
                     warp = new EyeXWarpPointer();

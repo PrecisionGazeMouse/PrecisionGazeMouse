@@ -6,11 +6,9 @@ namespace PrecisionGazeMouse.WarpPointers
     class NoWarpPointer : WarpPointer
     {
         Point warpPoint;
-        int warpThreshold;
 
         public NoWarpPointer(Point centerOfScreen)
         {
-            warpThreshold = 0;
             warpPoint = centerOfScreen;
         }
 
@@ -46,7 +44,7 @@ namespace PrecisionGazeMouse.WarpPointers
 
         public int GetWarpTreshold()
         {
-            return warpThreshold;
+            return 0;
         }
 
         public Point GetWarpPoint()

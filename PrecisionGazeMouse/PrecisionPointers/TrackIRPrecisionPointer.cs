@@ -31,9 +31,9 @@ namespace PrecisionGazeMouse.PrecisionPointers
         HeadTranslation trans;
         double sensitivity;
 
-        public TrackIRPrecisionPointer(double sensitivity)
+        public TrackIRPrecisionPointer(PrecisionPointerMode mode, double sensitivity)
         {
-            mode = PrecisionPointerMode.BOTH;
+            this.mode = mode;
             this.sensitivity = sensitivity;
             trackIRclient = new TrackIRUnity.TrackIRClient();  // Create an instance of the TrackerIR Client to get data from.
             if (trackIRclient != null)

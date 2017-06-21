@@ -40,6 +40,8 @@
             this.SamplesLabel = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.ModeBox = new System.Windows.Forms.ComboBox();
+            this.warpBar = new System.Windows.Forms.CheckBox();
+            this.gazeTracker = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // PositionLabel
@@ -50,11 +52,10 @@
             this.PositionLabel.Size = new System.Drawing.Size(42, 17);
             this.PositionLabel.TabIndex = 8;
             this.PositionLabel.Text = "(0, 0)";
-            this.PositionLabel.Click += new System.EventHandler(this.PositionLabel_Click);
             // 
             // QuitButton
             // 
-            this.QuitButton.Location = new System.Drawing.Point(64, 177);
+            this.QuitButton.Location = new System.Drawing.Point(158, 187);
             this.QuitButton.Name = "QuitButton";
             this.QuitButton.Size = new System.Drawing.Size(75, 23);
             this.QuitButton.TabIndex = 9;
@@ -70,7 +71,6 @@
             this.label1.Size = new System.Drawing.Size(96, 17);
             this.label1.TabIndex = 10;
             this.label1.Text = "Gaze Position";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label2
             // 
@@ -80,7 +80,6 @@
             this.label2.Size = new System.Drawing.Size(99, 17);
             this.label2.TabIndex = 11;
             this.label2.Text = "Head Rotation";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // HeadRotationLabel
             // 
@@ -90,7 +89,6 @@
             this.HeadRotationLabel.Size = new System.Drawing.Size(42, 17);
             this.HeadRotationLabel.TabIndex = 12;
             this.HeadRotationLabel.Text = "(0, 0)";
-            this.HeadRotationLabel.Click += new System.EventHandler(this.HeadRotationLabel_Click);
             // 
             // label3
             // 
@@ -100,7 +98,6 @@
             this.label3.Size = new System.Drawing.Size(41, 17);
             this.label3.TabIndex = 13;
             this.label3.Text = "State";
-            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // StateLabel
             // 
@@ -110,7 +107,6 @@
             this.StateLabel.Size = new System.Drawing.Size(57, 17);
             this.StateLabel.TabIndex = 14;
             this.StateLabel.Text = "Starting";
-            this.StateLabel.Click += new System.EventHandler(this.StateLabel_Click);
             // 
             // label4
             // 
@@ -133,7 +129,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(21, 22);
+            this.label5.Location = new System.Drawing.Point(21, 20);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(43, 17);
             this.label5.TabIndex = 17;
@@ -147,17 +143,43 @@
             "EyeX and TrackIR",
             "EyeX Only",
             "TrackIR Only"});
-            this.ModeBox.Location = new System.Drawing.Point(146, 19);
+            this.ModeBox.Location = new System.Drawing.Point(146, 17);
             this.ModeBox.Name = "ModeBox";
-            this.ModeBox.Size = new System.Drawing.Size(219, 24);
+            this.ModeBox.Size = new System.Drawing.Size(258, 24);
             this.ModeBox.TabIndex = 18;
             this.ModeBox.SelectedIndexChanged += new System.EventHandler(this.ModeBox_SelectedIndexChanged);
+            // 
+            // warpBar
+            // 
+            this.warpBar.AutoSize = true;
+            this.warpBar.Checked = true;
+            this.warpBar.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.warpBar.Location = new System.Drawing.Point(253, 52);
+            this.warpBar.Name = "warpBar";
+            this.warpBar.Size = new System.Drawing.Size(128, 21);
+            this.warpBar.TabIndex = 20;
+            this.warpBar.Text = "Show Warp Bar";
+            this.warpBar.UseVisualStyleBackColor = true;
+            this.warpBar.CheckedChanged += new System.EventHandler(this.warpBar_CheckedChanged);
+            // 
+            // gazeTracker
+            // 
+            this.gazeTracker.AutoSize = true;
+            this.gazeTracker.Location = new System.Drawing.Point(253, 80);
+            this.gazeTracker.Name = "gazeTracker";
+            this.gazeTracker.Size = new System.Drawing.Size(155, 21);
+            this.gazeTracker.TabIndex = 21;
+            this.gazeTracker.Text = "Show Gaze Tracker";
+            this.gazeTracker.UseVisualStyleBackColor = true;
+            this.gazeTracker.CheckedChanged += new System.EventHandler(this.gazeTracker_CheckedChanged);
             // 
             // PrecisionGazeMouseForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1006, 721);
+            this.ClientSize = new System.Drawing.Size(416, 232);
+            this.Controls.Add(this.gazeTracker);
+            this.Controls.Add(this.warpBar);
             this.Controls.Add(this.ModeBox);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.SamplesLabel);
@@ -169,6 +191,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.QuitButton);
             this.Controls.Add(this.PositionLabel);
+            this.DoubleBuffered = true;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "PrecisionGazeMouseForm";
             this.Text = "PrecisionGazeMouse";
@@ -190,6 +213,8 @@
         private System.Windows.Forms.Label SamplesLabel;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox ModeBox;
+        private System.Windows.Forms.CheckBox warpBar;
+        private System.Windows.Forms.CheckBox gazeTracker;
     }
 }
 

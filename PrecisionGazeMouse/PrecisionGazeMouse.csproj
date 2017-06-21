@@ -109,6 +109,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="OverlayForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OverlayForm.Designer.cs">
+      <DependentUpon>OverlayForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="PrecisionPointers\EyeXPrecisionPointer.cs" />
     <Compile Include="WarpPointers\EyeXWarpPointer.cs" />
     <Compile Include="GazeCalibrator.cs" />
@@ -125,6 +131,9 @@
     <Compile Include="PrecisionPointers\TrackIRPrecisionPointer.cs" />
     <Compile Include="WarpPointers\NoWarpPointer.cs" />
     <Compile Include="WarpPointers\WarpPointer.cs" />
+    <EmbeddedResource Include="OverlayForm.resx">
+      <DependentUpon>OverlayForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PrecisionGazeMouseForm.resx">
       <DependentUpon>PrecisionGazeMouseForm.cs</DependentUpon>
     </EmbeddedResource>
