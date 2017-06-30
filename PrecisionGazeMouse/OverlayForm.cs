@@ -50,6 +50,14 @@ namespace PrecisionGazeMouse
             set { gazeTracker = value; }
         }
 
+        public void ShowIfTracking()
+        {
+            if (gazeTracker || warpBar)
+                Show();
+            else
+                Hide();
+        }
+
         protected override void OnPaint(PaintEventArgs e)
         {
             Point p;

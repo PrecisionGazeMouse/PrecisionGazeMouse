@@ -62,7 +62,7 @@ namespace PrecisionGazeMouse
             overlay = new OverlayForm(controller);
             overlay.ShowWarpBar = warpBar.Checked;
             overlay.ShowGazeTracker = gazeTracker.Checked;
-            overlay.Show();
+            overlay.ShowIfTracking();
         }
 
         private void ModeBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -75,12 +75,21 @@ namespace PrecisionGazeMouse
             {
                 case "EyeX and TrackIR":
                     controller.setMode(MouseController.Mode.TRACKIR_AND_EYEX);
+                    warpBar.Enabled = true;
+                    gazeTracker.Enabled = true;
+                    overlay.ShowIfTracking();
                     break;
                 case "EyeX Only":
                     controller.setMode(MouseController.Mode.EYEX_ONLY);
+                    warpBar.Enabled = true;
+                    gazeTracker.Enabled = true;
+                    overlay.ShowIfTracking();
                     break;
                 case "TrackIR Only":
                     controller.setMode(MouseController.Mode.TRACKIR_ONLY);
+                    warpBar.Enabled = false;
+                    gazeTracker.Enabled = false;
+                    overlay.Hide();
                     break;
                 default:
                     break;
@@ -90,11 +99,13 @@ namespace PrecisionGazeMouse
         private void warpBar_CheckedChanged(object sender, EventArgs e)
         {
             overlay.ShowWarpBar = warpBar.Checked;
+            overlay.ShowIfTracking();
         }
 
         private void gazeTracker_CheckedChanged(object sender, EventArgs e)
         {
             overlay.ShowGazeTracker = gazeTracker.Checked;
+            overlay.ShowIfTracking();
         }
     }
 }

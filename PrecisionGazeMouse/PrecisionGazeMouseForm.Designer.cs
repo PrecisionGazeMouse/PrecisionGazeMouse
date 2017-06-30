@@ -29,6 +29,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PrecisionGazeMouseForm));
             this.PositionLabel = new System.Windows.Forms.Label();
             this.QuitButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -192,6 +193,7 @@
             this.Controls.Add(this.QuitButton);
             this.Controls.Add(this.PositionLabel);
             this.DoubleBuffered = true;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "PrecisionGazeMouseForm";
             this.Text = "PrecisionGazeMouse";
