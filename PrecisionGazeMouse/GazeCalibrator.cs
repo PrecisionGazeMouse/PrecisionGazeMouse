@@ -42,7 +42,7 @@ namespace PrecisionGazeMouse
 
         private void GlobalHookMouseDownExt(object sender, MouseEventExtArgs e)
         {
-            if (controller.GetTrackingState() == "Running")
+            if (controller.GetTrackingStatus() == "Running")
             {
                 Point curr = new Point(e.X, e.Y);
                 Point gaze = warp.calculateSmoothedPoint();

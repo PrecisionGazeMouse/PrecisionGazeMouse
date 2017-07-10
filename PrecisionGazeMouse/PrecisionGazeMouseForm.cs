@@ -48,8 +48,7 @@ namespace PrecisionGazeMouse
             // Update Labels
             PositionLabel.Text = controller.WarpPointer.ToString();
             HeadRotationLabel.Text = controller.PrecisionPointer.ToString();
-            StateLabel.Text = controller.GetTrackingState();
-            SamplesLabel.Text = controller.WarpPointer.GetSampleCount().ToString();
+            StatusLabel.Text = controller.GetTrackingStatus();
         }
 
         private void QuitButton_Click(object sender, EventArgs e)

@@ -86,7 +86,7 @@ namespace PrecisionGazeMouse
             get { return calibrator; }
         }
 
-        public String GetTrackingState()
+        public String GetTrackingStatus()
         {
             switch (state)
             {
