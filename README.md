@@ -1,6 +1,6 @@
 ## See the main website and user guide at [precisiongazemouse.com](http://precisiongazemouse.com)
 
-If you need help please file an issue by clicking the tab above.
+If you need help, please file an issue by clicking the tab above.
 
 **Software Developers:**
 
