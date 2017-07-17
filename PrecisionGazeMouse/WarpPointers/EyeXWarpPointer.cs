@@ -50,15 +50,7 @@ namespace PrecisionGazeMouse.WarpPointers
 
         public Point calculateSmoothedPoint()
         {
-            /*
-            Point delta = Point.Subtract(currentPoint, new Size(smoothedPoint));
-            delta.X = delta.X / 5;
-            delta.Y = delta.Y / 5;
-            smoothedPoint = Point.Add(smoothedPoint, new Size(delta));
-
-            delta = Point.Subtract(currentPoint, new Size(smoothedPoint));*/
-
-            return calculateMean();
+            return calculateTrimmedMean();
         }
 
         private Point calculateMean()
@@ -71,6 +63,39 @@ namespace PrecisionGazeMouse.WarpPointers
             }
             p.X /= samples.Length;
             p.Y /= samples.Length;
+
+            return p;
+        }
+
+        private Point calculateTrimmedMean()
+        {
+            Point p = calculateMean();
+
+            // Find the furthest point from the mean
+            double maxDist = 0;
+            int maxIndex = 0;
+            for (int i = 0; i < samples.Length; i++)
+            {
+                double dist = Math.Pow(samples[i].X - p.X, 2) + Math.Pow(samples[i].Y - p.Y, 2);
+                if (dist > maxDist)
+                {
+                    maxDist = dist;
+                    maxIndex = i;
+                }
+            }
+
+            // Calculate a new mean without the furthest point
+            p = new Point(0, 0);
+            for (int i = 0; i < samples.Length; i++)
+            {
+                if (i != maxIndex)
+                {
+                    p.X += samples[i].X;
+                    p.Y += samples[i].Y;
+                }
+            }
+            p.X /= (samples.Length - 1);
+            p.Y /= (samples.Length - 1);
 
             return p;
         }
@@ -105,15 +130,6 @@ namespace PrecisionGazeMouse.WarpPointers
 
         public int GetWarpTreshold()
         {
-            /*if (sampleCount < 10)
-                return 150;
-            double o = calculateStdDev() * 5;
-            if (o < 50)
-                return 50;
-            if (o > 300)
-                return 300;
-            return (int)o;*/
-
             return warpThreshold;
         }
 
@@ -125,7 +141,6 @@ namespace PrecisionGazeMouse.WarpPointers
         public Point GetNextPoint(Point currentPoint)
         {
             Point smoothedPoint = calculateSmoothedPoint();
-            //Point delta = Point.Subtract(currentPoint, new Size(smoothedPoint)); // whenever there is a big change from the past
             Point delta = Point.Subtract(smoothedPoint, new System.Drawing.Size(warpPoint)); // whenever there is a big change from the past
             double distance = Math.Sqrt(Math.Pow(delta.X, 2) + Math.Pow(delta.Y, 2));
             if (!setNewWarp && distance > GetWarpTreshold())
@@ -138,7 +153,6 @@ namespace PrecisionGazeMouse.WarpPointers
             {
                 warpPoint = smoothedPoint;
                 setNewWarp = false;
-                //SendKeys.Send("{F12}");
             }
 
             return warpPoint;
