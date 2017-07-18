@@ -110,7 +110,7 @@ namespace PrecisionGazeMouse.PrecisionPointers
                     trans = this.getTranslation();
                     if (trans != null)
                     {
-                        warpPoint.Offset(trans.x / 4, trans.y / 4);
+                        warpPoint.Offset((int)(trans.x / 1.5), (int)(trans.y / 1.5));
                         return warpPoint;
                     }
                     break;
@@ -118,7 +118,7 @@ namespace PrecisionGazeMouse.PrecisionPointers
                     trans = this.getTranslation();
                     if (trans != null)
                     {
-                        warpPoint.Offset(trans.x / 4, trans.y / 4);
+                        warpPoint.Offset((int)(trans.x / 1.5), (int)(trans.y / 1.5));
                     }
                     rot = this.getRotation();
                     if (rot != null)
@@ -175,7 +175,7 @@ namespace PrecisionGazeMouse.PrecisionPointers
         {
             HeadTranslation o = new HeadTranslation();
             o.x = -1 * (int)tid.fNPX;
-            o.y = (int)tid.fNPZ;
+            o.y = -1 * (int)tid.fNPY;
             return o;
         }
     }

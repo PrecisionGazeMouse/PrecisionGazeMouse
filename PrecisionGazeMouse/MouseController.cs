@@ -51,7 +51,7 @@ namespace PrecisionGazeMouse
             {
                 case Mode.EYEX_AND_TRACKIR:
                     warp = new EyeXWarpPointer();
-                    prec = new TrackIRPrecisionPointer(PrecisionPointerMode.ROTATION, .25);
+                    prec = new TrackIRPrecisionPointer(PrecisionPointerMode.ROTATION, .3);
                     break;
                 case Mode.EYEX_AND_SMARTNAV:
                     warp = new EyeXWarpPointer();
