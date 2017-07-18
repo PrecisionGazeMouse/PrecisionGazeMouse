@@ -122,6 +122,7 @@
             this.ModeBox.FormattingEnabled = true;
             this.ModeBox.Items.AddRange(new object[] {
             "EyeX and TrackIR",
+            "EyeX and SmartNav",
             "EyeX Only",
             "TrackIR Only"});
             this.ModeBox.Location = new System.Drawing.Point(132, 17);
@@ -133,8 +134,6 @@
             // warpBar
             // 
             this.warpBar.AutoSize = true;
-            this.warpBar.Checked = true;
-            this.warpBar.CheckState = System.Windows.Forms.CheckState.Checked;
             this.warpBar.Location = new System.Drawing.Point(239, 50);
             this.warpBar.Name = "warpBar";
             this.warpBar.Size = new System.Drawing.Size(128, 21);

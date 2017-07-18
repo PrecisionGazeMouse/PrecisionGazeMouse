@@ -22,7 +22,7 @@ namespace PrecisionGazeMouse
 
             // Set the default mode
             ModeBox.SelectedIndex = 0;
-            controller = new MouseController();
+            controller = new MouseController(this);
             controller.setMode((MouseController.Mode)ModeBox.SelectedIndex);
 
             Timer myTimer = new System.Windows.Forms.Timer();
@@ -33,9 +33,14 @@ namespace PrecisionGazeMouse
 
         private void RefreshScreen(Object o, EventArgs e)
         {
-            Cursor.Position = controller.UpdateMouse(Cursor.Position);
+            controller.UpdateMouse(Cursor.Position);
             this.Invalidate();
             overlay.Invalidate();
+        }
+
+        public void SetMousePosition(Point p)
+        {
+            Cursor.Position = p;
         }
 
         public static Rectangle GetScreenSize()
@@ -73,7 +78,13 @@ namespace PrecisionGazeMouse
             switch ((String)box.SelectedItem)
             {
                 case "EyeX and TrackIR":
-                    controller.setMode(MouseController.Mode.TRACKIR_AND_EYEX);
+                    controller.setMode(MouseController.Mode.EYEX_AND_TRACKIR);
+                    warpBar.Enabled = true;
+                    gazeTracker.Enabled = true;
+                    overlay.ShowIfTracking();
+                    break;
+                case "EyeX and SmartNav":
+                    controller.setMode(MouseController.Mode.EYEX_AND_SMARTNAV);
                     warpBar.Enabled = true;
                     gazeTracker.Enabled = true;
                     overlay.ShowIfTracking();

@@ -119,6 +119,7 @@
       <DependentUpon>OverlayForm.cs</DependentUpon>
     </Compile>
     <Compile Include="PrecisionPointers\EyeXPrecisionPointer.cs" />
+    <Compile Include="PrecisionPointers\NoPrecisionPointer.cs" />
     <Compile Include="WarpPointers\EyeXWarpPointer.cs" />
     <Compile Include="GazeCalibrator.cs" />
     <Compile Include="PrecisionGazeMouseForm.cs">

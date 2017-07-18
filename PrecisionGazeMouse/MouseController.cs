@@ -2,6 +2,7 @@
 using System.Drawing;
 using PrecisionGazeMouse.PrecisionPointers;
 using PrecisionGazeMouse.WarpPointers;
+using System.Windows.Forms;
 
 namespace PrecisionGazeMouse
 {
@@ -13,13 +14,16 @@ namespace PrecisionGazeMouse
         DateTime pauseTime;
         Point lastCursorPosition;
         GazeCalibrator calibrator;
+        PrecisionGazeMouseForm form;
 
         public enum Mode
         {
-            TRACKIR_AND_EYEX,
+            EYEX_AND_TRACKIR,
+            EYEX_AND_SMARTNAV,
             EYEX_ONLY,
             TRACKIR_ONLY
         };
+        Mode mode;
 
         enum TrackingState
         {
@@ -30,8 +34,9 @@ namespace PrecisionGazeMouse
         };
         TrackingState state;
         
-        public MouseController()
+        public MouseController(PrecisionGazeMouseForm form)
         {
+            this.form = form;
         }
 
         public void setMode(Mode mode)
@@ -41,11 +46,17 @@ namespace PrecisionGazeMouse
             if (prec != null)
                 prec.Dispose();
 
+            this.mode = mode;
             switch(mode)
             {
-                case Mode.TRACKIR_AND_EYEX:
+                case Mode.EYEX_AND_TRACKIR:
                     warp = new EyeXWarpPointer();
                     prec = new TrackIRPrecisionPointer(PrecisionPointerMode.ROTATION, .25);
+                    break;
+                case Mode.EYEX_AND_SMARTNAV:
+                    warp = new EyeXWarpPointer();
+                    prec = new NoPrecisionPointer();
+                    state = TrackingState.RUNNING;
                     break;
                 case Mode.TRACKIR_ONLY:
                     warp = new NoWarpPointer(getScreenCenter());
@@ -106,7 +117,7 @@ namespace PrecisionGazeMouse
             return "";
         }
 
-        public Point UpdateMouse(Point currentPoint)
+        public void UpdateMouse(Point currentPoint)
         {
             switch (state)
             {
@@ -118,16 +129,28 @@ namespace PrecisionGazeMouse
                     }
                     break;
                 case TrackingState.RUNNING:
-                    if (PrecisionGazeMouseForm.MousePosition != finalPoint)
-                    {
-                        state = TrackingState.PAUSED;
-                        pauseTime = System.DateTime.Now;
-                        return currentPoint;
-                    }
                     Point warpPoint = warp.GetNextPoint(currentPoint);
-                    finalPoint = prec.GetNextPoint(warpPoint);
-                    finalPoint = limitToScreenBounds(finalPoint);
-                    return finalPoint;
+                    if (mode == Mode.EYEX_AND_SMARTNAV)
+                    {
+                        warpPoint = limitToScreenBounds(warpPoint);
+                        if (warpPoint != finalPoint)
+                        {
+                            finalPoint = warpPoint;
+                            form.SetMousePosition(finalPoint);
+                        }
+                    }
+                    else
+                    {
+                        if (PrecisionGazeMouseForm.MousePosition != finalPoint)
+                        {
+                            state = TrackingState.PAUSED;
+                            pauseTime = System.DateTime.Now;
+                        }
+                        finalPoint = prec.GetNextPoint(warpPoint);
+                        finalPoint = limitToScreenBounds(finalPoint);
+                        form.SetMousePosition(finalPoint);
+                    }
+                    break;
                 case TrackingState.PAUSED:
                     // Keep pausing if the user is still moving the mouse
                     if (lastCursorPosition != currentPoint)
@@ -143,8 +166,6 @@ namespace PrecisionGazeMouse
                         state = TrackingState.STARTING;
                     break;
             }
-
-            return currentPoint;
         }
 
         private Point getScreenCenter()
