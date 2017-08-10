@@ -162,5 +162,11 @@ namespace PrecisionGazeMouse.WarpPointers
         {
             stream.IsEnabled = false;
         }
+
+        public void RefreshTracking()
+        {
+            sampleCount = 0;
+            setNewWarp = true;
+        }
     }
 }

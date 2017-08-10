@@ -14,6 +14,8 @@ namespace PrecisionGazeMouse
     {
         MouseController controller;
         OverlayForm overlay;
+        GlobalKeyboardHook _globalKeyboardHook;
+        Keys hotKey;
 
         public PrecisionGazeMouseForm()
         {
@@ -24,11 +26,47 @@ namespace PrecisionGazeMouse
             ModeBox.SelectedIndex = 0;
             controller = new MouseController(this);
             controller.setMode((MouseController.Mode)ModeBox.SelectedIndex);
+            controller.setMovement(MouseController.Movement.HOTKEY);
+            hotKey = Keys.F3;
 
-            Timer myTimer = new System.Windows.Forms.Timer();
-            myTimer.Tick += new EventHandler(RefreshScreen);
-            myTimer.Interval = 33;
-            myTimer.Start();
+            _globalKeyboardHook = new GlobalKeyboardHook();
+            _globalKeyboardHook.KeyboardPressed += OnKeyPressed;
+
+            Timer refreshTimer = new System.Windows.Forms.Timer();
+            refreshTimer.Tick += new EventHandler(RefreshScreen);
+            refreshTimer.Interval = 33;
+            refreshTimer.Start();
+        }
+
+        void OnKeyPressed(object sender, GlobalKeyboardHookEventArgs e)
+        {
+            if (e.KeyboardData.VirtualCode == (int)hotKey)
+            {
+                if (e.KeyboardState == GlobalKeyboardHook.KeyboardState.KeyDown)
+                {
+                    controller.HotKeyDown();
+                }
+                else if (e.KeyboardState == GlobalKeyboardHook.KeyboardState.KeyUp)
+                {
+                    controller.HotKeyUp();
+                }
+
+                // don't type the hot key 
+                e.Handled = true;
+            }
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (components != null)
+                {
+                    components.Dispose();
+                }
+                _globalKeyboardHook?.Dispose();
+            }
+            base.Dispose(disposing);
         }
 
         private void RefreshScreen(Object o, EventArgs e)
@@ -116,6 +154,25 @@ namespace PrecisionGazeMouse
         {
             overlay.ShowGazeTracker = gazeTracker.Checked;
             overlay.ShowIfTracking();
+        }
+
+        private void OnKeyPressButton_Click(object sender, EventArgs e)
+        {
+            ContinuousButton.Checked = false;
+            controller.setMovement(MouseController.Movement.HOTKEY);
+        }
+
+        private void ContinuousButton_Click(object sender, EventArgs e)
+        {
+            OnKeyPressButton.Checked = false;
+            controller.setMovement(MouseController.Movement.CONTINUOUS);
+        }
+
+        private void OnKeyPressInput_KeyDown(object sender, KeyEventArgs e)
+        {
+            e.SuppressKeyPress = true;
+            OnKeyPressInput.Text = e.KeyCode.ToString();
+            hotKey = e.KeyCode;
         }
     }
 }

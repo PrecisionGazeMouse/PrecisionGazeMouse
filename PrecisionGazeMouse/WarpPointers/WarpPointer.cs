@@ -27,5 +27,8 @@ namespace PrecisionGazeMouse.WarpPointers
 
         // Get the next warp point based on the current pointer location and gaze
         Point GetNextPoint(Point currentPoint);
+
+        // Refresh the tracking buffer for a fresh start
+        void RefreshTracking();
     }
 }

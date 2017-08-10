@@ -60,5 +60,9 @@ namespace PrecisionGazeMouse.WarpPointers
         public void Dispose()
         {
         }
+
+        public void RefreshTracking()
+        {
+        }
     }
 }

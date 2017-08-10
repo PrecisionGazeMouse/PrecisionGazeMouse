@@ -3,6 +3,7 @@ using System.Drawing;
 using PrecisionGazeMouse.PrecisionPointers;
 using PrecisionGazeMouse.WarpPointers;
 using System.Windows.Forms;
+using System.Runtime.InteropServices;
 
 namespace PrecisionGazeMouse
 {
@@ -15,6 +16,7 @@ namespace PrecisionGazeMouse
         Point lastCursorPosition;
         GazeCalibrator calibrator;
         PrecisionGazeMouseForm form;
+        bool updatedAtLeastOnce;
 
         public enum Mode
         {
@@ -25,6 +27,17 @@ namespace PrecisionGazeMouse
         };
         Mode mode;
 
+        public enum Movement
+        {
+            CONTINUOUS,
+            HOTKEY
+        };
+        Movement movement;
+        bool hotKeyDown = false;
+        bool dragging = false;
+        DateTime? timeSinceKeyUp;
+        Point? lastClick;
+
         enum TrackingState
         {
             STARTING,
@@ -33,10 +46,23 @@ namespace PrecisionGazeMouse
             ERROR
         };
         TrackingState state;
-        
+
+        [DllImport("user32.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.StdCall)]
+        public static extern void mouse_event(uint dwFlags, uint dx, uint dy, uint cButtons, uint dwExtraInfo);
+        //Mouse actions
+        private const int MOUSEEVENTF_LEFTDOWN = 0x02;
+        private const int MOUSEEVENTF_LEFTUP = 0x04;
+        private const int MOUSEEVENTF_RIGHTDOWN = 0x08;
+        private const int MOUSEEVENTF_RIGHTUP = 0x10;
+
         public MouseController(PrecisionGazeMouseForm form)
         {
             this.form = form;
+        }
+
+        public void setMovement(Movement movement)
+        {
+            this.movement = movement;
         }
 
         public void setMode(Mode mode)
@@ -75,6 +101,60 @@ namespace PrecisionGazeMouse
 
             if (!prec.IsStarted())
                 state = TrackingState.ERROR;
+        }
+        
+        public void HotKeyDown()
+        {
+            if (movement != Movement.HOTKEY || state == TrackingState.ERROR || state == TrackingState.PAUSED)
+                return;
+
+            if (!hotKeyDown)
+            {
+                if (!dragging && timeSinceKeyUp != null && System.DateTime.Now.Subtract(timeSinceKeyUp.Value).TotalMilliseconds < 500)
+                {
+                    // it's a drag so click down and hold
+                    uint X = (uint)lastClick.Value.X;
+                    uint Y = (uint)lastClick.Value.Y;
+                    mouse_event(MOUSEEVENTF_LEFTDOWN, X, Y, 0, 0);
+                    dragging = true;
+                }
+                else if(!dragging)
+                {
+                    warp.RefreshTracking();
+                    state = TrackingState.STARTING;
+                    updatedAtLeastOnce = false;
+                }
+            }
+            hotKeyDown = true;
+        }
+
+        public void HotKeyUp()
+        {
+            if (movement != Movement.HOTKEY || state == TrackingState.ERROR || state == TrackingState.PAUSED)
+                return;
+
+            uint X = (uint)Cursor.Position.X;
+            uint Y = (uint)Cursor.Position.Y;
+
+            if (dragging)
+            {
+                mouse_event(MOUSEEVENTF_LEFTUP, X, Y, 0, 0);
+                dragging = false;
+            }
+            else
+            {
+                if (timeSinceKeyUp != null && System.DateTime.Now.Subtract(timeSinceKeyUp.Value).TotalMilliseconds < 1000)
+                {
+                    // it's a double click so use the original click position
+                    X = (uint)lastClick.Value.X;
+                    Y = (uint)lastClick.Value.Y;
+                }
+                mouse_event(MOUSEEVENTF_LEFTDOWN | MOUSEEVENTF_LEFTUP, X, Y, 0, 0);
+                lastClick = Cursor.Position;
+            }
+
+            timeSinceKeyUp = System.DateTime.Now;
+            hotKeyDown = false;
         }
 
         public WarpPointer WarpPointer
@@ -129,6 +209,11 @@ namespace PrecisionGazeMouse
                     }
                     break;
                 case TrackingState.RUNNING:
+                    if(movement == Movement.HOTKEY)
+                    {
+                        if (updatedAtLeastOnce && !hotKeyDown)
+                            break;
+                    }
                     Point warpPoint = warp.GetNextPoint(currentPoint);
                     if (mode == Mode.EYEX_AND_SMARTNAV)
                     {
@@ -150,6 +235,7 @@ namespace PrecisionGazeMouse
                         finalPoint = limitToScreenBounds(finalPoint);
                         form.SetMousePosition(finalPoint);
                     }
+                    updatedAtLeastOnce = true;
                     break;
                 case TrackingState.PAUSED:
                     // Keep pausing if the user is still moving the mouse
@@ -177,15 +263,16 @@ namespace PrecisionGazeMouse
         private Point limitToScreenBounds(Point p)
         {
             Rectangle screenSize = PrecisionGazeMouseForm.GetScreenSize();
+            int margin = 5;
 
-            if (p.X < 0)
-                p.X = 0;
-            if (p.Y < 0)
-                p.Y = 0;
-            if (p.X >= screenSize.Width)
-                p.X = screenSize.Width - 1;
-            if (p.Y >= screenSize.Height)
-                p.Y = screenSize.Height - 1;
+            if (p.X < margin)
+                p.X = margin;
+            if (p.Y < margin)
+                p.Y = margin;
+            if (p.X >= screenSize.Width - margin)
+                p.X = screenSize.Width - margin;
+            if (p.Y >= screenSize.Height - margin - 5)
+                p.Y = screenSize.Height - margin - 5;
 
             return p;
         }
