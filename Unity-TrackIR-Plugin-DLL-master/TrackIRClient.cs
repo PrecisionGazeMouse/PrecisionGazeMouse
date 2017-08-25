@@ -268,9 +268,15 @@ namespace TrackIRUnity
 
     public void GetDLLLocation(ref string dllPath)
     {
-      RegistryKey registryKey = Registry.CurrentUser.OpenSubKey("Software\\NaturalPoint\\NATURALPOINT\\NPClient Location", false);
-      dllPath = registryKey.GetValue("Path").ToString();
-      registryKey.Close();
+        RegistryKey registryKey = Registry.CurrentUser.OpenSubKey("Software\\NaturalPoint\\NATURALPOINT\\NPClient Location", false);
+        if (registryKey != null)
+        {
+           if (registryKey.GetValue("Path") != null)
+           {
+               dllPath = registryKey.GetValue("Path").ToString();
+            }
+           registryKey.Close();
+        }
     }
 
     private delegate TrackIRClient.NPRESULT PF_NOTIFYCALLBACK(ushort a, ushort b);

@@ -110,7 +110,7 @@ namespace PrecisionGazeMouse
 
             if (!hotKeyDown)
             {
-                if (!dragging && timeSinceKeyUp != null && System.DateTime.Now.Subtract(timeSinceKeyUp.Value).TotalMilliseconds < 500)
+                if (!dragging && timeSinceKeyUp != null && System.DateTime.Now.Subtract(timeSinceKeyUp.Value).TotalMilliseconds < 250)
                 {
                     // it's a drag so click down and hold
                     uint X = (uint)lastClick.Value.X;
@@ -143,7 +143,7 @@ namespace PrecisionGazeMouse
             }
             else
             {
-                if (timeSinceKeyUp != null && System.DateTime.Now.Subtract(timeSinceKeyUp.Value).TotalMilliseconds < 1000)
+                if (timeSinceKeyUp != null && System.DateTime.Now.Subtract(timeSinceKeyUp.Value).TotalMilliseconds < 500)
                 {
                     // it's a double click so use the original click position
                     X = (uint)lastClick.Value.X;
