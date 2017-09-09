@@ -80,7 +80,7 @@ namespace PrecisionGazeMouse.PrecisionPointers
                     if (rot == null && trans == null)
                         return "";
                     else
-                        return String.Format("({0:0}, {1:0})", trans.x + rot.yaw, trans.y + rot.pitch);
+                        return String.Format("({0:0}, {1:0})", trans.x + rot.yaw, rot.pitch);
             }
 
             return "";
@@ -118,7 +118,7 @@ namespace PrecisionGazeMouse.PrecisionPointers
                     trans = this.getTranslation();
                     if (trans != null)
                     {
-                        warpPoint.Offset((int)(trans.x / 1.5), (int)(trans.y / 1.5));
+                        warpPoint.Offset((int)(trans.x / 1.5), 0); // set y to zero because translating head/up down is difficult, and it throws off the rotation
                     }
                     rot = this.getRotation();
                     if (rot != null)
