@@ -30,13 +30,18 @@
             this.label4 = new System.Windows.Forms.Label();
             this.ContinuousButton = new System.Windows.Forms.RadioButton();
             this.OnKeyPressButton = new System.Windows.Forms.RadioButton();
-            this.OnKeyPressInput = new System.Windows.Forms.TextBox();
+            this.MovementOnKeyPressInput = new System.Windows.Forms.TextBox();
+            this.SensitivityInput = new System.Windows.Forms.TrackBar();
+            this.label7 = new System.Windows.Forms.Label();
+            this.ClickOnKey = new System.Windows.Forms.Label();
+            this.ClickOnKeyInput = new System.Windows.Forms.TextBox();
+            ((System.ComponentModel.ISupportInitialize)(this.SensitivityInput)).BeginInit();
             this.SuspendLayout();
             // 
             // PositionLabel
             // 
             this.PositionLabel.AutoSize = true;
-            this.PositionLabel.Location = new System.Drawing.Point(131, 147);
+            this.PositionLabel.Location = new System.Drawing.Point(129, 250);
             this.PositionLabel.Name = "PositionLabel";
             this.PositionLabel.Size = new System.Drawing.Size(42, 17);
             this.PositionLabel.TabIndex = 8;
@@ -44,7 +49,7 @@
             // 
             // QuitButton
             // 
-            this.QuitButton.Location = new System.Drawing.Point(153, 215);
+            this.QuitButton.Location = new System.Drawing.Point(151, 318);
             this.QuitButton.Name = "QuitButton";
             this.QuitButton.Size = new System.Drawing.Size(75, 23);
             this.QuitButton.TabIndex = 9;
@@ -55,7 +60,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(26, 147);
+            this.label1.Location = new System.Drawing.Point(24, 250);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(96, 17);
             this.label1.TabIndex = 10;
@@ -64,7 +69,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(23, 177);
+            this.label2.Location = new System.Drawing.Point(21, 280);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(99, 17);
             this.label2.TabIndex = 11;
@@ -73,7 +78,7 @@
             // HeadRotationLabel
             // 
             this.HeadRotationLabel.AutoSize = true;
-            this.HeadRotationLabel.Location = new System.Drawing.Point(131, 177);
+            this.HeadRotationLabel.Location = new System.Drawing.Point(129, 280);
             this.HeadRotationLabel.Name = "HeadRotationLabel";
             this.HeadRotationLabel.Size = new System.Drawing.Size(42, 17);
             this.HeadRotationLabel.TabIndex = 12;
@@ -82,7 +87,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(71, 119);
+            this.label3.Location = new System.Drawing.Point(69, 222);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(48, 17);
             this.label3.TabIndex = 13;
@@ -91,7 +96,7 @@
             // StatusLabel
             // 
             this.StatusLabel.AutoSize = true;
-            this.StatusLabel.Location = new System.Drawing.Point(131, 119);
+            this.StatusLabel.Location = new System.Drawing.Point(129, 222);
             this.StatusLabel.Name = "StatusLabel";
             this.StatusLabel.Size = new System.Drawing.Size(57, 17);
             this.StatusLabel.TabIndex = 14;
@@ -124,7 +129,7 @@
             // warpBar
             // 
             this.warpBar.AutoSize = true;
-            this.warpBar.Location = new System.Drawing.Point(241, 118);
+            this.warpBar.Location = new System.Drawing.Point(239, 221);
             this.warpBar.Name = "warpBar";
             this.warpBar.Size = new System.Drawing.Size(128, 21);
             this.warpBar.TabIndex = 20;
@@ -135,7 +140,7 @@
             // gazeTracker
             // 
             this.gazeTracker.AutoSize = true;
-            this.gazeTracker.Location = new System.Drawing.Point(241, 146);
+            this.gazeTracker.Location = new System.Drawing.Point(239, 249);
             this.gazeTracker.Name = "gazeTracker";
             this.gazeTracker.Size = new System.Drawing.Size(155, 21);
             this.gazeTracker.TabIndex = 21;
@@ -146,7 +151,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(45, 51);
+            this.label4.Location = new System.Drawing.Point(45, 57);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(73, 17);
             this.label4.TabIndex = 22;
@@ -155,7 +160,7 @@
             // ContinuousButton
             // 
             this.ContinuousButton.AutoSize = true;
-            this.ContinuousButton.Location = new System.Drawing.Point(132, 51);
+            this.ContinuousButton.Location = new System.Drawing.Point(132, 57);
             this.ContinuousButton.Name = "ContinuousButton";
             this.ContinuousButton.Size = new System.Drawing.Size(100, 21);
             this.ContinuousButton.TabIndex = 23;
@@ -167,7 +172,7 @@
             // 
             this.OnKeyPressButton.AutoSize = true;
             this.OnKeyPressButton.Checked = true;
-            this.OnKeyPressButton.Location = new System.Drawing.Point(132, 78);
+            this.OnKeyPressButton.Location = new System.Drawing.Point(132, 84);
             this.OnKeyPressButton.Name = "OnKeyPressButton";
             this.OnKeyPressButton.Size = new System.Drawing.Size(116, 21);
             this.OnKeyPressButton.TabIndex = 24;
@@ -176,21 +181,61 @@
             this.OnKeyPressButton.UseVisualStyleBackColor = true;
             this.OnKeyPressButton.Click += new System.EventHandler(this.OnKeyPressButton_Click);
             // 
-            // OnKeyPressInput
+            // MovementOnKeyPressInput
             // 
-            this.OnKeyPressInput.Location = new System.Drawing.Point(256, 78);
-            this.OnKeyPressInput.Name = "OnKeyPressInput";
-            this.OnKeyPressInput.Size = new System.Drawing.Size(100, 22);
-            this.OnKeyPressInput.TabIndex = 25;
-            this.OnKeyPressInput.Text = "F3";
-            this.OnKeyPressInput.KeyDown += new System.Windows.Forms.KeyEventHandler(this.OnKeyPressInput_KeyDown);
+            this.MovementOnKeyPressInput.Location = new System.Drawing.Point(256, 84);
+            this.MovementOnKeyPressInput.Name = "MovementOnKeyPressInput";
+            this.MovementOnKeyPressInput.Size = new System.Drawing.Size(100, 22);
+            this.MovementOnKeyPressInput.TabIndex = 25;
+            this.MovementOnKeyPressInput.Text = "F3";
+            this.MovementOnKeyPressInput.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MovementOnKeyPressButton_Click);
+            // 
+            // SensitivityInput
+            // 
+            this.SensitivityInput.Location = new System.Drawing.Point(126, 163);
+            this.SensitivityInput.Name = "SensitivityInput";
+            this.SensitivityInput.Size = new System.Drawing.Size(268, 56);
+            this.SensitivityInput.TabIndex = 26;
+            this.SensitivityInput.Value = 5;
+            this.SensitivityInput.Scroll += new System.EventHandler(this.SensitivityInput_Scroll);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(49, 172);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(71, 17);
+            this.label7.TabIndex = 27;
+            this.label7.Text = "Sensitivity";
+            // 
+            // ClickOnKey
+            // 
+            this.ClickOnKey.AutoSize = true;
+            this.ClickOnKey.Location = new System.Drawing.Point(29, 124);
+            this.ClickOnKey.Name = "ClickOnKey";
+            this.ClickOnKey.Size = new System.Drawing.Size(88, 17);
+            this.ClickOnKey.TabIndex = 28;
+            this.ClickOnKey.Text = "Click On Key";
+            // 
+            // ClickOnKeyInput
+            // 
+            this.ClickOnKeyInput.Location = new System.Drawing.Point(132, 124);
+            this.ClickOnKeyInput.Name = "ClickOnKeyInput";
+            this.ClickOnKeyInput.Size = new System.Drawing.Size(100, 22);
+            this.ClickOnKeyInput.TabIndex = 29;
+            this.ClickOnKeyInput.Text = "F3";
+            this.ClickOnKeyInput.KeyDown += new System.Windows.Forms.KeyEventHandler(this.OnClickKeyPressInput_KeyDown);
             // 
             // PrecisionGazeMouseForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(416, 255);
-            this.Controls.Add(this.OnKeyPressInput);
+            this.ClientSize = new System.Drawing.Size(416, 357);
+            this.Controls.Add(this.ClickOnKeyInput);
+            this.Controls.Add(this.ClickOnKey);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.SensitivityInput);
+            this.Controls.Add(this.MovementOnKeyPressInput);
             this.Controls.Add(this.OnKeyPressButton);
             this.Controls.Add(this.ContinuousButton);
             this.Controls.Add(this.label4);
@@ -211,6 +256,7 @@
             this.Name = "PrecisionGazeMouseForm";
             this.Text = "Precision Gaze Mouse";
             this.Load += new System.EventHandler(this.GazeAwareForm_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.SensitivityInput)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -231,7 +277,11 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.RadioButton ContinuousButton;
         private System.Windows.Forms.RadioButton OnKeyPressButton;
-        private System.Windows.Forms.TextBox OnKeyPressInput;
+        private System.Windows.Forms.TextBox MovementOnKeyPressInput;
+        private System.Windows.Forms.TrackBar SensitivityInput;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label ClickOnKey;
+        private System.Windows.Forms.TextBox ClickOnKeyInput;
     }
 }
 

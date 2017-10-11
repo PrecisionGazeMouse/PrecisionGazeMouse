@@ -15,7 +15,8 @@ namespace PrecisionGazeMouse
         MouseController controller;
         OverlayForm overlay;
         GlobalKeyboardHook _globalKeyboardHook;
-        Keys hotKey;
+        Keys movementHotKey;
+        Keys clickHotKey;
 
         public PrecisionGazeMouseForm()
         {
@@ -27,7 +28,9 @@ namespace PrecisionGazeMouse
             controller = new MouseController(this);
             controller.setMode((MouseController.Mode)ModeBox.SelectedIndex);
             controller.setMovement(MouseController.Movement.HOTKEY);
-            hotKey = Keys.F3;
+            controller.Sensitivity = SensitivityInput.Value;
+            movementHotKey = Keys.F3;
+            clickHotKey = Keys.F3;
 
             _globalKeyboardHook = new GlobalKeyboardHook();
             _globalKeyboardHook.KeyboardPressed += OnKeyPressed;
@@ -40,19 +43,50 @@ namespace PrecisionGazeMouse
 
         void OnKeyPressed(object sender, GlobalKeyboardHookEventArgs e)
         {
-            if (e.KeyboardData.VirtualCode == (int)hotKey)
+            if (e.KeyboardData.VirtualCode == (int)movementHotKey || e.KeyboardData.VirtualCode == (int)clickHotKey)
             {
-                if (e.KeyboardState == GlobalKeyboardHook.KeyboardState.KeyDown)
+                if (e.KeyboardData.VirtualCode == (int)movementHotKey)
                 {
-                    controller.HotKeyDown();
-                }
-                else if (e.KeyboardState == GlobalKeyboardHook.KeyboardState.KeyUp)
-                {
-                    controller.HotKeyUp();
+                    if (e.KeyboardState == GlobalKeyboardHook.KeyboardState.KeyDown)
+                    {
+                        if (ClickOnKeyInput.Focused)
+                        {
+                            Keys k = (Keys)e.KeyboardData.VirtualCode;
+                            ClickOnKeyInput.Text = k.ToString();
+                            clickHotKey = k;
+                        }
+                        controller.MovementHotKeyDown();
+                    }
+                    else if (e.KeyboardState == GlobalKeyboardHook.KeyboardState.KeyUp)
+                    {
+                        controller.MovementHotKeyUp();
+                    }
+
+                    // don't type the hot key 
+                    e.Handled = true;
                 }
 
-                // don't type the hot key 
-                e.Handled = true;
+                // Can use the same hotkey for movement and clicking
+                if (e.KeyboardData.VirtualCode == (int)clickHotKey)
+                {
+                    if (e.KeyboardState == GlobalKeyboardHook.KeyboardState.KeyDown)
+                    {
+                        if (MovementOnKeyPressInput.Focused)
+                        {
+                            Keys k = (Keys)e.KeyboardData.VirtualCode;
+                            MovementOnKeyPressInput.Text = k.ToString();
+                            movementHotKey = k;
+                        }
+                        controller.ClickHotKeyDown();
+                    }
+                    else if (e.KeyboardState == GlobalKeyboardHook.KeyboardState.KeyUp)
+                    {
+                        controller.ClickHotKeyUp();
+                    }
+
+                    // don't type the hot key 
+                    e.Handled = true;
+                }
             }
         }
 
@@ -168,11 +202,31 @@ namespace PrecisionGazeMouse
             controller.setMovement(MouseController.Movement.CONTINUOUS);
         }
 
-        private void OnKeyPressInput_KeyDown(object sender, KeyEventArgs e)
+        private void OnClickKeyPressInput_KeyDown(object sender, KeyEventArgs e)
         {
             e.SuppressKeyPress = true;
-            OnKeyPressInput.Text = e.KeyCode.ToString();
-            hotKey = e.KeyCode;
+            if (e.KeyCode.Equals(Keys.Escape) || e.KeyCode.Equals(Keys.Back))
+            {
+                ClickOnKeyInput.Text = "";
+                clickHotKey = 0;
+            }
+            else
+            {
+                ClickOnKeyInput.Text = e.KeyCode.ToString();
+                clickHotKey = e.KeyCode;
+            }
+        }
+
+        private void MovementOnKeyPressButton_Click(object sender, KeyEventArgs e)
+        {
+            e.SuppressKeyPress = true;
+            MovementOnKeyPressInput.Text = e.KeyCode.ToString();
+            movementHotKey = e.KeyCode;
+        }
+
+        private void SensitivityInput_Scroll(object sender, EventArgs e)
+        {
+            controller.Sensitivity = SensitivityInput.Value;
         }
     }
 }

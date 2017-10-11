@@ -6,11 +6,18 @@ namespace PrecisionGazeMouse.PrecisionPointers
     class NoPrecisionPointer : PrecisionPointer
     {
         PrecisionPointerMode mode;
+        int sensitivity;
 
         public PrecisionPointerMode Mode
         {
             get { return mode; }
             set { mode = value; }
+        }
+
+        public int Sensitivity
+        {
+            get { return sensitivity; }
+            set { sensitivity = value; }
         }
 
         public override String ToString()

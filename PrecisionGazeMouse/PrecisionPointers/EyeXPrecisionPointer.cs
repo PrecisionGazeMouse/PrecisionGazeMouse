@@ -15,11 +15,13 @@ namespace PrecisionGazeMouse.PrecisionPointers
         int sampleIndex;
         int sampleCount;
         Point currentPoint;
+        int sensitivity;
 
-        public EyeXPrecisionPointer()
+        public EyeXPrecisionPointer(int sensitivity)
         {
             mode = PrecisionPointerMode.ROTATION;
             samples = new Vector3[5];
+            this.sensitivity = sensitivity;
             headPoseStream = Program.EyeXHost.Streams.CreateHeadPoseStream();
             if (headPoseStream != null)
             {
@@ -33,6 +35,12 @@ namespace PrecisionGazeMouse.PrecisionPointers
         {
             get { return mode; }
             set { mode = value; }
+        }
+
+        public int Sensitivity
+        {
+            get { return sensitivity; }
+            set { sensitivity = value; }
         }
 
         public override string ToString()
@@ -67,10 +75,10 @@ namespace PrecisionGazeMouse.PrecisionPointers
                         currentPoint = calculateSmoothedCalibratedPoint();
 
                         double basePitch = (warpPoint.Y - screenSize.Height / 2.0) / (screenSize.Height / 2.0) * 50.0;
-                        int yOffset = (int)(currentPoint.Y - basePitch);
+                        int yOffset = (int)((currentPoint.Y - basePitch) * sensitivity / 5);
 
                         double baseYaw = (warpPoint.X - screenSize.Width / 2.0) / (screenSize.Width / 2.0) * 150.0;
-                        int xOffset = (int)(currentPoint.X - baseYaw);
+                        int xOffset = (int)((currentPoint.X - baseYaw) * sensitivity / 5);
 
                         warpPoint.Offset(xOffset, yOffset);
 

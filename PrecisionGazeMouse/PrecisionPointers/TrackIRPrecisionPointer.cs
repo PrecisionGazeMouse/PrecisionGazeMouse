@@ -29,13 +29,13 @@ namespace PrecisionGazeMouse.PrecisionPointers
         PrecisionPointerMode mode;
         HeadRotation rot;
         HeadTranslation trans;
-        double sensitivity;
+        int sensitivity;
 
-        public TrackIRPrecisionPointer(PrecisionPointerMode mode, double sensitivity)
+        public TrackIRPrecisionPointer(PrecisionPointerMode mode, int sensitivity)
         {
             this.mode = mode;
-            this.sensitivity = sensitivity;
             trackIRclient = new TrackIRUnity.TrackIRClient();  // Create an instance of the TrackerIR Client to get data from.
+            this.sensitivity = sensitivity;
             if (trackIRclient != null)
             {
                 string status = trackIRclient.TrackIR_Enhanced_Init();
@@ -55,6 +55,12 @@ namespace PrecisionGazeMouse.PrecisionPointers
         {
             get { return mode; }
             set { mode = value; }
+        }
+
+        public int Sensitivity
+        {
+            get { return sensitivity; }
+            set { sensitivity = value; }
         }
 
         public bool IsStarted()
@@ -96,10 +102,10 @@ namespace PrecisionGazeMouse.PrecisionPointers
                     if (rot != null)
                     {
                         double basePitch = (warpPoint.Y - screenSize.Height / 2.0) / (screenSize.Height / 2.0) * 200.0;
-                        int yOffset = (int)((rot.pitch - basePitch) * sensitivity);
+                        int yOffset = (int)((rot.pitch - basePitch) * sensitivity / 20);
 
                         double baseYaw = (warpPoint.X - screenSize.Width / 2.0) / (screenSize.Width / 2.0) * 600.0;
-                        int xOffset = (int)((-1 * rot.yaw - baseYaw) * sensitivity);
+                        int xOffset = (int)((-1 * rot.yaw - baseYaw) * sensitivity / 20);
 
                         warpPoint.Offset(xOffset, yOffset);
 
@@ -124,10 +130,10 @@ namespace PrecisionGazeMouse.PrecisionPointers
                     if (rot != null)
                     {
                         double basePitch = (warpPoint.Y - screenSize.Height / 2.0) / (screenSize.Height / 2.0) * 200.0;
-                        int yOffset = (int)((rot.pitch - basePitch) * sensitivity);
+                        int yOffset = (int)((rot.pitch - basePitch) * sensitivity / 20);
 
                         double baseYaw = (warpPoint.X - screenSize.Width / 2.0) / (screenSize.Width / 2.0) * 600.0;
-                        int xOffset = (int)((-1 * rot.yaw - baseYaw) * sensitivity);
+                        int xOffset = (int)((-1 * rot.yaw - baseYaw) * sensitivity / 20);
 
                         warpPoint.Offset(xOffset, yOffset);
                     }
