@@ -20,6 +20,7 @@ namespace PrecisionGazeMouse
 
         public enum Mode
         {
+            EYEX_AND_EVIACAM,
             EYEX_AND_TRACKIR,
             EYEX_AND_SMARTNAV,
             EYEX_ONLY,
@@ -91,6 +92,11 @@ namespace PrecisionGazeMouse
             this.mode = mode;
             switch(mode)
             {
+                case Mode.EYEX_AND_EVIACAM:
+                    warp = new EyeXWarpPointer();
+                    prec = new NoPrecisionPointer();
+                    state = TrackingState.RUNNING;
+                    break;
                 case Mode.EYEX_AND_TRACKIR:
                     warp = new EyeXWarpPointer();
                     prec = new TrackIRPrecisionPointer(PrecisionPointerMode.ROTATION, sensitivity);
@@ -128,6 +134,10 @@ namespace PrecisionGazeMouse
             {
                 if (!dragging)
                 {
+                    if (mode == Mode.EYEX_AND_EVIACAM)
+                    {
+                        SendKeys.Send("{F11}"); // trigger eViacam to start tracking
+                    }
                     warp.RefreshTracking();
                     state = TrackingState.STARTING;
                     updatedAtLeastOnce = false;
@@ -140,6 +150,11 @@ namespace PrecisionGazeMouse
         public void MovementHotKeyUp()
         {
             movementHotKeyDown = false;
+
+            if (movement == Movement.HOTKEY && mode == Mode.EYEX_AND_EVIACAM)
+            {
+                SendKeys.Send("{F11}"); // trigger eViacam to stop tracking
+            }
         }
 
         public void ClickHotKeyDown()
@@ -248,7 +263,7 @@ namespace PrecisionGazeMouse
                             break;
                     }
                     Point warpPoint = warp.GetNextPoint(currentPoint);
-                    if (mode == Mode.EYEX_AND_SMARTNAV)
+                    if (mode == Mode.EYEX_AND_SMARTNAV || mode == Mode.EYEX_AND_EVIACAM)
                     {
                         warpPoint = limitToScreenBounds(warpPoint);
                         if (warpPoint != finalPoint)
