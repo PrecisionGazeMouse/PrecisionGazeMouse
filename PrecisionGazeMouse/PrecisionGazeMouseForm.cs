@@ -145,12 +145,12 @@ namespace PrecisionGazeMouse
         {
             string message;
             if(enabled)
-                message = "Press OK when eViacam is enabled.";
+                message = "If you are using eViacam, press OK when it's enabled. Otherwise, click Cancel.";
             else
-                message = "Press OK when eViacam is disabled.";
+                message = "If you are using eViacam, press OK when it's running but disabled. Otherwise, click Cancel.";
 
             string caption = "Check eViacam";
-            MessageBoxButtons buttons = MessageBoxButtons.OK;
+            MessageBoxButtons buttons = MessageBoxButtons.OKCancel;
             MessageBox.Show(this, message, caption, buttons);
         }
 
