@@ -259,5 +259,21 @@ namespace PrecisionGazeMouse
         {
             eViacamPrompt(false);
         }
+
+        private void PrecisionGazeMouseForm_Resize(object sender, EventArgs e)
+        {
+            if (this.WindowState == FormWindowState.Minimized)
+            {
+                Hide();
+                notifyIcon.Visible = true;
+            }
+        }
+
+        private void notifyIcon_Click(object sender, EventArgs e)
+        {
+            Show();
+            this.WindowState = FormWindowState.Normal;
+            notifyIcon.Visible = false;
+        }
     }
 }
