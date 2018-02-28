@@ -40,6 +40,7 @@ namespace PrecisionGazeMouse
         bool dragging = false;
         DateTime? timeSinceClickKeyUp;
         Point? lastClick;
+        bool pauseMode = false;
 
         enum TrackingState
         {
@@ -145,6 +146,25 @@ namespace PrecisionGazeMouse
             }
 
             movementHotKeyDown = true;
+        }
+
+        public void PauseHotKeyDown()
+        {
+            if (pauseMode)
+            {
+                pauseMode = false;
+                if (state != TrackingState.ERROR)
+                {
+                    warp.RefreshTracking();
+                    state = TrackingState.STARTING;
+                    updatedAtLeastOnce = false;
+                }
+            } else
+            {
+                pauseMode = true;
+                if (state == TrackingState.STARTING || state == TrackingState.RUNNING)
+                    state = TrackingState.PAUSED;
+            }
         }
 
         public void MovementHotKeyUp()
@@ -292,7 +312,7 @@ namespace PrecisionGazeMouse
                         lastCursorPosition = currentPoint;
                         pauseTime = System.DateTime.Now;
                     }
-                    if (System.DateTime.Now.CompareTo(pauseTime.AddSeconds(1)) > 0)
+                    if (!pauseMode && System.DateTime.Now.CompareTo(pauseTime.AddSeconds(1)) > 0)
                         state = TrackingState.STARTING;
                     break;
                 case TrackingState.ERROR:

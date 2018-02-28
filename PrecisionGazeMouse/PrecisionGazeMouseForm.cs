@@ -17,6 +17,7 @@ namespace PrecisionGazeMouse
         GlobalKeyboardHook _globalKeyboardHook;
         Keys movementHotKey;
         Keys clickHotKey;
+        Keys pauseHotKey;
 
         public PrecisionGazeMouseForm()
         {
@@ -31,6 +32,7 @@ namespace PrecisionGazeMouse
             controller.Sensitivity = SensitivityInput.Value;
             movementHotKey = Keys.F3;
             clickHotKey = Keys.F3;
+            pauseHotKey = Keys.F10;
 
             _globalKeyboardHook = new GlobalKeyboardHook();
             _globalKeyboardHook.KeyboardPressed += OnKeyPressed;
@@ -43,7 +45,7 @@ namespace PrecisionGazeMouse
 
         void OnKeyPressed(object sender, GlobalKeyboardHookEventArgs e)
         {
-            if (e.KeyboardData.VirtualCode == (int)movementHotKey || e.KeyboardData.VirtualCode == (int)clickHotKey)
+            if (e.KeyboardData.VirtualCode == (int)movementHotKey || e.KeyboardData.VirtualCode == (int)clickHotKey || e.KeyboardData.VirtualCode == (int)pauseHotKey)
             {
                 if (e.KeyboardData.VirtualCode == (int)movementHotKey)
                 {
@@ -82,6 +84,23 @@ namespace PrecisionGazeMouse
                     else if (e.KeyboardState == GlobalKeyboardHook.KeyboardState.KeyUp)
                     {
                         controller.ClickHotKeyUp();
+                    }
+
+                    // don't type the hot key 
+                    e.Handled = true;
+                }
+
+                if (e.KeyboardData.VirtualCode == (int)pauseHotKey)
+                {
+                    if (e.KeyboardState == GlobalKeyboardHook.KeyboardState.KeyDown)
+                    {
+                        if (MovementOnKeyPressInput.Focused)
+                        {
+                            Keys k = (Keys)e.KeyboardData.VirtualCode;
+                            PauseOnKeyInput.Text = k.ToString();
+                            pauseHotKey = k;
+                        }
+                        controller.PauseHotKeyDown();
                     }
 
                     // don't type the hot key 
@@ -274,6 +293,21 @@ namespace PrecisionGazeMouse
             Show();
             this.WindowState = FormWindowState.Normal;
             notifyIcon.Visible = false;
+        }
+
+        private void PauseOnKeyInput_KeyDown(object sender, KeyEventArgs e)
+        {
+            e.SuppressKeyPress = true;
+            if (e.KeyCode.Equals(Keys.Escape) || e.KeyCode.Equals(Keys.Back))
+            {
+                PauseOnKeyInput.Text = "";
+                pauseHotKey = 0;
+            }
+            else
+            {
+                PauseOnKeyInput.Text = e.KeyCode.ToString();
+                pauseHotKey = e.KeyCode;
+            }
         }
     }
 }
