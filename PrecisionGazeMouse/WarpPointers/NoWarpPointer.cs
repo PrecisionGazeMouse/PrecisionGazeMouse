@@ -6,10 +6,18 @@ namespace PrecisionGazeMouse.WarpPointers
     class NoWarpPointer : WarpPointer
     {
         Point warpPoint;
+        bool warpToInitialPoint;
 
-        public NoWarpPointer(Point centerOfScreen)
+        public NoWarpPointer()
         {
-            warpPoint = centerOfScreen;
+            this.warpPoint = new Point(0, 0);
+            this.warpToInitialPoint = false;
+        }
+
+        public NoWarpPointer(Point warpPoint)
+        {
+            this.warpPoint = warpPoint;
+            this.warpToInitialPoint = true;
         }
 
         public bool IsStarted()
@@ -54,7 +62,10 @@ namespace PrecisionGazeMouse.WarpPointers
 
         public Point GetNextPoint(Point currentPoint)
         {
-            return warpPoint;
+            if (warpToInitialPoint)
+                return warpPoint;
+            else
+                return currentPoint;
         }
 
         public void Dispose()

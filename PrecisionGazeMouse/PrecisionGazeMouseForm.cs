@@ -206,6 +206,13 @@ namespace PrecisionGazeMouse
                     gazeTracker.Enabled = true;
                     overlay.ShowIfTracking();
                     break;
+                case "eViacam Only":
+                    controller.setMode(MouseController.Mode.EVIACAM_ONLY);
+                    warpBar.Enabled = true;
+                    gazeTracker.Enabled = true;
+                    overlay.ShowIfTracking();
+                    eViacamPrompt(ContinuousButton.Checked);
+                    break;
                 case "TrackIR Only":
                     controller.setMode(MouseController.Mode.TRACKIR_ONLY);
                     warpBar.Enabled = false;

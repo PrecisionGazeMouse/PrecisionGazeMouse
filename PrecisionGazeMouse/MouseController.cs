@@ -24,7 +24,8 @@ namespace PrecisionGazeMouse
             EYEX_AND_TRACKIR,
             EYEX_AND_SMARTNAV,
             EYEX_ONLY,
-            TRACKIR_ONLY
+            TRACKIR_ONLY,
+            EVIACAM_ONLY
         };
         Mode mode;
 
@@ -115,6 +116,11 @@ namespace PrecisionGazeMouse
                     warp = new EyeXWarpPointer();
                     prec = new EyeXPrecisionPointer(sensitivity);
                     break;
+                case Mode.EVIACAM_ONLY:
+                    warp = new NoWarpPointer();
+                    prec = new NoPrecisionPointer();
+                    state = TrackingState.RUNNING;
+                    break;
             }
 
             calibrator = new GazeCalibrator(this, warp);
@@ -135,7 +141,7 @@ namespace PrecisionGazeMouse
             {
                 if (!dragging)
                 {
-                    if (mode == Mode.EYEX_AND_EVIACAM)
+                    if (mode == Mode.EYEX_AND_EVIACAM || mode == Mode.EVIACAM_ONLY)
                     {
                         SendKeys.Send("{F11}"); // trigger eViacam to start tracking
                     }
@@ -169,9 +175,12 @@ namespace PrecisionGazeMouse
 
         public void MovementHotKeyUp()
         {
+            if (state == TrackingState.ERROR || state == TrackingState.PAUSED)
+                return;
+            
             movementHotKeyDown = false;
 
-            if (movement == Movement.HOTKEY && mode == Mode.EYEX_AND_EVIACAM)
+            if (movement == Movement.HOTKEY && (mode == Mode.EYEX_AND_EVIACAM || mode == Mode.EVIACAM_ONLY))
             {
                 SendKeys.Send("{F11}"); // trigger eViacam to stop tracking
             }
@@ -283,7 +292,7 @@ namespace PrecisionGazeMouse
                             break;
                     }
                     Point warpPoint = warp.GetNextPoint(currentPoint);
-                    if (mode == Mode.EYEX_AND_SMARTNAV || mode == Mode.EYEX_AND_EVIACAM)
+                    if (mode == Mode.EYEX_AND_SMARTNAV || mode == Mode.EYEX_AND_EVIACAM || mode == Mode.EVIACAM_ONLY)
                     {
                         warpPoint = limitToScreenBounds(warpPoint);
                         if (warpPoint != finalPoint)
