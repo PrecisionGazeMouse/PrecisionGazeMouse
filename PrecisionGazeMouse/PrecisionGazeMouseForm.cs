@@ -160,19 +160,6 @@ namespace PrecisionGazeMouse
             overlay.ShowIfTracking();
         }
 
-        private void eViacamPrompt(bool enabled)
-        {
-            string message;
-            if(enabled)
-                message = "If you are using eViacam, press OK when it's enabled. Otherwise, click Cancel.";
-            else
-                message = "If you are using eViacam, press OK when it's running but disabled. Otherwise, click Cancel.";
-
-            string caption = "Check eViacam";
-            MessageBoxButtons buttons = MessageBoxButtons.OKCancel;
-            MessageBox.Show(this, message, caption, buttons);
-        }
-
         private void ModeBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (controller == null)
@@ -186,7 +173,6 @@ namespace PrecisionGazeMouse
                     warpBar.Enabled = true;
                     gazeTracker.Enabled = true;
                     overlay.ShowIfTracking();
-                    eViacamPrompt(ContinuousButton.Checked);
                     break;
                 case "EyeX and TrackIR":
                     controller.setMode(MouseController.Mode.EYEX_AND_TRACKIR);
@@ -211,7 +197,6 @@ namespace PrecisionGazeMouse
                     warpBar.Enabled = true;
                     gazeTracker.Enabled = true;
                     overlay.ShowIfTracking();
-                    eViacamPrompt(ContinuousButton.Checked);
                     break;
                 case "TrackIR Only":
                     controller.setMode(MouseController.Mode.TRACKIR_ONLY);
@@ -240,18 +225,12 @@ namespace PrecisionGazeMouse
         {
             ContinuousButton.Checked = false;
             controller.setMovement(MouseController.Movement.HOTKEY);
-
-            if (ModeBox.SelectedItem.ToString() == "EyeX and eViacam")
-                eViacamPrompt(false);
         }
 
         private void ContinuousButton_Click(object sender, EventArgs e)
         {
             OnKeyPressButton.Checked = false;
             controller.setMovement(MouseController.Movement.CONTINUOUS);
-
-            if(ModeBox.SelectedItem.ToString() == "EyeX and eViacam")
-                eViacamPrompt(true);
         }
 
         private void OnClickKeyPressInput_KeyDown(object sender, KeyEventArgs e)
@@ -279,11 +258,6 @@ namespace PrecisionGazeMouse
         private void SensitivityInput_Scroll(object sender, EventArgs e)
         {
             controller.Sensitivity = SensitivityInput.Value;
-        }
-
-        private void PrecisionGazeMouseForm_Shown(object sender, EventArgs e)
-        {
-            eViacamPrompt(false);
         }
 
         private void PrecisionGazeMouseForm_Resize(object sender, EventArgs e)

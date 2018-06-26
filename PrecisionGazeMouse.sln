@@ -1,7 +1,6 @@
-
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2035
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrecisionGazeMouse", "PrecisionGazeMouse\PrecisionGazeMouse.csproj", "{E26B1AA0-F0D7-459A-8537-C73610DCEE95}"
 EndProject
@@ -40,5 +39,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {56ADEDFF-60EC-498B-96D7-675DBDCAAA21}
 	EndGlobalSection
 EndGlobal
