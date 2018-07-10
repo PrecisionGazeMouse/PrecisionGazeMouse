@@ -310,6 +310,7 @@
             this.Name = "PrecisionGazeMouseForm";
             this.Text = "Precision Gaze Mouse";
             this.Load += new System.EventHandler(this.GazeAwareForm_Load);
+            this.Shown += new System.EventHandler(this.PrecisionGazeMouseForm_Shown);
             this.Resize += new System.EventHandler(this.PrecisionGazeMouseForm_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.SensitivityInput)).EndInit();
             this.ResumeLayout(false);
