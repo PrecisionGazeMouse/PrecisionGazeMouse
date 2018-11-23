@@ -30,12 +30,17 @@ namespace PrecisionGazeMouse
             controller.setMode(MouseController.Mode.EYEX_AND_EVIACAM);
             controller.setMovement(MouseController.Movement.HOTKEY);
             controller.Sensitivity = SensitivityInput.Value;
-            movementHotKey = Keys.F3;
-            clickHotKey = Keys.F3;
-            pauseHotKey = Keys.F10;
+            movementHotKey = (Keys)Enum.Parse(typeof(Keys), Properties.Settings.Default.MovementKey);
+            clickHotKey = (Keys)Enum.Parse(typeof(Keys), Properties.Settings.Default.ClickOnKey);
+            pauseHotKey = (Keys)Enum.Parse(typeof(Keys), Properties.Settings.Default.PauseOnKey);
 
             _globalKeyboardHook = new GlobalKeyboardHook();
             _globalKeyboardHook.KeyboardPressed += OnKeyPressed;
+
+            overlay = new OverlayForm(controller);
+            overlay.ShowWarpBar = warpBar.Checked;
+            overlay.ShowGazeTracker = gazeTracker.Checked;
+            overlay.ShowIfTracking();
 
             Timer refreshTimer = new System.Windows.Forms.Timer();
             refreshTimer.Tick += new EventHandler(RefreshScreen);
@@ -150,14 +155,6 @@ namespace PrecisionGazeMouse
         private void QuitButton_Click(object sender, EventArgs e)
         {
             this.Close();
-        }
-
-        private void GazeAwareForm_Load(object sender, EventArgs e)
-        {
-            overlay = new OverlayForm(controller);
-            overlay.ShowWarpBar = warpBar.Checked;
-            overlay.ShowGazeTracker = gazeTracker.Checked;
-            overlay.ShowIfTracking();
         }
 
         private void eViacamPrompt(bool enabled)
@@ -315,6 +312,20 @@ namespace PrecisionGazeMouse
                 PauseOnKeyInput.Text = e.KeyCode.ToString();
                 pauseHotKey = e.KeyCode;
             }
+        }
+
+        private void PrecisionGazeMouseForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Properties.Settings.Default.TrackerMode = ModeBox.Text;
+            Properties.Settings.Default.ContinuousMovement = ContinuousButton.Checked;
+            Properties.Settings.Default.OnKeyPressMovement = OnKeyPressButton.Checked;
+            Properties.Settings.Default.MovementKey = MovementOnKeyPressInput.Text;
+            Properties.Settings.Default.ClickOnKey = ClickOnKeyInput.Text;
+            Properties.Settings.Default.PauseOnKey = PauseOnKeyInput.Text;
+            Properties.Settings.Default.Sensitivity = SensitivityInput.Value;
+            Properties.Settings.Default.ShowWarpBar = warpBar.Checked;
+            Properties.Settings.Default.ShowGazeTracker = gazeTracker.Checked;
+            Properties.Settings.Default.Save();
         }
     }
 }

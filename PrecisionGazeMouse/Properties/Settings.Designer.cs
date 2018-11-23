@@ -22,5 +22,113 @@ namespace PrecisionGazeMouse.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("EyeX and eViacam")]
+        public string TrackerMode {
+            get {
+                return ((string)(this["TrackerMode"]));
+            }
+            set {
+                this["TrackerMode"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ContinuousMovement {
+            get {
+                return ((bool)(this["ContinuousMovement"]));
+            }
+            set {
+                this["ContinuousMovement"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("F3")]
+        public string ClickOnKey {
+            get {
+                return ((string)(this["ClickOnKey"]));
+            }
+            set {
+                this["ClickOnKey"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("F10")]
+        public string PauseOnKey {
+            get {
+                return ((string)(this["PauseOnKey"]));
+            }
+            set {
+                this["PauseOnKey"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("5")]
+        public int Sensitivity {
+            get {
+                return ((int)(this["Sensitivity"]));
+            }
+            set {
+                this["Sensitivity"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("F3")]
+        public string MovementKey {
+            get {
+                return ((string)(this["MovementKey"]));
+            }
+            set {
+                this["MovementKey"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ShowWarpBar {
+            get {
+                return ((bool)(this["ShowWarpBar"]));
+            }
+            set {
+                this["ShowWarpBar"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ShowGazeTracker {
+            get {
+                return ((bool)(this["ShowGazeTracker"]));
+            }
+            set {
+                this["ShowGazeTracker"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool OnKeyPressMovement {
+            get {
+                return ((bool)(this["OnKeyPressMovement"]));
+            }
+            set {
+                this["OnKeyPressMovement"] = value;
+            }
+        }
     }
 }
