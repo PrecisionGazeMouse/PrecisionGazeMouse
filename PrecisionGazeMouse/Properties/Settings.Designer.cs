@@ -130,5 +130,17 @@ namespace PrecisionGazeMouse.Properties {
                 this["OnKeyPressMovement"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("200")]
+        public int EyeXWarpThreshold {
+            get {
+                return ((int)(this["EyeXWarpThreshold"]));
+            }
+            set {
+                this["EyeXWarpThreshold"] = value;
+            }
+        }
     }
 }

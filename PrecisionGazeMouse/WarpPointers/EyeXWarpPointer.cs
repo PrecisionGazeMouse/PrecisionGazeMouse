@@ -18,8 +18,8 @@ namespace PrecisionGazeMouse.WarpPointers
         public EyeXWarpPointer()
         {
             samples = new Point[10];
-            warpThreshold = 200;
-            
+            warpThreshold = Properties.Settings.Default.EyeXWarpThreshold;
+
             stream = Program.EyeXHost.Streams.CreateGazePointDataStream();
             if (stream != null)
             {
