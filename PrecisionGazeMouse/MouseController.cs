@@ -143,7 +143,7 @@ namespace PrecisionGazeMouse
                 {
                     if (mode == Mode.EYEX_AND_EVIACAM || mode == Mode.EVIACAM_ONLY)
                     {
-                        SendKeys.Send("{F11}"); // trigger eViacam to start tracking
+                        SendKeys.Send("{" + Properties.Settings.Default.eViacamKey + "}"); // trigger eViacam to start tracking
                     }
                     warp.RefreshTracking();
                     state = TrackingState.STARTING;
@@ -182,7 +182,7 @@ namespace PrecisionGazeMouse
 
             if (movement == Movement.HOTKEY && (mode == Mode.EYEX_AND_EVIACAM || mode == Mode.EVIACAM_ONLY))
             {
-                SendKeys.Send("{F11}"); // trigger eViacam to stop tracking
+                SendKeys.Send("{" + Properties.Settings.Default.eViacamKey + "}"); // trigger eViacam to stop tracking
             }
         }
 

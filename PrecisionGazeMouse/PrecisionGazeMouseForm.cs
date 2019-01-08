@@ -7,6 +7,7 @@ using System;
 using System.Drawing;
 using System.Reflection;
 using System.Collections.Generic;
+using System.Windows.Input;
 
 namespace PrecisionGazeMouse
 {
@@ -18,6 +19,8 @@ namespace PrecisionGazeMouse
         Keys movementHotKey;
         Keys clickHotKey;
         Keys pauseHotKey;
+        Keys eViacamKey;
+        bool isKeyDown;
 
         public PrecisionGazeMouseForm()
         {
@@ -33,6 +36,7 @@ namespace PrecisionGazeMouse
             movementHotKey = (Keys)Enum.Parse(typeof(Keys), Properties.Settings.Default.MovementKey);
             clickHotKey = (Keys)Enum.Parse(typeof(Keys), Properties.Settings.Default.ClickOnKey);
             pauseHotKey = (Keys)Enum.Parse(typeof(Keys), Properties.Settings.Default.PauseOnKey);
+            eViacamKey = (Keys)Enum.Parse(typeof(Keys), Properties.Settings.Default.eViacamKey);
 
             _globalKeyboardHook = new GlobalKeyboardHook();
             _globalKeyboardHook.KeyboardPressed += OnKeyPressed;
@@ -48,19 +52,24 @@ namespace PrecisionGazeMouse
             refreshTimer.Start();
         }
 
+        public bool IsKeyDown()
+        {
+            return Keyboard.IsKeyDown((Key)eViacamKey) || Keyboard.IsKeyDown((Key)movementHotKey));
+        }
+
         void OnKeyPressed(object sender, GlobalKeyboardHookEventArgs e)
         {
-            if (e.KeyboardData.VirtualCode == (int)movementHotKey || e.KeyboardData.VirtualCode == (int)clickHotKey || e.KeyboardData.VirtualCode == (int)pauseHotKey)
+            Keys key = (Keys)e.KeyboardData.VirtualCode;
+            if (key == movementHotKey || key == clickHotKey || key == pauseHotKey)
             {
-                if (e.KeyboardData.VirtualCode == (int)movementHotKey)
+                if (key == movementHotKey)
                 {
                     if (e.KeyboardState == GlobalKeyboardHook.KeyboardState.KeyDown)
                     {
                         if (ClickOnKeyInput.Focused)
                         {
-                            Keys k = (Keys)e.KeyboardData.VirtualCode;
-                            ClickOnKeyInput.Text = k.ToString();
-                            clickHotKey = k;
+                            ClickOnKeyInput.Text = key.ToString();
+                            clickHotKey = key;
                         }
                         controller.MovementHotKeyDown();
                     }
@@ -74,15 +83,14 @@ namespace PrecisionGazeMouse
                 }
 
                 // Can use the same hotkey for movement and clicking
-                if (e.KeyboardData.VirtualCode == (int)clickHotKey)
+                if (key == clickHotKey)
                 {
                     if (e.KeyboardState == GlobalKeyboardHook.KeyboardState.KeyDown)
                     {
                         if (MovementOnKeyPressInput.Focused)
                         {
-                            Keys k = (Keys)e.KeyboardData.VirtualCode;
-                            MovementOnKeyPressInput.Text = k.ToString();
-                            movementHotKey = k;
+                            MovementOnKeyPressInput.Text = key.ToString();
+                            movementHotKey = key;
                         }
                         controller.ClickHotKeyDown();
                     }
@@ -95,15 +103,14 @@ namespace PrecisionGazeMouse
                     e.Handled = true;
                 }
 
-                if (e.KeyboardData.VirtualCode == (int)pauseHotKey)
+                if (key == pauseHotKey)
                 {
                     if (e.KeyboardState == GlobalKeyboardHook.KeyboardState.KeyDown)
                     {
                         if (MovementOnKeyPressInput.Focused)
                         {
-                            Keys k = (Keys)e.KeyboardData.VirtualCode;
-                            PauseOnKeyInput.Text = k.ToString();
-                            pauseHotKey = k;
+                            PauseOnKeyInput.Text = key.ToString();
+                            pauseHotKey = key;
                         }
                         controller.PauseHotKeyDown();
                     }

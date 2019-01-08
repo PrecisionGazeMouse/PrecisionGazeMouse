@@ -32,5 +32,8 @@
     <Setting Name="EyeXWarpThreshold" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">200</Value>
     </Setting>
+    <Setting Name="eViacamKey" Type="System.String" Scope="User">
+      <Value Profile="(Default)">F11</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

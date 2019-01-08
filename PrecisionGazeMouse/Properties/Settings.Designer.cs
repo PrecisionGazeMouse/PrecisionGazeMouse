@@ -142,5 +142,17 @@ namespace PrecisionGazeMouse.Properties {
                 this["EyeXWarpThreshold"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("F11")]
+        public string eViacamKey {
+            get {
+                return ((string)(this["eViacamKey"]));
+            }
+            set {
+                this["eViacamKey"] = value;
+            }
+        }
     }
 }
