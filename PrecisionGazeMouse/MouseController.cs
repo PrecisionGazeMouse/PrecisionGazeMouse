@@ -9,6 +9,8 @@ namespace PrecisionGazeMouse
 {
     class MouseController
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         WarpPointer warp;
         PrecisionPointer prec;
         Point finalPoint;
@@ -86,6 +88,7 @@ namespace PrecisionGazeMouse
 
         public void setMode(Mode mode)
         {
+            log.Debug($"Setting mode to {mode}");
             if (warp != null)
                 warp.Dispose();
             if (prec != null)
@@ -97,6 +100,7 @@ namespace PrecisionGazeMouse
                 case Mode.EYEX_AND_EVIACAM:
                     warp = new EyeXWarpPointer();
                     prec = new NoPrecisionPointer();
+                    log.Debug("State change to running");
                     state = TrackingState.RUNNING;
                     break;
                 case Mode.EYEX_AND_TRACKIR:
@@ -106,6 +110,7 @@ namespace PrecisionGazeMouse
                 case Mode.EYEX_AND_SMARTNAV:
                     warp = new EyeXWarpPointer();
                     prec = new NoPrecisionPointer();
+                    log.Debug("State change to running");
                     state = TrackingState.RUNNING;
                     break;
                 case Mode.TRACKIR_ONLY:
@@ -119,6 +124,7 @@ namespace PrecisionGazeMouse
                 case Mode.EVIACAM_ONLY:
                     warp = new NoWarpPointer();
                     prec = new NoPrecisionPointer();
+                    log.Debug("State change to running");
                     state = TrackingState.RUNNING;
                     break;
             }
@@ -126,10 +132,16 @@ namespace PrecisionGazeMouse
             calibrator = new GazeCalibrator(this, warp);
 
             if (!warp.IsStarted())
+            {
+                log.Debug("State change to error");
                 state = TrackingState.ERROR;
+            }
 
             if (!prec.IsStarted())
+            {
+                log.Debug("State change to error");
                 state = TrackingState.ERROR;
+            }
         }
         
         public void MovementHotKeyDown()
@@ -137,15 +149,18 @@ namespace PrecisionGazeMouse
             if (movement != Movement.HOTKEY || state == TrackingState.ERROR || state == TrackingState.PAUSED)
                 return;
 
+            log.Debug("Movement key down");
             if (!movementHotKeyDown)
             {
                 if (!dragging)
                 {
                     if (mode == Mode.EYEX_AND_EVIACAM || mode == Mode.EVIACAM_ONLY)
                     {
+                        log.Debug("Pressing eViacam key");
                         SendKeys.Send("{" + Properties.Settings.Default.eViacamKey + "}"); // trigger eViacam to start tracking
                     }
                     warp.RefreshTracking();
+                    log.Debug("State change to starting");
                     state = TrackingState.STARTING;
                     updatedAtLeastOnce = false;
                 }
@@ -156,12 +171,14 @@ namespace PrecisionGazeMouse
 
         public void PauseHotKeyDown()
         {
+            log.Debug("Pause key down");
             if (pauseMode)
             {
                 pauseMode = false;
                 if (state != TrackingState.ERROR)
                 {
                     warp.RefreshTracking();
+                    log.Debug("State change to starting");
                     state = TrackingState.STARTING;
                     updatedAtLeastOnce = false;
                 }
@@ -169,7 +186,10 @@ namespace PrecisionGazeMouse
             {
                 pauseMode = true;
                 if (state == TrackingState.STARTING || state == TrackingState.RUNNING)
+                {
+                    log.Debug("State change to paused");
                     state = TrackingState.PAUSED;
+                }
             }
         }
 
@@ -177,11 +197,13 @@ namespace PrecisionGazeMouse
         {
             if (state == TrackingState.ERROR || state == TrackingState.PAUSED)
                 return;
-            
+
+            log.Debug("Movement key up");
             movementHotKeyDown = false;
 
             if (movement == Movement.HOTKEY && (mode == Mode.EYEX_AND_EVIACAM || mode == Mode.EVIACAM_ONLY))
             {
+                log.Debug("Pressing eViacam key");
                 SendKeys.Send("{" + Properties.Settings.Default.eViacamKey + "}"); // trigger eViacam to stop tracking
             }
         }
@@ -191,6 +213,7 @@ namespace PrecisionGazeMouse
             if (state == TrackingState.ERROR || state == TrackingState.PAUSED)
                 return;
 
+            log.Debug("Click key down");
             if (!clickHotKeyDown)
             {
                 if (!dragging && movementHotKeyDown && timeSinceClickKeyUp != null && System.DateTime.Now.Subtract(timeSinceClickKeyUp.Value).TotalMilliseconds < 250)
@@ -200,6 +223,7 @@ namespace PrecisionGazeMouse
                     uint Y = (uint)lastClick.Value.Y;
                     mouse_event(MOUSEEVENTF_LEFTDOWN, X, Y, 0, 0);
                     dragging = true;
+                    log.Debug("Dragging mouse");
                 }
             }
             clickHotKeyDown = true;
@@ -210,6 +234,8 @@ namespace PrecisionGazeMouse
             if (state == TrackingState.ERROR || state == TrackingState.PAUSED)
                 return;
 
+            log.Debug("Movement key up");
+
             uint X = (uint)Cursor.Position.X;
             uint Y = (uint)Cursor.Position.Y;
 
@@ -217,6 +243,7 @@ namespace PrecisionGazeMouse
             {
                 mouse_event(MOUSEEVENTF_LEFTUP, X, Y, 0, 0);
                 dragging = false;
+                log.Debug("Stopped dragging");
             }
             else
             {
@@ -225,6 +252,7 @@ namespace PrecisionGazeMouse
                     // it's a double click so use the original click position
                     X = (uint)lastClick.Value.X;
                     Y = (uint)lastClick.Value.Y;
+                    log.Debug("Double click");
                 }
                 mouse_event(MOUSEEVENTF_LEFTDOWN | MOUSEEVENTF_LEFTUP, X, Y, 0, 0);
                 lastClick = Cursor.Position;
@@ -281,6 +309,7 @@ namespace PrecisionGazeMouse
                 case TrackingState.STARTING:
                     if (warp.IsWarpReady())
                     {
+                        log.Debug("State change to running");
                         state = TrackingState.RUNNING;
                         finalPoint = currentPoint;
                     }
@@ -305,6 +334,7 @@ namespace PrecisionGazeMouse
                     {
                         if (PrecisionGazeMouseForm.MousePosition != finalPoint)
                         {
+                            log.Debug("State change to paused");
                             state = TrackingState.PAUSED;
                             pauseTime = System.DateTime.Now;
                         }
@@ -322,11 +352,17 @@ namespace PrecisionGazeMouse
                         pauseTime = System.DateTime.Now;
                     }
                     if (!pauseMode && System.DateTime.Now.CompareTo(pauseTime.AddSeconds(1)) > 0)
+                    {
+                        log.Debug("State change to starting");
                         state = TrackingState.STARTING;
+                    }
                     break;
                 case TrackingState.ERROR:
                     if (warp.IsStarted() && prec.IsStarted())
+                    {
+                        log.Debug("State change to starting");
                         state = TrackingState.STARTING;
+                    }
                     break;
             }
         }

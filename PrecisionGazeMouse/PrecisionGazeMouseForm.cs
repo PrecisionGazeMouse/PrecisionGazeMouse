@@ -7,12 +7,13 @@ using System;
 using System.Drawing;
 using System.Reflection;
 using System.Collections.Generic;
-using System.Windows.Input;
 
 namespace PrecisionGazeMouse
 {
     public partial class PrecisionGazeMouseForm : Form
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         MouseController controller;
         OverlayForm overlay;
         GlobalKeyboardHook _globalKeyboardHook;
@@ -26,6 +27,7 @@ namespace PrecisionGazeMouse
         {
             InitializeComponent();
             QuitButton.Select();
+            log.Debug("Application starting");
 
             // Set the default mode
             ModeBox.SelectedIndex = 0;
@@ -52,16 +54,13 @@ namespace PrecisionGazeMouse
             refreshTimer.Start();
         }
 
-        public bool IsKeyDown()
-        {
-            return Keyboard.IsKeyDown((Key)eViacamKey) || Keyboard.IsKeyDown((Key)movementHotKey));
-        }
-
         void OnKeyPressed(object sender, GlobalKeyboardHookEventArgs e)
         {
             Keys key = (Keys)e.KeyboardData.VirtualCode;
             if (key == movementHotKey || key == clickHotKey || key == pauseHotKey)
             {
+                log.Debug($"Key {key} is {e.KeyboardState}");
+
                 if (key == movementHotKey)
                 {
                     if (e.KeyboardState == GlobalKeyboardHook.KeyboardState.KeyDown)
