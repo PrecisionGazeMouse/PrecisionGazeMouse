@@ -254,6 +254,9 @@ namespace PrecisionGazeMouse
         private void OnKeyPressButton_Click(object sender, EventArgs e)
         {
             ChooseHotkeyMovement();
+
+            if (ModeBox.SelectedItem.ToString() == "EyeX and eViacam")
+                eViacamPrompt(false);
         }
 
         private void ChooseHotkeyMovement()
@@ -262,14 +265,14 @@ namespace PrecisionGazeMouse
             OnKeyPressButton.Checked = true;
 
             controller.setMovement(MouseController.Movement.HOTKEY);
-
-            if (ModeBox.SelectedItem.ToString() == "EyeX and eViacam")
-                eViacamPrompt(false);
         }
 
         private void ContinuousButton_Click(object sender, EventArgs e)
         {
             ChooseContinuousMovement();
+
+            if (ModeBox.SelectedItem.ToString() == "EyeX and eViacam")
+                eViacamPrompt(true);
         }
 
         private void ChooseContinuousMovement()
@@ -278,9 +281,6 @@ namespace PrecisionGazeMouse
             OnKeyPressButton.Checked = false;
 
             controller.setMovement(MouseController.Movement.CONTINUOUS);
-
-            if (ModeBox.SelectedItem.ToString() == "EyeX and eViacam")
-                eViacamPrompt(true);
         }
 
         private void OnClickKeyPressInput_KeyDown(object sender, KeyEventArgs e)
