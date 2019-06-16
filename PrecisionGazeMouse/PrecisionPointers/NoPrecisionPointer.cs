@@ -22,7 +22,7 @@ namespace PrecisionGazeMouse.PrecisionPointers
 
         public override String ToString()
         {
-            return "";
+            return "None";
         }
 
         public bool IsStarted()

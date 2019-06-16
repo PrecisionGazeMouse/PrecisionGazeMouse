@@ -21,24 +21,15 @@ namespace PrecisionGazeMouse
         Keys clickHotKey;
         Keys pauseHotKey;
         Keys eViacamKey;
-        bool isKeyDown;
 
         public PrecisionGazeMouseForm()
         {
+            log.Debug("PrecisionGazeMouseForm constructor starting");
+
             InitializeComponent();
             QuitButton.Select();
-            log.Debug("Application starting");
 
-            // Set the default mode
-            ModeBox.SelectedIndex = 0;
-            controller = new MouseController(this);
-            controller.setMode(MouseController.Mode.EYEX_AND_EVIACAM);
-            controller.setMovement(MouseController.Movement.HOTKEY);
-            controller.Sensitivity = SensitivityInput.Value;
-            movementHotKey = (Keys)Enum.Parse(typeof(Keys), Properties.Settings.Default.MovementKey);
-            clickHotKey = (Keys)Enum.Parse(typeof(Keys), Properties.Settings.Default.ClickOnKey);
-            pauseHotKey = (Keys)Enum.Parse(typeof(Keys), Properties.Settings.Default.PauseOnKey);
-            eViacamKey = (Keys)Enum.Parse(typeof(Keys), Properties.Settings.Default.eViacamKey);
+            controller = new MouseController(SetMousePosition);
 
             _globalKeyboardHook = new GlobalKeyboardHook();
             _globalKeyboardHook.KeyboardPressed += OnKeyPressed;
@@ -52,6 +43,23 @@ namespace PrecisionGazeMouse
             refreshTimer.Tick += new EventHandler(RefreshScreen);
             refreshTimer.Interval = 33;
             refreshTimer.Start();
+
+            if (Properties.Settings.Default.ContinuousMovement)
+            {
+                ChooseContinuousMovement();
+            }
+            else
+            {
+                ChooseHotkeyMovement();
+            }
+            controller.Sensitivity = SensitivityInput.Value;
+            updateModeFromSelectedMode();
+            movementHotKey = (Keys)Enum.Parse(typeof(Keys), Properties.Settings.Default.MovementKey);
+            clickHotKey = (Keys)Enum.Parse(typeof(Keys), Properties.Settings.Default.ClickOnKey);
+            pauseHotKey = (Keys)Enum.Parse(typeof(Keys), Properties.Settings.Default.PauseOnKey);
+            eViacamKey = (Keys)Enum.Parse(typeof(Keys), Properties.Settings.Default.eViacamKey);
+
+            log.Debug("PrecisionGazeMouseForm constructor completed");
         }
 
         void OnKeyPressed(object sender, GlobalKeyboardHookEventArgs e)
@@ -181,8 +189,12 @@ namespace PrecisionGazeMouse
             if (controller == null)
                 return;
 
-            System.Windows.Forms.ComboBox box = (System.Windows.Forms.ComboBox)sender;
-            switch ((String)box.SelectedItem)
+            updateModeFromSelectedMode();
+        }
+
+        private void updateModeFromSelectedMode()
+        {
+            switch (ModeBox.SelectedItem)
             {
                 case "EyeX and eViacam":
                     controller.setMode(MouseController.Mode.EYEX_AND_EVIACAM);
@@ -241,7 +253,14 @@ namespace PrecisionGazeMouse
 
         private void OnKeyPressButton_Click(object sender, EventArgs e)
         {
+            ChooseHotkeyMovement();
+        }
+
+        private void ChooseHotkeyMovement()
+        {
             ContinuousButton.Checked = false;
+            OnKeyPressButton.Checked = true;
+
             controller.setMovement(MouseController.Movement.HOTKEY);
 
             if (ModeBox.SelectedItem.ToString() == "EyeX and eViacam")
@@ -250,10 +269,17 @@ namespace PrecisionGazeMouse
 
         private void ContinuousButton_Click(object sender, EventArgs e)
         {
+            ChooseContinuousMovement();
+        }
+
+        private void ChooseContinuousMovement()
+        {
+            ContinuousButton.Checked = true;
             OnKeyPressButton.Checked = false;
+
             controller.setMovement(MouseController.Movement.CONTINUOUS);
 
-            if(ModeBox.SelectedItem.ToString() == "EyeX and eViacam")
+            if (ModeBox.SelectedItem.ToString() == "EyeX and eViacam")
                 eViacamPrompt(true);
         }
 
@@ -282,11 +308,6 @@ namespace PrecisionGazeMouse
         private void SensitivityInput_Scroll(object sender, EventArgs e)
         {
             controller.Sensitivity = SensitivityInput.Value;
-        }
-
-        private void PrecisionGazeMouseForm_Shown(object sender, EventArgs e)
-        {
-            eViacamPrompt(false);
         }
 
         private void PrecisionGazeMouseForm_Resize(object sender, EventArgs e)
@@ -322,15 +343,10 @@ namespace PrecisionGazeMouse
 
         private void PrecisionGazeMouseForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Properties.Settings.Default.TrackerMode = ModeBox.Text;
-            Properties.Settings.Default.ContinuousMovement = ContinuousButton.Checked;
-            Properties.Settings.Default.OnKeyPressMovement = OnKeyPressButton.Checked;
             Properties.Settings.Default.MovementKey = MovementOnKeyPressInput.Text;
             Properties.Settings.Default.ClickOnKey = ClickOnKeyInput.Text;
             Properties.Settings.Default.PauseOnKey = PauseOnKeyInput.Text;
             Properties.Settings.Default.Sensitivity = SensitivityInput.Value;
-            Properties.Settings.Default.ShowWarpBar = warpBar.Checked;
-            Properties.Settings.Default.ShowGazeTracker = gazeTracker.Checked;
             Properties.Settings.Default.Save();
         }
     }
