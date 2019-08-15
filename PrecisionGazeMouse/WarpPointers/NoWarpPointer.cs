@@ -37,7 +37,7 @@ namespace PrecisionGazeMouse.WarpPointers
 
         public override String ToString()
         {
-            return String.Format("({0:0}, {1:0})", warpPoint.X, warpPoint.Y);
+            return String.Format("None ({0:0}, {1:0})", warpPoint.X, warpPoint.Y);
         }
 
         public Point GetGazePoint()
