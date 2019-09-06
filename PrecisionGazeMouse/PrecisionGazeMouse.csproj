@@ -26,13 +26,13 @@
     <UpdatePeriodically>true</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <InstallUrl>http://precisiongazemouse.com/install/</InstallUrl>
+    <InstallUrl>https://precisiongazemouse.org/install/</InstallUrl>
     <SupportUrl>https://github.com/PrecisionGazeMouse/PrecisionGazeMouse/issues</SupportUrl>
     <ProductName>Precision Gaze Mouse</ProductName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
     <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>1.12.0.%2a</ApplicationVersion>
+    <ApplicationVersion>1.12.0.0</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
