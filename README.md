@@ -1,4 +1,5 @@
 # Users
+**See the main website and user guide at [precisiongazemouse.org](https://precisiongazemouse.org)**
 
 If you need help, please file an issue by clicking the Issues tab near the top of this page.
 
