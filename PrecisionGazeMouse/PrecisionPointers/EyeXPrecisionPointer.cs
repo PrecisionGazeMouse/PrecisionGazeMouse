@@ -17,10 +17,17 @@ namespace PrecisionGazeMouse.PrecisionPointers
         Point currentPoint;
         int sensitivity;
 
+        // the baseline of the sensitive slider in the UI
+        const int BASELINE_SENSITIVITY = 5;
+
+        // the number of pixels that a typical person rotates their head when looking at the screen edges
+        const double EDGE_Y_ROTATION = 50;
+        const double EDGE_X_ROTATION = 150;
+
         public EyeXPrecisionPointer(int sensitivity)
         {
             mode = PrecisionPointerMode.ROTATION;
-            samples = new Vector3[5];
+            samples = new Vector3[5]; // store 5 samples
             this.sensitivity = sensitivity;
             headPoseStream = Program.EyeXHost.Streams.CreateHeadPoseStream();
             if (headPoseStream != null)
@@ -74,11 +81,18 @@ namespace PrecisionGazeMouse.PrecisionPointers
                     {
                         currentPoint = calculateSmoothedCalibratedPoint();
 
-                        double basePitch = (warpPoint.Y - screenSize.Height / 2.0) / (screenSize.Height / 2.0) * 50.0;
-                        int yOffset = (int)((currentPoint.Y - basePitch) * sensitivity / 5);
+                        // When a person looks to the edge of the screen, they rotate their head slightly. It'd be annoying if 
+                        // the pointer was always offset down when we looked down, for example. So we need to correct for it.
+                        // Assuming a neutral head position is the middle of the screen, and the edge rotation is the number of 
+                        // pixels of head rotation we'd get when looking at the edge of the screen, calculate the ratio we expect 
+                        // at the given warp point.
+                        double basePitch = (warpPoint.Y - screenSize.Height / 2.0) / (screenSize.Height / 2.0) * EDGE_Y_ROTATION;
 
-                        double baseYaw = (warpPoint.X - screenSize.Width / 2.0) / (screenSize.Width / 2.0) * 150.0;
-                        int xOffset = (int)((currentPoint.X - baseYaw) * sensitivity / 5);
+                        // subtract the pixels due to looking at the warp point, and scale the offset by the sensitivity setting
+                        int yOffset = (int)((currentPoint.Y - basePitch) * sensitivity / BASELINE_SENSITIVITY);
+
+                        double baseYaw = (warpPoint.X - screenSize.Width / 2.0) / (screenSize.Width / 2.0) * EDGE_X_ROTATION;
+                        int xOffset = (int)((currentPoint.X - baseYaw) * sensitivity / BASELINE_SENSITIVITY);
 
                         warpPoint.Offset(xOffset, yOffset);
 
@@ -87,6 +101,7 @@ namespace PrecisionGazeMouse.PrecisionPointers
                     break;
                 case (PrecisionPointerMode.TRANSLATION):
                     /*
+                    // Disabled because its hard to translate my head up/down when setting in a chair
                     trans = this.getTranslation();
                     if (trans != null)
                     {
@@ -116,6 +131,8 @@ namespace PrecisionGazeMouse.PrecisionPointers
             }
         }
 
+        // Rmove some of the noise from the EyeX by averaging the last few samples. Also subtract the baseline 
+        // rotation, since we want the mouse to start moving from the initial head rotation.
         public Point calculateSmoothedCalibratedPoint()
         {
             if (!hasCalibrated)
@@ -127,6 +144,8 @@ namespace PrecisionGazeMouse.PrecisionPointers
             Point p = new Point(0, 0);
             for (int i = 0; i < samples.Length; i++)
             {
+                // Calculate the change in head rotation, then scale it so we get a noticeable movement
+                // Also, it feels more natural to rotate left/right than up/down so scale the latter more
                 p.X += (int)((samples[i].Y - calibrationPoint.Y) * -600);
                 p.Y += (int)((samples[i].X - calibrationPoint.X) * -1200);
             }
