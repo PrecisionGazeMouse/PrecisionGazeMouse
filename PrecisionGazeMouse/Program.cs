@@ -14,7 +14,7 @@ namespace PrecisionGazeMouse
 
     static class Program
     {
-        private static Host _eyeXHost = new Host();
+        private static Host _eyeXHost;
 
         /// <summary>
         /// Gets the singleton EyeX host instance.
@@ -81,6 +81,16 @@ namespace PrecisionGazeMouse
 
         public static void StartApp()
         {
+            try
+            {
+                _eyeXHost = new Host();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Error initializing Tobii EyeX. Please install it before using Precision Gaze Mouse.", "Error");
+                Application.Exit();
+            }
+
             _eyeXHost.InitializeWpfAgent();
 
             Application.EnableVisualStyles();
