@@ -320,7 +320,7 @@
             this.DoubleBuffered = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "PrecisionGazeMouseForm";
-            this.Text = "Precision Gaze Mouse v1.14";
+            this.Text = "Precision Gaze Mouse v1.13";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.PrecisionGazeMouseForm_FormClosing);
             this.Resize += new System.EventHandler(this.PrecisionGazeMouseForm_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.SensitivityInput)).EndInit();
