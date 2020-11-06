@@ -201,6 +201,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Eye-Camera.ico" />
+    <Content Include="Tobii.EyeX.Client.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Unity-TrackIR-Plugin-DLL-master\TrackIRUnity.csproj">
