@@ -288,7 +288,7 @@ namespace PrecisionGazeMouse
             e.SuppressKeyPress = true;
             if (e.KeyCode.Equals(Keys.Escape) || e.KeyCode.Equals(Keys.Back))
             {
-                ClickOnKeyInput.Text = "";
+                ClickOnKeyInput.Text = "None";
                 clickHotKey = 0;
             }
             else
@@ -331,7 +331,7 @@ namespace PrecisionGazeMouse
             e.SuppressKeyPress = true;
             if (e.KeyCode.Equals(Keys.Escape) || e.KeyCode.Equals(Keys.Back))
             {
-                PauseOnKeyInput.Text = "";
+                PauseOnKeyInput.Text = "None";
                 pauseHotKey = 0;
             }
             else
