@@ -31,6 +31,13 @@ namespace PrecisionGazeMouse.PrecisionPointers
         HeadTranslation trans;
         int sensitivity;
 
+        // the baseline of the sensitive slider in the UI
+        const int BASELINE_SENSITIVITY = 20;
+
+        // the number of pixels that a typical person rotates their head when looking at the screen edges
+        const double EDGE_Y_ROTATION = 200;
+        const double EDGE_X_ROTATION = 600;
+
         public TrackIRPrecisionPointer(PrecisionPointerMode mode, int sensitivity)
         {
             this.mode = mode;
@@ -101,11 +108,18 @@ namespace PrecisionGazeMouse.PrecisionPointers
                     rot = this.getRotation();
                     if (rot != null)
                     {
-                        double basePitch = (warpPoint.Y - screenSize.Height / 2.0) / (screenSize.Height / 2.0) * 200.0;
-                        int yOffset = (int)((rot.pitch - basePitch) * sensitivity / 20);
+                        // When a person looks to the edge of the screen, they rotate their head slightly. It'd be annoying if 
+                        // the pointer was always offset down when we looked down, for example. So we need to correct for it.
+                        // Assuming a neutral head position is the middle of the screen, and the edge rotation is the number of 
+                        // pixels of head rotation we'd get when looking at the edge of the screen, calculate the ratio we expect 
+                        // at the given warp point.
+                        double basePitch = (warpPoint.Y - screenSize.Height / 2.0) / (screenSize.Height / 2.0) * EDGE_Y_ROTATION;
 
-                        double baseYaw = (warpPoint.X - screenSize.Width / 2.0) / (screenSize.Width / 2.0) * 600.0;
-                        int xOffset = (int)((-1 * rot.yaw - baseYaw) * sensitivity / 20);
+                        // subtract the pixels due to looking at the warp point, and scale the offset by the sensitivity setting
+                        int yOffset = (int)((rot.pitch - basePitch) * sensitivity / BASELINE_SENSITIVITY);
+
+                        double baseYaw = (warpPoint.X - screenSize.Width / 2.0) / (screenSize.Width / 2.0) * EDGE_X_ROTATION;
+                        int xOffset = (int)((-1 * rot.yaw - baseYaw) * sensitivity / BASELINE_SENSITIVITY);
 
                         warpPoint.Offset(xOffset, yOffset);
 
@@ -129,11 +143,11 @@ namespace PrecisionGazeMouse.PrecisionPointers
                     rot = this.getRotation();
                     if (rot != null)
                     {
-                        double basePitch = (warpPoint.Y - screenSize.Height / 2.0) / (screenSize.Height / 2.0) * 200.0;
-                        int yOffset = (int)((rot.pitch - basePitch) * sensitivity / 20);
+                        double basePitch = (warpPoint.Y - screenSize.Height / 2.0) / (screenSize.Height / 2.0) * EDGE_Y_ROTATION;
+                        int yOffset = (int)((rot.pitch - basePitch) * sensitivity / BASELINE_SENSITIVITY);
 
-                        double baseYaw = (warpPoint.X - screenSize.Width / 2.0) / (screenSize.Width / 2.0) * 600.0;
-                        int xOffset = (int)((-1 * rot.yaw - baseYaw) * sensitivity / 20);
+                        double baseYaw = (warpPoint.X - screenSize.Width / 2.0) / (screenSize.Width / 2.0) * EDGE_X_ROTATION;
+                        int xOffset = (int)((-1 * rot.yaw - baseYaw) * sensitivity / BASELINE_SENSITIVITY);
 
                         warpPoint.Offset(xOffset, yOffset);
                     }
