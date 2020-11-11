@@ -17,7 +17,7 @@ namespace PrecisionGazeMouse.WarpPointers
 
         public EyeXWarpPointer()
         {
-            samples = new Point[10];
+            samples = new Point[5];
             warpThreshold = Properties.Settings.Default.EyeXWarpThreshold;
 
             stream = Program.EyeXHost.Streams.CreateGazePointDataStream();
@@ -36,7 +36,7 @@ namespace PrecisionGazeMouse.WarpPointers
 
         public bool IsWarpReady()
         {
-            return sampleCount > 10;
+            return sampleCount > samples.Length;
         }
 
         protected void UpdateGazePosition(object s, StreamData<GazePointData> streamData)
