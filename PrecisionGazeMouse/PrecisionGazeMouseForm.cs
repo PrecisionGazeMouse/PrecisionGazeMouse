@@ -173,9 +173,8 @@ namespace PrecisionGazeMouse
 
         private void eViacamPrompt(bool enabled)
         {
-            if (Properties.Settings.Default.Settings.Default.SkipeViacamPrompt) {
+            if (Properties.Settings.Default.Settings.Default.SkipeViacamPrompt)
                 return;
-            }
             string message;
             if(enabled)
                 message = "If you are using eViacam, press OK when it's enabled. Otherwise, click Cancel.";
