@@ -35,5 +35,8 @@
     <Setting Name="eViacamKey" Type="System.String" Scope="User">
       <Value Profile="(Default)">F11</Value>
     </Setting>
+    <Setting Name="SkipeViacamPrompt" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
