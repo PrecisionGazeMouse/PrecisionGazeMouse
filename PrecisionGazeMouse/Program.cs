@@ -51,7 +51,7 @@ namespace PrecisionGazeMouse
         {
             try
             {
-                MessageBox.Show("Unhandled exception catched.\n Application is going to close now.");
+                MessageBox.Show("Unhandled exception caught.\n Application is going to close now.\n" + t.Exception.Message);
             }
             catch
             {

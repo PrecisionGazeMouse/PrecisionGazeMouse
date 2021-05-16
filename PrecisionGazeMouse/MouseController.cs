@@ -81,16 +81,30 @@ namespace PrecisionGazeMouse
             }
         }
 
-        int sensitivity = 0;
-        public int Sensitivity
+        int precisionSensitivity = 0;
+        public int PrecisionSensitivity
         {
-            get { return sensitivity; }
+            get { return precisionSensitivity; }
             set
             {
-                sensitivity = value;
+                precisionSensitivity = value;
                 if (prec != null)
                 {
                     prec.Sensitivity = value;
+                }
+            }
+        }
+
+        int warpSensitivity = 0;
+        public int WarpSensitivity
+        {
+            get { return warpSensitivity; }
+            set
+            {
+                warpSensitivity = value;
+                if (warp != null)
+                {
+                    warp.Sensitivity = value;
                 }
             }
         }
@@ -125,26 +139,26 @@ namespace PrecisionGazeMouse
             switch(mode)
             {
                 case Mode.EYEX_AND_EVIACAM:
-                    warp = new EyeXWarpPointer();
+                    warp = new EyeXWarpPointer(warpSensitivity);
                     prec = new NoPrecisionPointer();
                     state = TrackingState.RUNNING;
                     break;
                 case Mode.EYEX_AND_TRACKIR:
-                    warp = new EyeXWarpPointer();
-                    prec = new TrackIRPrecisionPointer(PrecisionPointerMode.ROTATION, sensitivity);
+                    warp = new EyeXWarpPointer(warpSensitivity);
+                    prec = new TrackIRPrecisionPointer(PrecisionPointerMode.ROTATION, precisionSensitivity);
                     break;
                 case Mode.EYEX_AND_SMARTNAV:
-                    warp = new EyeXWarpPointer();
+                    warp = new EyeXWarpPointer(warpSensitivity);
                     prec = new NoPrecisionPointer();
                     state = TrackingState.RUNNING;
                     break;
                 case Mode.TRACKIR_ONLY:
                     warp = new NoWarpPointer(getScreenCenter());
-                    prec = new TrackIRPrecisionPointer(PrecisionPointerMode.BOTH, sensitivity);
+                    prec = new TrackIRPrecisionPointer(PrecisionPointerMode.BOTH, precisionSensitivity);
                     break;
                 case Mode.EYEX_ONLY:
-                    warp = new EyeXWarpPointer();
-                    prec = new EyeXPrecisionPointer(sensitivity);
+                    warp = new EyeXWarpPointer(warpSensitivity);
+                    prec = new EyeXPrecisionPointer(precisionSensitivity);
                     break;
                 case Mode.EVIACAM_ONLY:
                     warp = new NoWarpPointer();

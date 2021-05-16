@@ -52,12 +52,18 @@ namespace PrecisionGazeMouse
             {
                 ChooseHotkeyMovement();
             }
-            controller.Sensitivity = SensitivityInput.Value;
+            controller.PrecisionSensitivity = PrecisionSensitivityInput.Value;
+            controller.WarpSensitivity = WarpSensitivityInput.Value;
             updateModeFromSelectedMode();
             movementHotKey = (Keys)Enum.Parse(typeof(Keys), Properties.Settings.Default.MovementKey);
             clickHotKey = (Keys)Enum.Parse(typeof(Keys), Properties.Settings.Default.ClickOnKey);
             pauseHotKey = (Keys)Enum.Parse(typeof(Keys), Properties.Settings.Default.PauseOnKey);
             eViacamKey = (Keys)Enum.Parse(typeof(Keys), Properties.Settings.Default.eViacamKey);
+
+            // Put focus on the Ok button at form load
+            this.Show();
+            if (ConfirmationPanel.Visible)
+                OkButton.Focus();
 
             log.Debug("PrecisionGazeMouseForm constructor completed");
         }
@@ -175,15 +181,14 @@ namespace PrecisionGazeMouse
         {
             if (Properties.Settings.Default.SkipeViacamPrompt)
                 return;
-            string message;
-            if(enabled)
-                message = "If you are using eViacam, press OK when it's enabled. Otherwise, click Cancel.";
-            else
-                message = "If you are using eViacam, press OK when it's running but disabled. Otherwise, click Cancel.";
 
-            string caption = "Check eViacam";
-            MessageBoxButtons buttons = MessageBoxButtons.OKCancel;
-            MessageBox.Show(this, message, caption, buttons);
+            if (enabled)
+                MessageBox1.Text = "If you are using eViacam, press OK when it's enabled. Otherwise, click Cancel.";
+            else
+                MessageBox1.Text = "If you are using eViacam, press OK when it's running but disabled. Otherwise, click Cancel.";
+
+            ConfirmationPanel.Visible = true;
+            OkButton.Focus();
         }
 
         private void ModeBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -307,9 +312,9 @@ namespace PrecisionGazeMouse
             movementHotKey = e.KeyCode;
         }
 
-        private void SensitivityInput_Scroll(object sender, EventArgs e)
+        private void PrecisionSensitivityInput_Scroll(object sender, EventArgs e)
         {
-            controller.Sensitivity = SensitivityInput.Value;
+            controller.PrecisionSensitivity = PrecisionSensitivityInput.Value;
         }
 
         private void PrecisionGazeMouseForm_Resize(object sender, EventArgs e)
@@ -348,8 +353,33 @@ namespace PrecisionGazeMouse
             Properties.Settings.Default.MovementKey = MovementOnKeyPressInput.Text;
             Properties.Settings.Default.ClickOnKey = ClickOnKeyInput.Text;
             Properties.Settings.Default.PauseOnKey = PauseOnKeyInput.Text;
-            Properties.Settings.Default.Sensitivity = SensitivityInput.Value;
+            Properties.Settings.Default.PrecisionSensitivity = PrecisionSensitivityInput.Value;
+            Properties.Settings.Default.WarpSensitivity = WarpSensitivityInput.Value;
             Properties.Settings.Default.Save();
+        }
+
+        private void OkButton_Click(object sender, EventArgs e)
+        {
+            ConfirmationPanel.Visible = false;
+        }
+
+        private void CancelButton_Click(object sender, EventArgs e)
+        {
+            ConfirmationPanel.Visible = false;
+        }
+
+        private void DontShowCheckbox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (DontShowCheckbox.Checked)
+            {
+                Properties.Settings.Default.SkipeViacamPrompt = true;
+                Properties.Settings.Default.Save();
+            }
+        }
+
+        private void WarpSensitivityInput_Scroll(object sender, EventArgs e)
+        {
+            controller.WarpSensitivity = WarpSensitivityInput.Value;
         }
     }
 }

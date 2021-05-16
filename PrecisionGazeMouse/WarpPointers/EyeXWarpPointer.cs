@@ -13,12 +13,13 @@ namespace PrecisionGazeMouse.WarpPointers
         int sampleIndex;
         int sampleCount;
         bool setNewWarp;
-        int warpThreshold;
 
-        public EyeXWarpPointer()
+        public int Sensitivity { get; set; }
+
+        public EyeXWarpPointer(int sensitivity)
         {
             samples = new Point[5];
-            warpThreshold = Properties.Settings.Default.EyeXWarpThreshold;
+            Sensitivity = sensitivity;
 
             stream = Program.EyeXHost.Streams.CreateGazePointDataStream();
             if (stream != null)
@@ -128,11 +129,6 @@ namespace PrecisionGazeMouse.WarpPointers
             return sampleCount;
         }
 
-        public int GetWarpTreshold()
-        {
-            return warpThreshold;
-        }
-
         public Point GetWarpPoint()
         {
             return warpPoint;
@@ -143,7 +139,7 @@ namespace PrecisionGazeMouse.WarpPointers
             Point smoothedPoint = calculateSmoothedPoint();
             Point delta = Point.Subtract(smoothedPoint, new System.Drawing.Size(warpPoint)); // whenever there is a big change from the past
             double distance = Math.Sqrt(Math.Pow(delta.X, 2) + Math.Pow(delta.Y, 2));
-            if (!setNewWarp && distance > GetWarpTreshold())
+            if (!setNewWarp && distance > Sensitivity)
             {
                 sampleCount = 0;
                 setNewWarp = true;

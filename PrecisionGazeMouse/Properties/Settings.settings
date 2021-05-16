@@ -14,7 +14,7 @@
     <Setting Name="PauseOnKey" Type="System.String" Scope="User">
       <Value Profile="(Default)">F10</Value>
     </Setting>
-    <Setting Name="Sensitivity" Type="System.Int32" Scope="User">
+    <Setting Name="PrecisionSensitivity" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">5</Value>
     </Setting>
     <Setting Name="MovementKey" Type="System.String" Scope="User">
@@ -29,7 +29,7 @@
     <Setting Name="OnKeyPressMovement" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="EyeXWarpThreshold" Type="System.Int32" Scope="User">
+    <Setting Name="WarpSensitivity" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">200</Value>
     </Setting>
     <Setting Name="eViacamKey" Type="System.String" Scope="User">

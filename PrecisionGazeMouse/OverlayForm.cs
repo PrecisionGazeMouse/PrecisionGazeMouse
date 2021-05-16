@@ -64,7 +64,7 @@ namespace PrecisionGazeMouse
             Rectangle rec;
 
             // Skip if no warp to paint
-            int threshold = controller.WarpPointer.GetWarpTreshold();
+            int threshold = controller.WarpPointer.Sensitivity;
             if (threshold == 0)
                 return;
 

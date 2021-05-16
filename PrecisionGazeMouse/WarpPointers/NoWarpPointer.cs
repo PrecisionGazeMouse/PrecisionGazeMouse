@@ -8,6 +8,8 @@ namespace PrecisionGazeMouse.WarpPointers
         Point warpPoint;
         bool warpToInitialPoint;
 
+        public int Sensitivity { get; set; }
+
         public NoWarpPointer()
         {
             this.warpPoint = new Point(0, 0);
@@ -48,11 +50,6 @@ namespace PrecisionGazeMouse.WarpPointers
         public int GetSampleCount()
         {
             return 1;
-        }
-
-        public int GetWarpTreshold()
-        {
-            return 0;
         }
 
         public Point GetWarpPoint()

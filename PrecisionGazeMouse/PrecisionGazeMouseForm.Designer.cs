@@ -30,22 +30,33 @@
             this.ClickOnKey = new System.Windows.Forms.Label();
             this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.PauseOnKey = new System.Windows.Forms.Label();
+            this.ConfirmationPanel = new System.Windows.Forms.Panel();
+            this.ConfirmationCancelButton = new System.Windows.Forms.Button();
+            this.DontShowCheckbox = new System.Windows.Forms.CheckBox();
+            this.MessageBox1 = new System.Windows.Forms.TextBox();
+            this.OkButton = new System.Windows.Forms.Button();
+            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.label6 = new System.Windows.Forms.Label();
             this.PauseOnKeyInput = new System.Windows.Forms.TextBox();
             this.ClickOnKeyInput = new System.Windows.Forms.TextBox();
-            this.SensitivityInput = new System.Windows.Forms.TrackBar();
+            this.PrecisionSensitivityInput = new System.Windows.Forms.TrackBar();
             this.MovementOnKeyPressInput = new System.Windows.Forms.TextBox();
             this.OnKeyPressButton = new System.Windows.Forms.RadioButton();
             this.ContinuousButton = new System.Windows.Forms.RadioButton();
             this.gazeTracker = new System.Windows.Forms.CheckBox();
             this.warpBar = new System.Windows.Forms.CheckBox();
             this.ModeBox = new System.Windows.Forms.ComboBox();
-            ((System.ComponentModel.ISupportInitialize)(this.SensitivityInput)).BeginInit();
+            this.WarpSensitivityInput = new System.Windows.Forms.TrackBar();
+            this.ConfirmationPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PrecisionSensitivityInput)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.WarpSensitivityInput)).BeginInit();
             this.SuspendLayout();
             // 
             // PositionLabel
             // 
             this.PositionLabel.AutoSize = true;
-            this.PositionLabel.Location = new System.Drawing.Point(97, 233);
+            this.PositionLabel.Location = new System.Drawing.Point(115, 258);
             this.PositionLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.PositionLabel.Name = "PositionLabel";
             this.PositionLabel.Size = new System.Drawing.Size(31, 13);
@@ -54,7 +65,7 @@
             // 
             // QuitButton
             // 
-            this.QuitButton.Location = new System.Drawing.Point(113, 287);
+            this.QuitButton.Location = new System.Drawing.Point(118, 340);
             this.QuitButton.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.QuitButton.Name = "QuitButton";
             this.QuitButton.Size = new System.Drawing.Size(56, 19);
@@ -66,7 +77,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(18, 233);
+            this.label1.Location = new System.Drawing.Point(36, 258);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(72, 13);
@@ -76,7 +87,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(16, 257);
+            this.label2.Location = new System.Drawing.Point(34, 282);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(76, 13);
@@ -86,7 +97,7 @@
             // HeadRotationLabel
             // 
             this.HeadRotationLabel.AutoSize = true;
-            this.HeadRotationLabel.Location = new System.Drawing.Point(97, 257);
+            this.HeadRotationLabel.Location = new System.Drawing.Point(115, 282);
             this.HeadRotationLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.HeadRotationLabel.Name = "HeadRotationLabel";
             this.HeadRotationLabel.Size = new System.Drawing.Size(31, 13);
@@ -96,7 +107,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(52, 209);
+            this.label3.Location = new System.Drawing.Point(71, 310);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(37, 13);
@@ -106,7 +117,7 @@
             // StatusLabel
             // 
             this.StatusLabel.AutoSize = true;
-            this.StatusLabel.Location = new System.Drawing.Point(97, 209);
+            this.StatusLabel.Location = new System.Drawing.Point(115, 310);
             this.StatusLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.StatusLabel.Name = "StatusLabel";
             this.StatusLabel.Size = new System.Drawing.Size(43, 13);
@@ -136,12 +147,12 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(37, 169);
+            this.label7.Location = new System.Drawing.Point(11, 171);
             this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(54, 13);
+            this.label7.Size = new System.Drawing.Size(100, 13);
             this.label7.TabIndex = 27;
-            this.label7.Text = "Sensitivity";
+            this.label7.Text = "Precision Sensitivity";
             // 
             // ClickOnKey
             // 
@@ -169,6 +180,73 @@
             this.PauseOnKey.TabIndex = 30;
             this.PauseOnKey.Text = "Pause On Key";
             // 
+            // ConfirmationPanel
+            // 
+            this.ConfirmationPanel.Controls.Add(this.ConfirmationCancelButton);
+            this.ConfirmationPanel.Controls.Add(this.DontShowCheckbox);
+            this.ConfirmationPanel.Controls.Add(this.MessageBox1);
+            this.ConfirmationPanel.Controls.Add(this.OkButton);
+            this.ConfirmationPanel.Location = new System.Drawing.Point(0, 0);
+            this.ConfirmationPanel.Name = "ConfirmationPanel";
+            this.ConfirmationPanel.Size = new System.Drawing.Size(311, 375);
+            this.ConfirmationPanel.TabIndex = 31;
+            this.ConfirmationPanel.Visible = false;
+            // 
+            // ConfirmationCancelButton
+            // 
+            this.ConfirmationCancelButton.Location = new System.Drawing.Point(155, 167);
+            this.ConfirmationCancelButton.Name = "ConfirmationCancelButton";
+            this.ConfirmationCancelButton.Size = new System.Drawing.Size(75, 23);
+            this.ConfirmationCancelButton.TabIndex = 3;
+            this.ConfirmationCancelButton.Text = "Cancel";
+            this.ConfirmationCancelButton.UseVisualStyleBackColor = true;
+            this.ConfirmationCancelButton.Click += new System.EventHandler(this.CancelButton_Click);
+            // 
+            // DontShowCheckbox
+            // 
+            this.DontShowCheckbox.AutoSize = true;
+            this.DontShowCheckbox.Location = new System.Drawing.Point(99, 211);
+            this.DontShowCheckbox.Name = "DontShowCheckbox";
+            this.DontShowCheckbox.Size = new System.Drawing.Size(108, 17);
+            this.DontShowCheckbox.TabIndex = 2;
+            this.DontShowCheckbox.Text = "Don\'t show again";
+            this.DontShowCheckbox.UseVisualStyleBackColor = true;
+            this.DontShowCheckbox.CheckedChanged += new System.EventHandler(this.DontShowCheckbox_CheckedChanged);
+            // 
+            // MessageBox1
+            // 
+            this.MessageBox1.BackColor = System.Drawing.SystemColors.Control;
+            this.MessageBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.MessageBox1.Location = new System.Drawing.Point(17, 114);
+            this.MessageBox1.Margin = new System.Windows.Forms.Padding(20, 75, 20, 20);
+            this.MessageBox1.Multiline = true;
+            this.MessageBox1.Name = "MessageBox1";
+            this.MessageBox1.Size = new System.Drawing.Size(276, 41);
+            this.MessageBox1.TabIndex = 0;
+            this.MessageBox1.TabStop = false;
+            this.MessageBox1.Text = "Message";
+            this.MessageBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // OkButton
+            // 
+            this.OkButton.Location = new System.Drawing.Point(74, 167);
+            this.OkButton.Name = "OkButton";
+            this.OkButton.Size = new System.Drawing.Size(75, 23);
+            this.OkButton.TabIndex = 1;
+            this.OkButton.Text = "OK";
+            this.OkButton.UseVisualStyleBackColor = true;
+            this.OkButton.Click += new System.EventHandler(this.OkButton_Click);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(25, 215);
+            this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(83, 13);
+            this.label6.TabIndex = 33;
+            this.label6.Text = "Warp Sensitivity";
+            // 
             // PauseOnKeyInput
             // 
             this.PauseOnKeyInput.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::PrecisionGazeMouse.Properties.Settings.Default, "PauseOnKey", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
@@ -191,17 +269,17 @@
             this.ClickOnKeyInput.Text = global::PrecisionGazeMouse.Properties.Settings.Default.ClickOnKey;
             this.ClickOnKeyInput.KeyDown += new System.Windows.Forms.KeyEventHandler(this.OnClickKeyPressInput_KeyDown);
             // 
-            // SensitivityInput
+            // PrecisionSensitivityInput
             // 
-            this.SensitivityInput.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::PrecisionGazeMouse.Properties.Settings.Default, "Sensitivity", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.SensitivityInput.Location = new System.Drawing.Point(95, 162);
-            this.SensitivityInput.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.SensitivityInput.Maximum = 20;
-            this.SensitivityInput.Name = "SensitivityInput";
-            this.SensitivityInput.Size = new System.Drawing.Size(201, 45);
-            this.SensitivityInput.TabIndex = 7;
-            this.SensitivityInput.Value = global::PrecisionGazeMouse.Properties.Settings.Default.Sensitivity;
-            this.SensitivityInput.Scroll += new System.EventHandler(this.SensitivityInput_Scroll);
+            this.PrecisionSensitivityInput.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::PrecisionGazeMouse.Properties.Settings.Default, "PrecisionSensitivity", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.PrecisionSensitivityInput.Location = new System.Drawing.Point(115, 166);
+            this.PrecisionSensitivityInput.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.PrecisionSensitivityInput.Maximum = 20;
+            this.PrecisionSensitivityInput.Name = "PrecisionSensitivityInput";
+            this.PrecisionSensitivityInput.Size = new System.Drawing.Size(181, 45);
+            this.PrecisionSensitivityInput.TabIndex = 7;
+            this.PrecisionSensitivityInput.Value = global::PrecisionGazeMouse.Properties.Settings.Default.PrecisionSensitivity;
+            this.PrecisionSensitivityInput.Scroll += new System.EventHandler(this.PrecisionSensitivityInput_Scroll);
             // 
             // MovementOnKeyPressInput
             // 
@@ -248,7 +326,7 @@
             this.gazeTracker.AutoSize = true;
             this.gazeTracker.Checked = global::PrecisionGazeMouse.Properties.Settings.Default.ShowGazeTracker;
             this.gazeTracker.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::PrecisionGazeMouse.Properties.Settings.Default, "ShowGazeTracker", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.gazeTracker.Location = new System.Drawing.Point(179, 231);
+            this.gazeTracker.Location = new System.Drawing.Point(170, 281);
             this.gazeTracker.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.gazeTracker.Name = "gazeTracker";
             this.gazeTracker.Size = new System.Drawing.Size(121, 17);
@@ -262,7 +340,7 @@
             this.warpBar.AutoSize = true;
             this.warpBar.Checked = global::PrecisionGazeMouse.Properties.Settings.Default.ShowWarpBar;
             this.warpBar.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::PrecisionGazeMouse.Properties.Settings.Default, "ShowWarpBar", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.warpBar.Location = new System.Drawing.Point(179, 209);
+            this.warpBar.Location = new System.Drawing.Point(170, 259);
             this.warpBar.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.warpBar.Name = "warpBar";
             this.warpBar.Size = new System.Drawing.Size(101, 17);
@@ -291,17 +369,34 @@
             this.ModeBox.Text = global::PrecisionGazeMouse.Properties.Settings.Default.TrackerMode;
             this.ModeBox.SelectedIndexChanged += new System.EventHandler(this.ModeBox_SelectedIndexChanged);
             // 
+            // WarpSensitivityInput
+            // 
+            this.WarpSensitivityInput.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::PrecisionGazeMouse.Properties.Settings.Default, "WarpSensitivity", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.WarpSensitivityInput.LargeChange = 25;
+            this.WarpSensitivityInput.Location = new System.Drawing.Point(115, 211);
+            this.WarpSensitivityInput.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.WarpSensitivityInput.Maximum = 500;
+            this.WarpSensitivityInput.Minimum = 1;
+            this.WarpSensitivityInput.Name = "WarpSensitivityInput";
+            this.WarpSensitivityInput.Size = new System.Drawing.Size(181, 45);
+            this.WarpSensitivityInput.SmallChange = 5;
+            this.WarpSensitivityInput.TabIndex = 34;
+            this.WarpSensitivityInput.TickFrequency = 25;
+            this.WarpSensitivityInput.Value = global::PrecisionGazeMouse.Properties.Settings.Default.WarpSensitivity;
+            this.WarpSensitivityInput.Scroll += new System.EventHandler(this.WarpSensitivityInput_Scroll);
+            // 
             // PrecisionGazeMouseForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(312, 322);
+            this.ClientSize = new System.Drawing.Size(312, 377);
+            this.Controls.Add(this.ConfirmationPanel);
             this.Controls.Add(this.PauseOnKeyInput);
             this.Controls.Add(this.PauseOnKey);
             this.Controls.Add(this.ClickOnKeyInput);
             this.Controls.Add(this.ClickOnKey);
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.SensitivityInput);
+            this.Controls.Add(this.PrecisionSensitivityInput);
             this.Controls.Add(this.MovementOnKeyPressInput);
             this.Controls.Add(this.OnKeyPressButton);
             this.Controls.Add(this.ContinuousButton);
@@ -317,13 +412,19 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.QuitButton);
             this.Controls.Add(this.PositionLabel);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.WarpSensitivityInput);
             this.DoubleBuffered = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "PrecisionGazeMouseForm";
-            this.Text = "Precision Gaze Mouse v1.14";
+            this.Text = "Precision Gaze Mouse v1.16";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.PrecisionGazeMouseForm_FormClosing);
             this.Resize += new System.EventHandler(this.PrecisionGazeMouseForm_Resize);
-            ((System.ComponentModel.ISupportInitialize)(this.SensitivityInput)).EndInit();
+            this.ConfirmationPanel.ResumeLayout(false);
+            this.ConfirmationPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PrecisionSensitivityInput)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.WarpSensitivityInput)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -345,13 +446,21 @@
         private System.Windows.Forms.RadioButton ContinuousButton;
         private System.Windows.Forms.RadioButton OnKeyPressButton;
         private System.Windows.Forms.TextBox MovementOnKeyPressInput;
-        private System.Windows.Forms.TrackBar SensitivityInput;
+        private System.Windows.Forms.TrackBar PrecisionSensitivityInput;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label ClickOnKey;
         private System.Windows.Forms.TextBox ClickOnKeyInput;
         private System.Windows.Forms.NotifyIcon notifyIcon;
         private System.Windows.Forms.TextBox PauseOnKeyInput;
         private System.Windows.Forms.Label PauseOnKey;
+        private System.Windows.Forms.Panel ConfirmationPanel;
+        private System.Windows.Forms.TextBox MessageBox1;
+        private System.Windows.Forms.Button OkButton;
+        private System.Windows.Forms.CheckBox DontShowCheckbox;
+        private System.Windows.Forms.Button ConfirmationCancelButton;
+        private System.Windows.Forms.BindingSource bindingSource1;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TrackBar WarpSensitivityInput;
     }
 }
 

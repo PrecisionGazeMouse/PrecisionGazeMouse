@@ -12,7 +12,7 @@ namespace PrecisionGazeMouse.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.8.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.2.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -74,12 +74,12 @@ namespace PrecisionGazeMouse.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("5")]
-        public int Sensitivity {
+        public int PrecisionSensitivity {
             get {
-                return ((int)(this["Sensitivity"]));
+                return ((int)(this["PrecisionSensitivity"]));
             }
             set {
-                this["Sensitivity"] = value;
+                this["PrecisionSensitivity"] = value;
             }
         }
         
@@ -134,12 +134,12 @@ namespace PrecisionGazeMouse.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("200")]
-        public int EyeXWarpThreshold {
+        public int WarpSensitivity {
             get {
-                return ((int)(this["EyeXWarpThreshold"]));
+                return ((int)(this["WarpSensitivity"]));
             }
             set {
-                this["EyeXWarpThreshold"] = value;
+                this["WarpSensitivity"] = value;
             }
         }
         

@@ -19,8 +19,8 @@ namespace PrecisionGazeMouse.WarpPointers
         // Sample count for printing
         int GetSampleCount();
 
-        // Warp threshold in pixels
-        int GetWarpTreshold();
+        // The sensitivity for warping to a new point, in pixels
+        int Sensitivity { get; set; }
 
         // Warp point for drawing, no update made
         Point GetWarpPoint();
