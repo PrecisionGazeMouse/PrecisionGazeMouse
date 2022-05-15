@@ -40,11 +40,9 @@ namespace PrecisionGazeMouse
                 }
                 finally
                 {
-                    Application.Exit();
+                    Environment.Exit(1);
                 }
             }
-
-            // It should terminate our main thread so Application.Exit() is unnecessary here
         }
 
         private static void UIThreadException(object sender, ThreadExceptionEventArgs t)
@@ -62,12 +60,9 @@ namespace PrecisionGazeMouse
                 }
                 finally
                 {
-                    Application.Exit();
+                    Environment.Exit(1);
                 }
             }
-
-            // Here we can decide if we want to end our application or do something else
-            Application.Exit();
         }
 
         
@@ -85,10 +80,10 @@ namespace PrecisionGazeMouse
             {
                 _eyeXHost = new Host();
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                MessageBox.Show("Error initializing Tobii EyeX. Please install it before using Precision Gaze Mouse.", "Error");
-                Application.Exit();
+                MessageBox.Show("Error initializing Tobii Eye Tracker. Please install it before using Precision Gaze Mouse.\n\n" + e.ToString(), "Error");
+                Environment.Exit(1);
             }
 
             _eyeXHost.InitializeWpfAgent();
