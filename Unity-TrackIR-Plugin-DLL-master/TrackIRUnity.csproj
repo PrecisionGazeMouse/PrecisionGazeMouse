@@ -9,7 +9,7 @@
     <AssemblyName>TrackIRUnity</AssemblyName>
     <ApplicationVersion>1.0.0.0</ApplicationVersion>
     <RootNamespace>TrackIRUnity</RootNamespace>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <UpgradeBackupLocation>
